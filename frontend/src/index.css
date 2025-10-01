@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern SaaS Monitoring Dashboard Design System */
+
+@layer base {
+  :root {
+    /* Core Brand Colors - Professional SaaS Palette */
+    --background: 0 0% 100%;
+    --foreground: 222 15% 7%;
+    
+    /* Brand Primary - Teal/Indigo Gradient System */
+    --primary: 192 100% 45%; /* Teal */
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 192 100% 35%;
+    --primary-light: 192 100% 55%;
+    
+    /* Secondary - Clean Blues */
+    --secondary: 219 14% 95%;
+    --secondary-foreground: 219 25% 25%;
+    
+    /* Status Colors */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 93% 47%;
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Neutral Grays */
+    --muted: 219 14% 95%;
+    --muted-foreground: 219 10% 45%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 15% 7%;
+    
+    /* UI Elements */
+    --border: 219 13% 91%;
+    --input: 219 13% 91%;
+    --ring: 192 100% 45%;
+    --radius: 0.5rem;
+    
+    /* Accent & Highlights */
+    --accent: 219 14% 95%;
+    --accent-foreground: 219 25% 25%;
+    
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 15% 7%;
+    
+    /* Charts & Data Visualization */
+    --chart-1: 192 100% 45%; /* Primary Teal */
+    --chart-2: 261 83% 58%; /* Purple */
+    --chart-3: 142 71% 45%; /* Green */
+    --chart-4: 45 93% 47%; /* Orange */
+    --chart-5: 0 84% 60%; /* Red */
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(192 100% 45%) 0%, hsl(261 83% 58%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 71% 45%) 0%, hsl(192 100% 45%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(192 100% 45%) 0%, hsl(219 78% 56%) 50%, hsl(261 83% 58%) 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(222 15% 7% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(222 15% 7% / 0.1), 0 2px 4px -1px hsl(222 15% 7% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(222 15% 7% / 0.1), 0 4px 6px -2px hsl(222 15% 7% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(222 15% 7% / 0.1), 0 10px 10px -5px hsl(222 15% 7% / 0.04);
+    --shadow-glow: 0 0 0 1px hsl(192 100% 45% / 0.3), 0 0 20px hsl(192 100% 45% / 0.3);
+  }
+
+  .dark {
+    /* Dark Mode - Professional Dark Theme */
+    --background: 222 47% 4%;
+    --foreground: 219 14% 95%;
+    
+    /* Brand Colors - Adjusted for Dark */
+    --primary: 192 100% 55%;
+    --primary-foreground: 222 47% 4%;
+    --primary-dark: 192 100% 45%;
+    --primary-light: 192 100% 65%;
+    
+    --secondary: 219 25% 12%;
+    --secondary-foreground: 219 14% 90%;
+    
+    /* Status Colors - Dark Mode */
+    --success: 142 71% 55%;
+    --success-foreground: 222 47% 4%;
+    --warning: 45 93% 57%;
+    --warning-foreground: 222 47% 4%;
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 222 47% 4%;
+    
+    /* Neutral Grays - Dark */
+    --muted: 219 25% 12%;
+    --muted-foreground: 219 10% 65%;
+    --card: 219 25% 8%;
+    --card-foreground: 219 14% 95%;
+    
+    /* UI Elements - Dark */
+    --border: 219 25% 16%;
+    --input: 219 25% 16%;
+    --ring: 192 100% 55%;
+    
+    /* Accent & Highlights - Dark */
+    --accent: 219 25% 12%;
+    --accent-foreground: 219 14% 90%;
+    
+    /* Popover - Dark */
+    --popover: 219 25% 8%;
+    --popover-foreground: 219 14% 95%;
+    
+    /* Gradients - Dark Mode */
+    --gradient-primary: linear-gradient(135deg, hsl(192 100% 55%) 0%, hsl(261 83% 68%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 71% 55%) 0%, hsl(192 100% 55%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(192 100% 55%) 0%, hsl(219 78% 66%) 50%, hsl(261 83% 68%) 100%);
+    
+    /* Shadows - Dark Mode */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.15);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.2), 0 2px 4px -1px hsl(0 0% 0% / 0.15);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.25), 0 4px 6px -2px hsl(0 0% 0% / 0.2);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.3), 0 10px 10px -5px hsl(0 0% 0% / 0.25);
+    --shadow-glow: 0 0 0 1px hsl(192 100% 55% / 0.4), 0 0 30px hsl(192 100% 55% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Hero Section Styles */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  /* Glass Morphism Effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-black/10 backdrop-blur-md border border-black/20;
+  }
+  
+  /* Status Indicators */
+  .status-online {
+    @apply bg-success text-success-foreground;
+  }
+  
+  .status-offline {
+    @apply bg-destructive text-destructive-foreground;
+  }
+  
+  .status-warning {
+    @apply bg-warning text-warning-foreground;
+  }
+  
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  @keyframes glow {
+    from {
+      box-shadow: var(--shadow-lg);
+    }
+    to {
+      box-shadow: var(--shadow-glow);
+    }
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+}
