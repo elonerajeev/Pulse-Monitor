@@ -14,6 +14,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { API_BASE_URL } from "../../utils/api";
+import Navbar from "@/components/ui/navbar";
+import BackgroundIcons from "@/components/ui/background-icons";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -25,8 +27,6 @@ const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // console.log(API_BASE_URL)
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
       ...prev,
@@ -37,7 +37,6 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // https://5000-firebase-server-1759253299248.cluster-fdkw7vjj7bgguspe3fbbc25tra.cloudworkstations.dev/
     try {
       const response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
         method: "POST",
@@ -48,7 +47,7 @@ const Login = () => {
       });
 
       const data = await response.json();
-     
+
       if (response.ok) {
         toast({
           title: "Login Successful",
@@ -76,106 +75,91 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <Link
-            to="/"
-            className="inline-flex items-center space-x-2 text-white hover:opacity-80 transition-opacity"
-          >
-            <Activity className="w-8 h-8" />
-            <span className="text-2xl font-bold">PulseMonitor</span>
-          </Link>
-        </div>
-
-        <Card className="glass border-white/20 shadow-xl">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-white">Welcome Back</CardTitle>
-            <CardDescription className="text-white/80">
-              Sign in to your account
-            </CardDescription>
-          </CardHeader>
-
-          <form onSubmit={handleLogin}>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-white">
-                  Email
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-white">
-                  Password
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter your password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    className="bg-white/10 border-white/20 text-white placeholder:text-white/60 pr-10"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white/80"
-                  >
-                    {showPassword ? (
-                      <EyeOff className="w-4 h-4" />
-                    ) : (
-                      <Eye className="w-4 h-4" />
-                    )}
-                  </button>
+    <div className="min-h-screen bg-background relative">
+      <BackgroundIcons />
+      <Navbar isAuthenticated={false} />
+      <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] p-4">
+        <div className="w-full max-w-md">
+          <Card className="border-none shadow-lg rounded-2xl bg-background/80 backdrop-blur-sm">
+            <CardHeader className="text-center">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex space-x-2">
+                  <span className="w-3 h-3 bg-red-500 rounded-full"></span>
+                  <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                  <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+                </div>
+                <div className="flex items-center justify-center flex-grow">
+                  <Activity className="w-10 h-10 text-primary" />
+                  <h1 className="text-2xl font-bold ml-2">PulseMonitor</h1>
                 </div>
               </div>
-            </CardContent>
+              <CardTitle className="text-2xl">Welcome Back</CardTitle>
+              <CardDescription>Sign in to your account</CardDescription>
+            </CardHeader>
 
-            <CardFooter className="flex flex-col space-y-3">
-              <Button
-                type="submit"
-                variant="glass"
-                size="lg"
-                className="w-full"
-                disabled={isLoading}
-              >
-                {isLoading ? "Signing in..." : "Sign In"}
-              </Button>
+            <form onSubmit={handleLogin}>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
 
-              <p className="text-center text-sm text-white/80">
-                Don't have an account?{" "}
-                <Link
-                  to="/signup"
-                  className="text-white hover:underline font-medium"
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Enter your password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </CardContent>
+
+              <CardFooter className="flex flex-col space-y-3">
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isLoading}
                 >
-                  Sign up
-                </Link>
-              </p>
-            </CardFooter>
-          </form>
-        </Card>
+                  {isLoading ? "Signing in..." : "Sign In"}
+                </Button>
 
-        <div className="text-center mt-6">
-          <Link
-            to="/"
-            className="text-white/60 hover:text-white/80 text-sm transition-colors"
-          >
-            ← Back to homepage
-          </Link>
+                <p className="text-center text-sm text-muted-foreground">
+                  Don't have an account?{" "}
+                  <Link
+                    to="/signup"
+                    className="text-primary hover:underline font-medium"
+                  >
+                    Sign up
+                  </Link>
+                </p>
+              </CardFooter>
+            </form>
+          </Card>
         </div>
       </div>
     </div>

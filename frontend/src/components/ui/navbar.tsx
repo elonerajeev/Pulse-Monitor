@@ -1,0 +1,158 @@
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { Button } from "./button";
+import { ThemeToggle } from "./theme-toggle";
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const isLandingPage = location.pathname === "/";
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem("isAuthenticated");
+    setIsAuthenticated(authStatus === 'true');
+  }, []);
+
+  const navItems = [
+    { label: "Home", href: "/" },
+    { label: "Features", href: "/#features" },
+    { label: "Testimonials", href: "/#testimonials" },
+    { label: "Pricing", href: "/#pricing" },
+    { label: "Documentation", href: "/documentation" },
+  ];
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (href.startsWith("/#")) {
+      e.preventDefault();
+      const targetId = href.substring(2);
+      if (location.pathname === "/") {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        navigate("/");
+        setTimeout(() => {
+          document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+      setIsOpen(false);
+    } else {
+      setIsOpen(false);
+    }
+  };
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 items-center">
+        <Link to="/" className="mr-6 flex items-center space-x-2">
+          <img src="/logo.svg" alt="PulseMonitor Logo" className="h-8 w-8" />
+          <span className="font-bold">PulseMonitor</span>
+        </Link>
+
+        <div className="flex flex-1 items-center justify-end space-x-2">
+          <nav className="hidden md:flex md:items-center md:space-x-6 text-sm font-medium">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                to={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="hidden md:flex items-center space-x-2">
+            <ThemeToggle />
+            {isLandingPage || !isAuthenticated ? (
+              <>
+                <Button variant="ghost" asChild>
+                  <Link to="/login">Login</Link>
+                </Button>
+                <Button asChild>
+                  <Link to="/signup">Get Started</Link>
+                </Button>
+              </>
+            ) : (
+              <Button onClick={() => navigate("/dashboard")}>Dashboard</Button>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              <span className="sr-only">Toggle Menu</span>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                to={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className="block px-3 py-2 rounded-md text-base font-medium text-foreground/60 hover:text-foreground/80 hover:bg-accent"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <div className="pt-4 border-t border-border">
+              {isLandingPage || !isAuthenticated ? (
+                <>
+                  <Link to="/login">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                  <Link to="/signup">
+                    <Button
+                      variant="default"
+                      className="w-full mt-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Get Started Free
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <Button
+                  variant="default"
+                  className="w-full mt-2"
+                  onClick={() => {
+                    navigate("/dashboard");
+                    setIsOpen(false);
+                  }}
+                >
+                  Dashboard
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Navbar;

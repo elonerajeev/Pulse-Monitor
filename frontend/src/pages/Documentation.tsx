@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
   Activity, 
-  ArrowLeft, 
   Book, 
   Code, 
   PlayCircle, 
@@ -17,7 +16,7 @@ import {
   CheckCircle
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import Navbar from "@/components/ui/navbar";
 import { useState } from "react";
 
 const Documentation = () => {
@@ -61,40 +60,21 @@ const Documentation = () => {
       title: "Create Monitor",
       method: "POST",
       endpoint: "/api/v1/monitors",
-      code: `{
-  "url": "https://api.example.com/health",
-  "name": "API Health Check",
-  "interval": 300,
-  "regions": ["us-east", "eu-west"],
-  "expected_status": 200,
-  "timeout": 30
-}`,
+      code: `{\n  "url": "https://api.example.com/health",\n  "name": "API Health Check",\n  "interval": 300,\n  "regions": ["us-east", "eu-west"],\n  "expected_status": 200,\n  "timeout": 30\n}`,
       description: "Create a new monitor for your service"
     },
     {
       title: "Get Monitor Status",
       method: "GET",
       endpoint: "/api/v1/monitors/{id}",
-      code: `{
-  "id": "mon_1234567890",
-  "url": "https://api.example.com/health",
-  "status": "up",
-  "last_check": "2024-01-15T10:30:00Z",
-  "response_time": 245,
-  "uptime_percentage": 99.95
-}`,
+      code: `{\n  "id": "mon_1234567890",\n  "url": "https://api.example.com/health",\n  "status": "up",\n  "last_check": "2024-01-15T10:30:00Z",\n  "response_time": 245,\n  "uptime_percentage": 99.95\n}`,
       description: "Retrieve current status and metrics"
     },
     {
       title: "Set up Webhook",
       method: "POST",
       endpoint: "/api/v1/notifications/webhooks",
-      code: `{
-  "url": "https://hooks.slack.com/services/...",
-  "events": ["down", "up", "slow_response"],
-  "name": "Slack Alerts",
-  "active": true
-}`,
+      code: `{\n  "url": "https://hooks.slack.com/services/...",\n  "events": ["down", "up", "slow_response"],\n  "name": "Slack Alerts",\n  "active": true\n}`,
       description: "Configure webhook notifications"
     }
   ];
@@ -140,30 +120,7 @@ const Documentation = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="border-b bg-background/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center space-x-2">
-              <Activity className="w-8 h-8 text-primary" />
-              <span className="text-xl font-bold text-gradient">PulseMonitor</span>
-            </Link>
-            
-            <div className="flex items-center space-x-4">
-              <ThemeToggle />
-              <Link to="/">
-                <Button variant="ghost" size="sm">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Home
-                </Button>
-              </Link>
-              <Link to="/signup">
-                <Button variant="hero" size="sm">Get Started</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero */}
       <section className="py-20 bg-gradient-to-b from-muted/50 to-background">

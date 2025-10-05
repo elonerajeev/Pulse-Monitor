@@ -1,72 +1,18 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Monitor,
-  Activity,
-  Clock,
-  AlertTriangle,
-  CheckCircle,
-  Plus,
-  TrendingUp,
-  Globe,
-  Bell,
-  Settings,
-  User,
-  Moon,
-  Sun,
-  Mail,
-  LogOut,
-  Users,
-  CreditCard,
-  Shield,
-  Eye,
-  BellRing,
-  Trash,
-  PaintBucket,
-  Languages,
-  KeyRound,
-  HelpCircle,
-} from "lucide-react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import Navbar from "@/components/ui/navbar";
 import { useToast } from "@/components/ui/use-toast";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [user, setUser] = useState({ name: '', email: '' });
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem("isAuthenticated");
-    if (isAuthenticated !== 'true') {
+    const authStatus = localStorage.getItem("isAuthenticated");
+    setIsAuthenticated(authStatus === 'true');
+    if (authStatus !== 'true') {
       navigate("/login");
     } else {
       const storedUser = localStorage.getItem('user');
@@ -158,187 +104,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Top Navigation */}
-      <header className="border-b bg-background/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Activity className="w-8 h-8 text-primary" />
-            <span className="text-xl font-bold text-gradient">PulseMonitor</span>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            {/* Notifications Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="relative">
-                  <Bell className="w-4 h-4" />
-                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></div>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-80">
-                <div className="flex items-center justify-between px-2 py-2">
-                  <span className="font-semibold">Notifications</span>
-                  <Badge variant="secondary" className="ml-auto">
-                    5 New
-                  </Badge>
-                </div>
-                <DropdownMenuSeparator />
-                {recentAlerts.map((alert) => (
-                  <DropdownMenuItem key={alert.id} className="cursor-pointer">
-                    <div className="flex items-start space-x-3 py-1">
-                      <div
-                        className={`w-2 h-2 rounded-full mt-2 ${
-                          alert.severity === "warning"
-                            ? "bg-warning"
-                            : alert.severity === "success"
-                            ? "bg-success"
-                            : "bg-primary"
-                        }`}
-                      />
-                      <div>
-                        <p className="font-medium">{alert.message}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {alert.service} • {alert.time}
-                        </p>
-                      </div>
-                    </div>
-                  </DropdownMenuItem>
-                ))}
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={() => toast({ description: "Notification preferences updated" })}
-                >
-                  <BellRing className="w-4 h-4 mr-2" />
-                  Notification Settings
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => toast({ description: "All notifications cleared" })}
-                >
-                  <Trash className="w-4 h-4 mr-2" />
-                  Clear All
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <ThemeToggle />
-
-            {/* Settings Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm">
-                  <Settings className="w-4 h-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <div className="px-2 py-2">
-                  <p className="text-sm font-medium">Theme</p>
-                </div>
-                <DropdownMenuItem
-                  onClick={() => toast({ description: "Light mode activated" })}
-                >
-                  <Sun className="w-4 h-4 mr-2" />
-                  Light Mode
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => toast({ description: "Dark mode activated" })}
-                >
-                  <Moon className="w-4 h-4 mr-2" />
-                  Dark Mode
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => toast({ description: "Color scheme updated" })}
-                >
-                  <PaintBucket className="w-4 h-4 mr-2" />
-                  Color Scheme
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <div className="px-2 py-2">
-                  <p className="text-sm font-medium">Preferences</p>
-                </div>
-                <DropdownMenuItem
-                  onClick={() =>
-                    toast({ description: "Language settings opened" })
-                  }
-                >
-                  <Languages className="w-4 h-4 mr-2" />
-                  Language
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => toast({ description: "Timezone updated" })}
-                >
-                  <Globe className="w-4 h-4 mr-2" />
-                  Timezone
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() =>
-                    toast({ description: "Security settings opened" })
-                  }
-                >
-                  <Shield className="w-4 h-4 mr-2" />
-                  Security Settings
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* User Profile Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm">
-                  <User className="w-4 h-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <div className="flex items-center justify-start gap-2 p-2">
-                  <div className="rounded-full w-10 h-10 bg-primary/10 flex items-center justify-center">
-                    <User className="w-5 h-5 text-primary" />
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium leading-none">{user.name}</p>
-                    <p className="text-xs text-muted-foreground">{user.email}</p>
-                  </div>
-                </div>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={() => toast({ description: "Profile settings opened" })}
-                >
-                  <User className="w-4 h-4 mr-2" />
-                  Edit Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => toast({ description: "Team settings opened" })}
-                >
-                  <Users className="w-4 h-4 mr-2" />
-                  Team Settings
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => toast({ description: "Billing settings opened" })}
-                >
-                  <CreditCard className="w-4 h-4 mr-2" />
-                  Billing
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => toast({ description: "API settings opened" })}
-                >
-                  <KeyRound className="w-4 h-4 mr-2" />
-                  API Keys
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={() => {
-                    localStorage.removeItem("isAuthenticated");
-                    localStorage.removeItem("isDemoMode");
-                    navigate("/login");
-                    toast({ description: "Logged out successfully" });
-                  }}
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Log Out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
-      </header>
+      <Navbar isAuthenticated={isAuthenticated} user={user} />
 
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
