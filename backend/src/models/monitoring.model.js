@@ -12,7 +12,7 @@ const monitoringSchema = new Schema(
       required: [true, "Target is required"],
       trim: true,
     },
-    type: {
+    serviceType: {
       type: String,
       required: [true, "Service type is required"],
       enum: ["website", "server"],

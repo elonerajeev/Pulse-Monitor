@@ -7,6 +7,7 @@ import cors from "cors";
 // Import routes
 import healthcheckRouter from "./routes/healthcheck.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import monitoringRouter from "./routes/monitoring.routes.js";
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -55,6 +56,7 @@ app.use(cookieParser());
 // Routes declaration
 app.use("/api/v1/healthcheck", healthcheckRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/monitoring", monitoringRouter);
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));

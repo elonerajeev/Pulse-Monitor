@@ -1,86 +1,77 @@
-import User from "../models/user.model.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import generateToken from "../utils/token.util.js";
+import User from "../models/user.model.js";
 
-// Register a new user
-const registerUser = async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
-  console.log(req.body)
-  // console.log(req.body);
-  try {
-    if (!name || !email || !password || !confirmPassword) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
 
-    if (password !== confirmPassword) {
-      return res.status(400).json({ message: "Passwords do not match" });
-    }
-
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-
-    const user = await User.create({ name, email, password });
-    res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      token: generateToken(user._id),
-    });
-    console.log(req.body);
-    console.log("User registered successfully:");
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
+  if ([name, email, password, confirmPassword].some((field) => field?.trim() === "")) {
+    throw new ApiError(400, "All fields are required");
   }
-};
 
-// Login user
-const loginUser = async (req, res) => {
+  if (password !== confirmPassword) {
+    throw new ApiError(400, "Passwords do not match");
+  }
+
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    throw new ApiError(409, "User with this email already exists");
+  }
+
+  const user = await User.create({ name, email, password });
+
+  const createdUser = await User.findById(user._id).select("-password");
+
+  if (!createdUser) {
+    throw new ApiError(500, "Something went wrong while registering the user");
+  }
+
+  const accessToken = generateToken(user._id);
+
+  return res.status(201).json(
+    new ApiResponse(
+      201,
+      { user: createdUser, accessToken },
+      "User registered successfully"
+    )
+  );
+});
+
+const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  console.log("Login attempt with:", req.body);
 
-  try {
-    if (!email || !password) {
-      console.log("Login failed: Missing email or password");
-      return res.status(400).json({ message: "All fields are required" });
-    }
-
-    console.log("Searching for user with email:", email);
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      console.log("Login failed: User not found with email:", email);
-      return res.status(400).json({ message: "Invalid email or password" });
-    }
-
-    console.log("User found:", user.email);
-    console.log("Comparing passwords...");
-    const isMatch = await user.comparePassword(password);
-    console.log("Password comparison result:", isMatch);
-
-    if (!isMatch) {
-      console.log("Login failed: Password does not match for user:", email);
-      return res.status(400).json({ message: "Invalid email or password" });
-    }
-
-    console.log("Password matched. Generating token...");
-    const token = generateToken(user._id);
-    console.log("Token generated.");
-
-    res.status(200).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      token: token,
-    });
-
-    console.log("User logged in successfully:", user.email);
-  } catch (error) {
-    console.error("!!! SERVER ERROR DURING LOGIN !!!");
-    console.error("Error object:", error);
-    console.error("Request body:", req.body);
-    res.status(500).json({ message: "Server error", error: error.message });
+  if (!email || !password) {
+    throw new ApiError(400, "Email and password are required");
   }
-};
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+  const isPasswordValid = await user.comparePassword(password);
+
+  if (!isPasswordValid) {
+    throw new ApiError(401, "Invalid credentials");
+  }
+
+  const accessToken = generateToken(user._id);
+
+  const loggedInUser = await User.findById(user._id).select("-password");
+
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        user: loggedInUser,
+        accessToken,
+      },
+      "User logged in successfully"
+    )
+  );
+});
 
 export { registerUser, loginUser };

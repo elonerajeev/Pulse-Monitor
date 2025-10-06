@@ -6,12 +6,12 @@ import { Monitoring } from "../models/monitoring.model.js";
 const createMonitoring = asyncHandler(async (req, res) => {
   console.log("req.body: ", req.body);
   console.log("req.user: ", req.user);
-  const { name, target, type, interval } = req.body;
+  const { name, target, serviceType, interval } = req.body;
   
   const monitoring = await Monitoring.create({
     name,
     target,
-    type,
+    serviceType,
     interval: interval || 5,
     owner: req.user._id, // Attach the authenticated user's ID
   });

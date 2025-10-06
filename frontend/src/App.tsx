@@ -6,7 +6,7 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import Dashboard from "./pages/Dashboard";
-import DemoDashboard from "./pages/DemoDashboard"; // Import the new demo dashboard
+import AddMonitoringService from "./pages/AddMonitoringService";
 import Documentation from "./pages/Documentation";
 import NotFound from "./pages/NotFound";
 import Terms from "./pages/Terms";
@@ -23,7 +23,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/demo-dashboard" element={<DemoDashboard />} /> // Add the new demo dashboard route
+          <Route path="/monitoring/add" element={<AddMonitoringService />} />
           {/* <Route path="/testimonials" element={<Testimonials />} /> */}
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/terms" element={<Terms />} />
