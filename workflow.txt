@@ -1,0 +1,24 @@
+        ┌────────────────────────┐
+        │      Frontend (React)  │
+        └──────────▲─────────────┘
+                   │  API calls
+                   ▼
+        ┌────────────────────────┐
+        │   Backend (Express)    │
+        │ - Auth, Register, etc. │
+        │ - Expose API: /logs    │
+        └──────────▲─────────────┘
+                   │  (shared DB)
+                   ▼
+        ┌────────────────────────┐
+        │   Mongo altas Database  │
+        │   (users, websites,    │
+        │    website_logs)       │
+        └──────────▲─────────────┘
+                   │
+                   ▼
+        ┌────────────────────────┐
+        │  Backend_Core (Cron)   │
+        │ - Ping URLs            │
+        │ - Write uptime logs    │
+        └────────────────────────┘
