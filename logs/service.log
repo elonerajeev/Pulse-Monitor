@@ -1,5 +1,5 @@
 
-up to date, audited 147 packages in 3s
+up to date, audited 147 packages in 4s
 
 24 packages are looking for funding
   run `npm fund` for details
@@ -14,45 +14,106 @@ found 0 vulnerabilities
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/index.js`[39m
-[dotenv@17.2.3] injecting env (1) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+[dotenv@17.2.3] injecting env (1) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
 Server is running on port 3000
 MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
 
 -- Running Monitoring Scheduler --
 
 🔍 Monitoring required for: Rajeev Kumar (www.zyz.com)
-   - Result: OFFLINE (211.5789950000035ms)
-   - Error: connect ECONNREFUSED 66.39.157.6:443
+   - Result: OFFLINE (574.7305909999995ms)
+   - Error: [object Object]
 
 🔍 Monitoring required for: My Production Website (http://elonerajeev.org.in/)
-   - Result: OFFLINE (85.40770500000508ms)
-   - Error: getaddrinfo ENOTFOUND elonerajeev.org.in
+   - Result: OFFLINE (53.036785999982385ms)
+   - Error: [object Object]
 
 🔍 Monitoring required for: Elonerajeev (www.google.com)
-   - Result: ONLINE (56.89659400000528ms)
+   - Result: ONLINE (57.69869099999778ms)
 
 🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
-   - Result: ONLINE (496.6504769999883ms)
+   - Result: ONLINE (509.5211189999827ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (305.5261060000048ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (165.671474999981ms)
 
 -- Monitoring Scheduler Finished --
 
 -- Running Monitoring Scheduler --
 
 🔍 Monitoring required for: Rajeev Kumar (www.zyz.com)
-   - Result: OFFLINE (689.7968429999892ms)
-   - Error: connect ECONNREFUSED 66.39.157.6:443
+   - Result: OFFLINE (349.96062100003473ms)
+   - Error: [object Object]
 
 🔍 Monitoring required for: My Production Website (http://elonerajeev.org.in/)
-   - Result: OFFLINE (84.49958199996036ms)
-   - Error: getaddrinfo ENOTFOUND elonerajeev.org.in
+   - Result: OFFLINE (16.459109000046737ms)
+   - Error: [object Object]
 
 🔍 Monitoring required for: Elonerajeev (www.google.com)
-   - Result: ONLINE (65.10671500000171ms)
+   - Result: ONLINE (66.85663599998225ms)
 
 🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
-   - Result: ONLINE (488.2255679999944ms)
+   - Result: ONLINE (493.29892500001006ms)
 
 🔍 Monitoring required for: GitHub (https://github.com/)
-   - Result: ONLINE (288.2738290000125ms)
+   - Result: ONLINE (282.56530499993823ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (166.31010000000242ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Rajeev Kumar (www.zyz.com)
+   - Result: OFFLINE (354.49417700001504ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (565.1832489999942ms)
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Result: ONLINE (61.37497500004247ms)
+
+🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
+   - Result: ONLINE (478.7758540000068ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (300.2978109999094ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (164.17532499996014ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (41.92046100005973ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Rajeev Kumar (www.zyz.com)
+   - Result: OFFLINE (349.312471000012ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (472.0136990000028ms)
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Result: ONLINE (55.540613000048324ms)
+
+🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
+   - Result: ONLINE (477.22388100018725ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (303.82966300006956ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (164.39425899996422ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (44.57766700000502ms)
 
 -- Monitoring Scheduler Finished --

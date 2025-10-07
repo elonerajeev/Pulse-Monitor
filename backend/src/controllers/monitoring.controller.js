@@ -25,6 +25,12 @@ const createMonitoring = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Something went wrong while creating the monitoring service");
   }
 
+  // Create an initial pending log so it shows up on the dashboard immediately
+  await MonitoringLog.create({
+    monitoringId: monitoring._id,
+    status: 'pending',
+  });
+
   return res
     .status(201)
     .json(new ApiResponse(201, monitoring, "Monitoring service created successfully"));

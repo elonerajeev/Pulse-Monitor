@@ -99,7 +99,7 @@ export const monitorWebsite = (url) => {
             resolve({
                 status: 'offline',
                 responseTime: timings.end - timings.start,
-                error: err.message,
+                error: { message: err.message, code: err.code },
             });
         });
 
@@ -109,7 +109,7 @@ export const monitorWebsite = (url) => {
             resolve({
                 status: 'offline',
                 responseTime: timings.end - timings.start,
-                error: 'Request timed out',
+                error: { message: 'Request timed out' },
             });
         });
 

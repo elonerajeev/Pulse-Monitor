@@ -9,35 +9,32 @@ const monitoringLogSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["online", "offline", "pending", "error"],
+      enum: ["online", "offline", "pending", "down", "error"],
       default: "pending",
     },
-    statusCode: {
-      type: Number,
-    },
+    statusCode: Number,
     responseTime: {
       type: Number, // in milliseconds
     },
     timings: {
-        dns: Number,
-        tcp: Number,
-        tls: Number,
-        firstByte: Number,
-        contentTransfer: Number,
-        total: Number,
+      dns: Number,
+      tcp: Number,
+      tls: Number,
+      firstByte: Number,
+      contentTransfer: Number,
+      total: Number,
     },
     ssl: {
       subject: Object,
       issuer: Object,
-      validFrom: String,
-      validTo: String,
+      valid_from: Date,
+      valid_to: Date,
       daysUntilExpiry: Number,
     },
-    responseBody: {
-        type: String,
-    },
+    responseBody: String,
     error: {
-      type: String,
+      message: String,
+      code: String,
     },
   },
   { timestamps: true }

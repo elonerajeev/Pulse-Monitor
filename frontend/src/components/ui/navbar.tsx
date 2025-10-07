@@ -1,21 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "./button";
 import { ThemeToggle } from "./theme-toggle";
+import { useAuth } from "@/hooks/useAuth"; // Import the custom hook
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated, user } = useAuth(); // Use the custom hook
   const location = useLocation();
   const navigate = useNavigate();
 
   const isLandingPage = location.pathname === "/";
-
-  useEffect(() => {
-    const authStatus = localStorage.getItem("isAuthenticated");
-    setIsAuthenticated(authStatus === 'true');
-  }, []);
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -46,6 +44,13 @@ const Navbar = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
@@ -70,7 +75,20 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center space-x-2">
             <ThemeToggle />
-            {isLandingPage || !isAuthenticated ? (
+            {isAuthenticated ? (
+              <Popover>
+                <PopoverTrigger>
+                  <Avatar>
+                    <AvatarImage src={user?.avatarUrl} />
+                    <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
+                  </Avatar>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <Button onClick={() => navigate("/dashboard")} className="w-full mb-2">Dashboard</Button>
+                  <Button onClick={handleLogout} variant="destructive" className="w-full">Logout</Button>
+                </PopoverContent>
+              </Popover>
+            ) : (
               <>
                 <Button variant="ghost" asChild>
                   <Link to="/login">Login</Link>
@@ -79,8 +97,6 @@ const Navbar = () => {
                   <Link to="/signup">Get Started</Link>
                 </Button>
               </>
-            ) : (
-              <Button onClick={() => navigate("/dashboard")}>Dashboard</Button>
             )}
           </div>
 
@@ -114,7 +130,20 @@ const Navbar = () => {
               </Link>
             ))}
             <div className="pt-4 border-t border-border">
-              {isLandingPage || !isAuthenticated ? (
+              {isAuthenticated ? (
+                 <Popover>
+                 <PopoverTrigger className="w-full">
+                   <Avatar>
+                     <AvatarImage src={user?.avatarUrl} />
+                     <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
+                   </Avatar>
+                 </PopoverTrigger>
+                 <PopoverContent>
+                   <Button onClick={() => navigate("/dashboard")} className="w-full mb-2">Dashboard</Button>
+                   <Button onClick={handleLogout} variant="destructive" className="w-full">Logout</Button>
+                 </PopoverContent>
+               </Popover>
+              ) : (
                 <>
                   <Link to="/login">
                     <Button
@@ -135,17 +164,6 @@ const Navbar = () => {
                     </Button>
                   </Link>
                 </>
-              ) : (
-                <Button
-                  variant="default"
-                  className="w-full mt-2"
-                  onClick={() => {
-                    navigate("/dashboard");
-                    setIsOpen(false);
-                  }}
-                >
-                  Dashboard
-                </Button>
               )}
             </div>
           </div>
