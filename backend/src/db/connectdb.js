@@ -1,14 +1,18 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import DB_NAME from "./../constants.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 const connectDB = async () => {
   try {
-    const connectionStatus = await mongoose.connect(
-      `${process.env.MONGO_URI}`
-    );
+    const connectionStatus = await mongoose.connect(process.env.MONGO_URI, {
+      dbName: "hello",
+    });
     console.log("MongoDB connected:", connectionStatus.connection.host);
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
