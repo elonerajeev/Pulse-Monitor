@@ -1,5 +1,5 @@
 
-up to date, audited 535 packages in 6s
+up to date, audited 535 packages in 7s
 
 83 packages are looking for funding
   run `npm fund` for details
@@ -15,11 +15,83 @@ Run `npm audit` for details.
 > vite
 
 
-  VITE v5.4.19  ready in 452 ms
+  VITE v5.4.19  ready in 4028 ms
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
-10:18:05 AM [vite] hmr update /src/pages/Dashboard.tsx, /src/index.css
-10:20:03 AM [vite] hmr update /src/pages/Dashboard.tsx, /src/index.css
-10:20:06 AM [vite] hmr update /src/components/ui/avatar.tsx, /src/index.css
-10:36:29 AM [vite] hmr update /src/components/ui/real-time-chart.tsx, /src/index.css
+2:04:53 PM [vite] hmr update /src/pages/Landing.tsx, /src/index.css
+2:04:55 PM [vite] hmr update /src/pages/Landing.tsx, /src/index.css
+2:04:56 PM [vite] hmr update /src/pages/Landing.tsx, /src/index.css
+2:04:59 PM [vite] hmr update /src/pages/Landing.tsx, /src/index.css
+2:05:06 PM [vite] hmr update /src/pages/Landing.tsx, /src/index.css
+2:05:18 PM [vite] hmr update /src/pages/Landing.tsx, /src/index.css
+2:08:19 PM [vite] hmr update /src/pages/Landing.tsx, /src/index.css
+2:08:19 PM [vite] Internal server error: /home/user/server/frontend/src/pages/Landing.tsx: Unexpected token, expected "}" (383:14)
+
+  381 |                 </CardContent>
+  382 |               </Card>
+> 383 |             ))Þ
+      |               ^
+  384 |           </div>
+  385 |         </div>
+  386 |       </motion.section>
+  Plugin: vite:react-babel
+  File: /home/user/server/frontend/src/pages/Landing.tsx:383:14
+  381|                  </CardContent>
+  382|                </Card>
+  383|              ))Þ
+     |                ^
+  384|            </div>
+  385|          </div>
+      at constructor (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+      at TypeScriptParserMixin.raise (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+      at TypeScriptParserMixin.unexpected (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:6650:16)
+      at TypeScriptParserMixin.expect (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:6930:12)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4670:10)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4744:36)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4731:32)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4731:32)
+      at TypeScriptParserMixin.jsxParseElementAt (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4731:32)
+      at TypeScriptParserMixin.jsxParseElement (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4782:17)
+      at TypeScriptParserMixin.parseExprAtom (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4792:19)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:11085:23)
+      at TypeScriptParserMixin.parseUpdate (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:11070:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:11050:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9857:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10903:61)
+      at TypeScriptParserMixin.parseExprOps (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10908:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10885:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9795:39
+      at TypeScriptParserMixin.tryParse (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:6938:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9795:18)
+      at /home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10804:39
+      at TypeScriptParserMixin.allowInAnd (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12436:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10804:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12503:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:11683:28)
+      at TypeScriptParserMixin.parseExprAtom (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:11335:23)
+      at TypeScriptParserMixin.parseExprAtom (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:11085:23)
+      at TypeScriptParserMixin.parseUpdate (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:11070:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:11050:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9857:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10903:61)
+      at TypeScriptParserMixin.parseExprOps (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10908:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10885:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10835:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9806:20)
+      at TypeScriptParserMixin.parseExpressionBase (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10784:39
+      at TypeScriptParserMixin.allowInAnd (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12431:16)
+      at TypeScriptParserMixin.parseExpression (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10784:17)
+      at TypeScriptParserMixin.parseReturnStatement (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13151:28)
+      at TypeScriptParserMixin.parseStatementContent (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12807:21)
+      at TypeScriptParserMixin.parseStatementContent (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9532:18)
+      at TypeScriptParserMixin.parseStatementLike (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12776:17)
+      at TypeScriptParserMixin.parseStatementListItem (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12756:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13325:61)
+      at TypeScriptParserMixin.parseBlockBody (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13318:10)
+      at TypeScriptParserMixin.parseBlock (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13306:10)
+2:10:25 PM [vite] hmr update /src/pages/Landing.tsx, /src/index.css
+2:10:32 PM [vite] hmr update /src/pages/Landing.tsx, /src/index.css

@@ -15,7 +15,7 @@ import {
   Users,
   Building2
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/ui/navbar";
 import StatusDonut from "@/components/ui/status-donut";
@@ -23,8 +23,19 @@ import RealTimeChart from "@/components/ui/real-time-chart";
 import MetricsGrid from "@/components/ui/metrics-grid";
 import World from "@/components/ui/World"; // Corrected import
 import BackgroundDecorator from "@/components/ui/background-decorator";
+import { useAuth } from "@/hooks/useAuth";
 
 const Landing = () => {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    } else {
+      navigate("/signup");
+    }
+  };
   const features = [
     {
       icon: Monitor,
@@ -247,17 +258,15 @@ const Landing = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Link to="/signup">
-                <Button variant="hero" size="xl" className="w-full sm:w-auto">
+              <Button onClick={handleGetStarted} variant="hero" size="xl" className="w-full sm:w-auto">
                   Get Started Free
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
-              </Link>
-              <Link to="/login">
+              {/* <Link to="/deshboard">
                 <Button variant="outline" size="xl" className="w-full sm:w-auto">
                   Login
                 </Button>
-              </Link>
+              </Link> */}
             </div>
 
             <div className="text-sm text-muted-foreground">
@@ -494,11 +503,9 @@ const Landing = () => {
                       </li>
                     ))}
                   </ul>
-                  <Link to="/signup">
-                    <Button variant={plan.variant} className="w-full" size="lg">
+                  <Button onClick={handleGetStarted} variant={plan.variant} className="w-full" size="lg">
                       {plan.cta}
                     </Button>
-                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -518,12 +525,10 @@ const Landing = () => {
             <p className="text-xl mb-8 text-muted-foreground max-w-2xl mx-auto">
               Join thousands of developers who trust PulseMonitor to keep their services online.
             </p>
-            <Link to="/signup">
-              <Button variant="hero" size="xl">
+            <Button onClick={handleGetStarted} variant="hero" size="xl">
                 Get Started Free
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-            </Link>
           </div>
         </div>
       </section>

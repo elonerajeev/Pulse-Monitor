@@ -1,0 +1,25 @@
+graph TD
+    subgraph User
+        A[Browser]
+    end
+
+    subgraph Frontend
+        B[React App]
+    end
+
+    subgraph Backend
+        C[Node.js/Express API]
+        D[MongoDB]
+    end
+
+    subgraph "Monitoring Service"
+        E[Node.js Cron Service]
+    end
+
+    A -->|HTTP/S| B
+    B -->|API Calls (REST)| C
+    C -->|Mongoose| D
+    E -->|Mongoose| D
+    E -->|HTTP Requests| F[External Services]
+
+    style F fill:#f9f,stroke:#333,stroke-width:2px
