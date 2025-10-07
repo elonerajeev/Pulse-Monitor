@@ -1,0 +1,76 @@
+
+up to date, audited 87 packages in 2s
+
+12 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> service@1.0.0 dev
+> nodemon src/index.js
+
+[33m[nodemon] 3.1.10[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[32m[nodemon] starting `node src/index.js`[39m
+(node:7621) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/user/server/service/src/index.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/user/server/service/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[dotenv@17.2.3] injecting env (1) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Rajeev Kumar (www.zyz.com)
+   - Last checked: 687.51 minutes ago
+   - Interval: 5 minutes
+   - Result: OFFLINE (nullms)
+   - Error: Invalid URL
+
+🔍 Monitoring required for: website ping (www.google.com)
+   - Last checked: 686.85 minutes ago
+   - Interval: 15 minutes
+   - Result: OFFLINE (nullms)
+   - Error: Invalid URL
+
+🔍 Monitoring required for: My Production Website (http://elonerajeev.org.in/)
+   - Last checked: 681.10 minutes ago
+   - Interval: 10 minutes
+   - Result: OFFLINE (nullms)
+   - Error: getaddrinfo ENOTFOUND elonerajeev.org.in
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Last checked: 21.74 minutes ago
+   - Interval: 5 minutes
+   - Result: OFFLINE (nullms)
+   - Error: Invalid URL
+
+🔍 Monitoring required for: real Data (elonerajeev.org)
+   - Last checked: 15.80 minutes ago
+   - Interval: 8 minutes
+   - Result: OFFLINE (nullms)
+   - Error: Invalid URL
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+-- Monitoring Scheduler Finished --

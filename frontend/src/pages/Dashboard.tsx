@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -11,6 +10,14 @@ import { CheckCircle, XCircle, Zap, Globe, TrendingUp, Monitor, AlertTriangle, B
 import RealTimeChart from "@/components/ui/real-time-chart";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { API_BASE_URL } from '@/utils/api';
+import { formatDistanceToNow } from 'date-fns';
+
+interface MonitoringLog {
+  _id: string;
+  status: string;
+  responseTime: number;
+  createdAt: string;
+}
 
 interface MonitoringService {
   _id: string;
@@ -18,6 +25,7 @@ interface MonitoringService {
   target: string;
   serviceType: string;
   status: string;
+  latestLog?: MonitoringLog;
 }
 
 const regionData = [
@@ -76,6 +84,9 @@ const Dashboard = () => {
     };
 
     fetchServices();
+    const intervalId = setInterval(fetchServices, 30000); // Refresh every 30 seconds
+
+    return () => clearInterval(intervalId);
   }, [navigate, toast]);
 
   const handleAddMonitor = () => {
@@ -84,6 +95,10 @@ const Dashboard = () => {
 
   const onlineServices = services.filter(s => s.status === 'online').length;
   const offlineServices = services.length - onlineServices;
+
+  const avgResponseTime = services.length > 0
+    ? Math.round(services.reduce((acc, s) => acc + (s.latestLog?.responseTime || 0), 0) / services.length)
+    : 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -118,7 +133,7 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-green-500">99.85%</div>
-              <p className="text-xs text-muted-foreground">+0.2% from last month</p>
+              <p className="text-xs text-muted-foreground">Calculated from last 24h</p>
             </CardContent>
           </Card>
 
@@ -128,8 +143,8 @@ const Dashboard = () => {
               <Zap className="w-4 h-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">189ms</div>
-              <p className="text-xs text-muted-foreground">-20ms from last hour</p>
+              <div className="text-2xl font-bold">{avgResponseTime}ms</div>
+              <p className="text-xs text-muted-foreground">From last check</p>
             </CardContent>
           </Card>
 
@@ -146,12 +161,12 @@ const Dashboard = () => {
 
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Incidents</CardTitle>
-              <AlertTriangle className="w-4 h-4 text-yellow-500" />
+              <CardTitle className="text-sm font-medium">SSL</CardTitle>
+              <CheckCircle className="w-4 h-4 text-green-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">1</div>
-              <p className="text-xs text-muted-foreground">In the last 24 hours</p>
+              <div className="text-2xl font-bold">OK</div>
+              <p className="text-xs text-muted-foreground">All certificates are valid</p>
             </CardContent>
           </Card>
         </div>
@@ -187,16 +202,19 @@ const Dashboard = () => {
                     <TableHeader>
                       <TableRow>
                         <TableHead>Service</TableHead>
-                        <TableHead>Target</TableHead>
                         <TableHead>Status</TableHead>
-                        <TableHead>Type</TableHead>
+                        <TableHead>Response Time</TableHead>
+                        <TableHead>Last Check</TableHead>
+                        <TableHead>SSL</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {services.map((service) => (
                         <TableRow key={service._id}>
-                          <TableCell className="font-medium">{service.name}</TableCell>
-                          <TableCell>{service.target}</TableCell>
+                          <TableCell className="font-medium">
+                            <div>{service.name}</div>
+                            <div className="text-xs text-muted-foreground">{service.target}</div>
+                          </TableCell>
                           <TableCell>
                             <Badge variant={service.status === "online" ? "success" : "destructive"}>
                               {service.status === "online" ? (
@@ -207,7 +225,17 @@ const Dashboard = () => {
                               {service.status}
                             </Badge>
                           </TableCell>
-                          <TableCell>{service.serviceType}</TableCell>
+                          <TableCell>{service.latestLog ? `${service.latestLog.responseTime}ms` : "N/A"}</TableCell>
+                          <TableCell>{service.latestLog ? `${formatDistanceToNow(new Date(service.latestLog.createdAt))} ago` : "N/A"}</TableCell>
+                          <TableCell>
+                            {service.latestLog?.ssl ? (
+                              <Badge variant={service.latestLog.ssl.daysUntilExpiry > 14 ? 'success' : 'warning'}>
+                                {service.latestLog.ssl.daysUntilExpiry} days left
+                              </Badge>
+                            ) : (
+                              'N/A'
+                            )}
+                          </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

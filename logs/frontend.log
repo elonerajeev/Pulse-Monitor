@@ -1,0 +1,23 @@
+
+up to date, audited 535 packages in 4s
+
+83 packages are looking for funding
+  run `npm fund` for details
+
+2 moderate severity vulnerabilities
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+
+> vite_react_shadcn_ts@0.0.0 dev
+> vite
+
+
+  VITE v5.4.19  ready in 448 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+7:22:28 PM [vite] ✨ new dependencies optimized: date-fns
+7:22:28 PM [vite] ✨ optimized dependencies changed. reloading

@@ -1,30 +1,33 @@
 #!/bin/bash
 
-# This script will install dependencies and run both the backend and frontend servers.
+# Script to run the entire PulseMonitor application (backend, frontend, and service)
 
-# Exit immediately if a command exits with a non-zero status.
-set -e
-
-cleanup() {
-    echo "--- Stopping servers ---"
-    # Kill all background jobs of this script
-    kill 0
+# Function to print a colored message
+print_message() {
+  echo -e "\n\e[1;34m$1\e[0m\n"
 }
 
-# Run the cleanup function on exit
-trap cleanup EXIT
+# Create a log directory if it doesn't exist
+mkdir -p logs
 
-echo "--- Setting up backend ---"
-cd /home/user/server/backend
-npm install
-echo "--- Starting backend server in the background ---"
-npm start &
+# Trap Ctrl+C and kill all background processes
+trap 'kill $(jobs -p); echo -e "\n\e[1;31mAll services have been stopped.\e[0m"; exit' INT
 
-# Wait a moment for the backend to start
-sleep 5
+# Start the Backend Server
+print_message "Starting Backend Server... (logs in logs/backend.log)"
+(cd backend && npm install && npm run dev) > logs/backend.log 2>&1 &
 
-echo "--- Setting up frontend ---"
-cd /home/user/server/frontend
-npm install
-echo "--- Starting frontend dev server ---"
-npm run dev
+# Start the Frontend Development Server
+print_message "Starting Frontend Development Server... (logs in logs/frontend.log)"
+(cd frontend && npm install && npm run dev) > logs/frontend.log 2>&1 &
+
+# Start the Monitoring Service
+print_message "Starting Monitoring Service... (logs in logs/service.log)"
+(cd service && npm install && npm run dev) > logs/service.log 2>&1 &
+
+echo -e "\n\e[1;32mAll services are starting up in the background.\e[0m"
+echo -e "You can view the logs in the \e[1;33mlogs/\e[0m directory."
+echo -e "Press \e[1;31mCtrl+C\e[0m to stop all services."
+
+# Wait for all background processes to finish (which they won't, until Ctrl+C)
+wait

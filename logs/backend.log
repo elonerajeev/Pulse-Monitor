@@ -1,0 +1,65 @@
+
+up to date, audited 138 packages in 2s
+
+22 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> backend@1.0.0 dev
+> nodemon src/server.js
+
+[33m[nodemon] 3.1.10[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[32m[nodemon] starting `node src/server.js`[39m
+[dotenv@17.2.2] injecting env (4) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 📡 version env with Radar: https://dotenvx.com/radar
+Server is running on http://localhost:5000
+MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTc3ODU3NiwiZXhwIjoxNzYwMzgzMzc2fQ.q_z-FPL1E9kDZLRr4bVQH2OWmbrdTq0nJ5rCgjHdhHk
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759778576, exp: 1760383376 }
