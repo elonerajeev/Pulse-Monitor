@@ -19,7 +19,7 @@ interface MonitoringService {
 }
 
 interface RealTimeChartProps {
-  services: MonitoringService[];
+  services?: MonitoringService[];
 }
 
 const roundToNearest5Minutes = (date: Date) => {
@@ -28,26 +28,70 @@ const roundToNearest5Minutes = (date: Date) => {
   return new Date(Math.round(date.getTime() / ms) * ms);
 };
 
-const RealTimeChart: React.FC<RealTimeChartProps> = ({ services = [] }) => {
+const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
   const [data, setData] = useState<any[]>([]);
+
+  const chartServices = useMemo(() => {
+    if (services && services.length > 0) {
+      return services;
+    }
+
+    // Generate dummy data for the landing page
+    const dummyServices: MonitoringService[] = [
+      {
+        _id: '1',
+        name: 'API',
+        target: 'https://api.example.com',
+        serviceType: 'api',
+        status: 'healthy',
+        logs: [],
+      },
+      {
+        _id: '2',
+        name: 'Website',
+        target: 'https://example.com',
+        serviceType: 'website',
+        status: 'healthy',
+        logs: [],
+      },
+    ];
+
+    const now = new Date();
+    for (let i = 29; i >= 0; i--) {
+      const time = new Date(now.getTime() - i * 5 * 60 * 1000);
+      dummyServices[0].logs.push({
+        _id: `log1-${i}`,
+        status: 'healthy',
+        responseTime: Math.floor(Math.random() * (200 - 50 + 1) + 50),
+        createdAt: time.toISOString(),
+      });
+      dummyServices[1].logs.push({
+        _id: `log2-${i}`,
+        status: 'healthy',
+        responseTime: Math.floor(Math.random() * (300 - 100 + 1) + 100),
+        createdAt: time.toISOString(),
+      });
+    }
+    return dummyServices;
+  }, [services]);
 
   const serviceColors = useMemo(() => {
     const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#a4de6c", "#d0ed57", "#ff7300", "#00C49F", "#FFBB28", "#FF8042"];
-    return services.reduce((acc, service, index) => {
+    return chartServices.reduce((acc, service, index) => {
       acc[service.name] = colors[index % colors.length];
       return acc;
     }, {} as Record<string, string>);
-  }, [services]);
+  }, [chartServices]);
 
   useEffect(() => {
     const timeMap = new Map<string, any>();
 
-    services.forEach(service => {
+    chartServices.forEach(service => {
       if (service.logs) {
         service.logs.forEach(log => {
           const roundedDate = roundToNearest5Minutes(new Date(log.createdAt));
           const time = roundedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          
+
           if (!timeMap.has(time)) {
             timeMap.set(time, { time });
           }
@@ -58,9 +102,10 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services = [] }) => {
 
     const chartData = Array.from(timeMap.values()).sort((a, b) => a.time.localeCompare(b.time));
     setData(chartData);
-  }, [services]);
+  }, [chartServices]);
 
-  if (services.length === 0) {
+
+  if (chartServices.length === 0) {
     return <div className="flex items-center justify-center h-full text-muted-foreground">No data to display</div>;
   }
 
@@ -77,7 +122,7 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services = [] }) => {
           }}
         />
         <Legend wrapperStyle={{ fontSize: '14px' }} />
-        {services.map(service => (
+        {chartServices.map(service => (
           <Line
             key={service.name}
             type="monotone"

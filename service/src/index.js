@@ -1,6 +1,5 @@
 import express from "express";
 import { startMonitoring } from "./jobs/monitorJob.js";
-import { startCleanupJob } from "./jobs/cleanupJob.js";
 import db from "./config/db.js";
 import routes from "./routes/index.js";
 
@@ -12,7 +11,6 @@ app.use("/api", routes);
 (async () => {
   await db();
   startMonitoring();
-  startCleanupJob();
 })();
 
 app.listen(port, () => {

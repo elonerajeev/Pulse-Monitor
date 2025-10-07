@@ -10,6 +10,7 @@ import AddMonitoringService from "./pages/AddMonitoringService";
 import Documentation from "./pages/Documentation";
 import NotFound from "./pages/NotFound";
 import Terms from "./pages/Terms";
+import DemoDashboard from "./pages/DemoDashboard";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/demo-dashboard" element={<DemoDashboard />} />
           <Route path="/monitoring/add" element={<AddMonitoringService />} />
           {/* <Route path="/testimonials" element={<Testimonials />} /> */}
           <Route path="/documentation" element={<Documentation />} />

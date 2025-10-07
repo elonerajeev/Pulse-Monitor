@@ -12,17 +12,18 @@ export const saveMonitoringResult = async (monitoringId, result) => {
         ...result
     });
     await newLog.save();
+
+    const logs = await MonitoringLog.find({ monitoringId }).sort({ createdAt: -1 }).select('_id').lean();
+    if (logs.length > 15) {
+        const idsToDelete = logs.slice(15).map(log => log._id);
+        await MonitoringLog.deleteMany({ _id: { $in: idsToDelete } });
+    }
+
     return newLog;
 };
 
 export const updateMonitoringStatus = async (monitoringId, newStatus) => {
   await Monitoring.findByIdAndUpdate(monitoringId, { status: newStatus });
-};
-
-export const deleteOldMonitoringLogs = async () => {
-  const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-  const result = await MonitoringLog.deleteMany({ createdAt: { $lt: twentyFourHoursAgo } });
-  return result;
 };
 
 export const getMonitoringLogs = async (monitoringId) => {

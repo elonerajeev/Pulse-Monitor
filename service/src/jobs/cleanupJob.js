@@ -1,3 +1,4 @@
+/*
 import cron from "node-cron";
 import { deleteOldMonitoringLogs } from "../services/monitoringService.js";
 
@@ -14,3 +15,4 @@ export const startCleanupJob = () => {
     console.log("\n-- Cleanup Job Finished --");
   });
 };
+*/

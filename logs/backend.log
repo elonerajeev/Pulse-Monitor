@@ -1,5 +1,5 @@
 
-up to date, audited 149 packages in 4s
+up to date, audited 149 packages in 2s
 
 24 packages are looking for funding
   run `npm fund` for details
@@ -14,28 +14,32 @@ found 0 vulnerabilities
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/server.js`[39m
-[dotenv@17.2.2] injecting env (4) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+[dotenv@17.2.2] injecting env (4) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 📡 version env with Radar: https://dotenvx.com/radar
 [dotenv@17.2.2] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
-[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
 Server is running on http://localhost:5000
 MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc1OTgzMTI3OSwiZXhwIjoxNzYwNDM2MDc5fQ.wWlVo2QJMPufU91aW9zmpIw0oTMMfA5jTPZnJ_ciPgQ
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1759831279, exp: 1760436079 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc1OTg1NjA3MiwiZXhwIjoxNzYwNDYwODcyfQ.sTdcdRLVD32DFgW5TdARwEv_0F__GjzBYbKxLLzQ1dE
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1759856072, exp: 1760460872 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc1OTgzMTI3OSwiZXhwIjoxNzYwNDM2MDc5fQ.wWlVo2QJMPufU91aW9zmpIw0oTMMfA5jTPZnJ_ciPgQ
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1759831279, exp: 1760436079 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc1OTg1NjA3MiwiZXhwIjoxNzYwNDYwODcyfQ.sTdcdRLVD32DFgW5TdARwEv_0F__GjzBYbKxLLzQ1dE
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1759856072, exp: 1760460872 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc1OTg0NjMyMiwiZXhwIjoxNzYwNDUxMTIyfQ.qO1NbKeNR1wkHykYZAUspQBW2Ns6mNUcQv4N2EL3VeE
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1759846322, exp: 1760451122 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc1OTg1OTE4MSwiZXhwIjoxNzYwNDYzOTgxfQ.pV4i0Pi3WAuul3ZKkcbPJHge_z9yflt9suYW0MqTnNA
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1759859181, exp: 1760463981 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTg0NjMzNiwiZXhwIjoxNzYwNDUxMTM2fQ.ysLJaH77VYSuJQJ1-pMV5UTEh6rGVrO40TVHOpB08xY
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759846336, exp: 1760451136 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTg1OTE5OSwiZXhwIjoxNzYwNDYzOTk5fQ.GTCkhn1fGbHyKlqbCrfO0AWgfu3_bAaq5ufpHtl2gVI
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759859199, exp: 1760463999 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTg0NjMzNiwiZXhwIjoxNzYwNDUxMTM2fQ.ysLJaH77VYSuJQJ1-pMV5UTEh6rGVrO40TVHOpB08xY
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759846336, exp: 1760451136 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc1OTg1OTE5OSwiZXhwIjoxNzYwNDYzOTk5fQ.GTCkhn1fGbHyKlqbCrfO0AWgfu3_bAaq5ufpHtl2gVI
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1759859199, exp: 1760463999 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc1OTg1OTQwOCwiZXhwIjoxNzYwNDY0MjA4fQ.adB1t2je_EOgShnThigXViRukaMSlTmN1zX4Ac0oK0Q
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1759859408, exp: 1760464208 }

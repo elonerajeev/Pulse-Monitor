@@ -202,11 +202,11 @@ const Landing = () => {
   ];
 
   const customerLogos = [
-    { src: "/logo.svg", alt: "Logo 1" },
-    { src: "/logo.svg", alt: "Logo 2" },
-    { src: "/logo.svg", alt: "Logo 3" },
-    { src: "/logo.svg", alt: "Logo 4" },
-    { src: "/logo.svg", alt: "Logo 5" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg", alt: "Google" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/a/ab/Meta-Logo.svg", alt: "Meta" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg", alt: "Microsoft" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", alt: "Amazon" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", alt: "Netflix" },
   ];
 
   const sectionVariants = {
