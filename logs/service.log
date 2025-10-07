@@ -117,3 +117,29 @@ MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
    - Result: ONLINE (44.57766700000502ms)
 
 -- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Rajeev Kumar (www.zyz.com)
+   - Result: OFFLINE (201.31784199993126ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (485.21752399997786ms)
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Result: ONLINE (50.70959799992852ms)
+
+🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
+   - Result: ONLINE (618.9799190000631ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (305.0787569999229ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (161.48408800014295ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (119.19405300007202ms)
+
+-- Monitoring Scheduler Finished --

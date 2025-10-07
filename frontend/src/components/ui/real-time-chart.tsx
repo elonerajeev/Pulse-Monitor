@@ -22,15 +22,21 @@ interface RealTimeChartProps {
   services: MonitoringService[];
 }
 
+const roundToNearest5Minutes = (date: Date) => {
+  const minutes = 5;
+  const ms = 1000 * 60 * minutes;
+  return new Date(Math.round(date.getTime() / ms) * ms);
+};
+
 const RealTimeChart: React.FC<RealTimeChartProps> = ({ services = [] }) => {
   const [data, setData] = useState<any[]>([]);
 
   const serviceColors = useMemo(() => {
-    const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#a4de6c", "#d0ed57", "#ff7300"];
+    const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#a4de6c", "#d0ed57", "#ff7300", "#00C49F", "#FFBB28", "#FF8042"];
     return services.reduce((acc, service, index) => {
       acc[service.name] = colors[index % colors.length];
       return acc;
-    }, {});
+    }, {} as Record<string, string>);
   }, [services]);
 
   useEffect(() => {
@@ -39,7 +45,9 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services = [] }) => {
     services.forEach(service => {
       if (service.logs) {
         service.logs.forEach(log => {
-          const time = new Date(log.createdAt).toLocaleTimeString();
+          const roundedDate = roundToNearest5Minutes(new Date(log.createdAt));
+          const time = roundedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          
           if (!timeMap.has(time)) {
             timeMap.set(time, { time });
           }
@@ -52,12 +60,16 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services = [] }) => {
     setData(chartData);
   }, [services]);
 
+  if (services.length === 0) {
+    return <div className="flex items-center justify-center h-full text-muted-foreground">No data to display</div>;
+  }
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--muted))" />
         <XAxis dataKey="time" stroke="hsl(var(--muted-foreground))" fontSize={12} />
-        <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
+        <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} unit="ms" />
         <Tooltip
           contentStyle={{
             backgroundColor: "hsl(var(--background))",
@@ -70,10 +82,12 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services = [] }) => {
             key={service.name}
             type="monotone"
             dataKey={service.name}
+            name={service.name}
             stroke={serviceColors[service.name]}
             strokeWidth={2}
             dot={false}
             activeDot={{ r: 6 }}
+            connectNulls
           />
         ))}
       </LineChart>
