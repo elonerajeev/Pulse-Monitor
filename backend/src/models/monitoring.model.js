@@ -22,7 +22,7 @@ const monitoringSchema = new Schema(
       type: Number,
       required: [true, "Check interval is required"],
       default: 5, // Default to 5 minutes
-      min: [1, "Interval must be at least 1 minute"],
+      min: [5, "Interval must be at least 5 minutes"],
     },
     owner: {
       type: Schema.Types.ObjectId,

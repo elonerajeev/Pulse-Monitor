@@ -6,12 +6,26 @@ export const getAllMonitoringServices = async () => {
   return services;
 };
 
-export const saveMonitoringResult = async (result) => {
-  const newLog = new MonitoringLog(result);
-  await newLog.save();
-  return newLog;
+export const saveMonitoringResult = async (monitoringId, result) => {
+    const newLog = new MonitoringLog({
+        monitoringId,
+        ...result
+    });
+    await newLog.save();
+    return newLog;
 };
 
 export const updateMonitoringStatus = async (monitoringId, newStatus) => {
   await Monitoring.findByIdAndUpdate(monitoringId, { status: newStatus });
+};
+
+export const deleteOldMonitoringLogs = async () => {
+  const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+  const result = await MonitoringLog.deleteMany({ createdAt: { $lt: twentyFourHoursAgo } });
+  return result;
+};
+
+export const getMonitoringLogs = async (monitoringId) => {
+  const logs = await MonitoringLog.find({ monitoringId }).sort({ createdAt: -1 });
+  return logs;
 };

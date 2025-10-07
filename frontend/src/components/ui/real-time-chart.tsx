@@ -1,48 +1,56 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
-const RealTimeChart = () => {
-  const demoWebsites = useMemo(() => [
-    { name: "TechCrunch", color: "#8884d8" },
-    { name: "The Verge", color: "#82ca9d" },
-    { name: "Hacker News", color: "#ffc658" },
-    { name: "GitHub", color: "#ff8042" },
-    { name: "Product Hunt", color: "#a4de6c" },
-    { name: "Indie Hackers", color: "#d0ed57" },
-    { name: "Reddit", color: "#ff7300" },
-  ], []);
+interface MonitoringLog {
+  _id: string;
+  status: string;
+  responseTime: number;
+  createdAt: string;
+}
 
-  const [data, setData] = useState(() => {
-    const initialData = [];
-    const time = new Date();
-    for (let i = 10; i >= 0; i--) {
-      const entry = { time: new Date(time.getTime() - i * 5000).toLocaleTimeString() };
-      demoWebsites.forEach(site => {
-        entry[site.name] = 100 + Math.random() * 200;
-      });
-      initialData.push(entry);
-    }
-    return initialData;
-  });
+interface MonitoringService {
+  _id: string;
+  name: string;
+  target: string;
+  serviceType: string;
+  status: string;
+  latestLog?: MonitoringLog;
+  logs: MonitoringLog[];
+}
+
+interface RealTimeChartProps {
+  services: MonitoringService[];
+}
+
+const RealTimeChart: React.FC<RealTimeChartProps> = ({ services = [] }) => {
+  const [data, setData] = useState<any[]>([]);
+
+  const serviceColors = useMemo(() => {
+    const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#a4de6c", "#d0ed57", "#ff7300"];
+    return services.reduce((acc, service, index) => {
+      acc[service.name] = colors[index % colors.length];
+      return acc;
+    }, {});
+  }, [services]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setData(prevData => {
-        const newData = [...prevData];
-        if (newData.length >= 12) {
-          newData.shift();
-        }
-        const newEntry = { time: new Date().toLocaleTimeString() };
-        demoWebsites.forEach(site => {
-          const lastValue = newData.length > 0 ? newData[newData.length - 1][site.name] : 150;
-          newEntry[site.name] = Math.max(50, lastValue + (Math.random() - 0.5) * 50);
-        });
-        return [...newData, newEntry];
-      });
-    }, 3000);
+    const timeMap = new Map<string, any>();
 
-    return () => clearInterval(interval);
-  }, [demoWebsites]);
+    services.forEach(service => {
+      if (service.logs) {
+        service.logs.forEach(log => {
+          const time = new Date(log.createdAt).toLocaleTimeString();
+          if (!timeMap.has(time)) {
+            timeMap.set(time, { time });
+          }
+          timeMap.get(time)[service.name] = log.responseTime;
+        });
+      }
+    });
+
+    const chartData = Array.from(timeMap.values()).sort((a, b) => a.time.localeCompare(b.time));
+    setData(chartData);
+  }, [services]);
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -57,12 +65,12 @@ const RealTimeChart = () => {
           }}
         />
         <Legend wrapperStyle={{ fontSize: '14px' }} />
-        {demoWebsites.map(site => (
+        {services.map(service => (
           <Line
-            key={site.name}
+            key={service.name}
             type="monotone"
-            dataKey={site.name}
-            stroke={site.color}
+            dataKey={service.name}
+            stroke={serviceColors[service.name]}
             strokeWidth={2}
             dot={false}
             activeDot={{ r: 6 }}

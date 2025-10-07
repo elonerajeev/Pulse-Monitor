@@ -3,20 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/ui/navbar';
 import { useToast } from '@/hooks/use-toast';
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { CheckCircle, XCircle, Zap, Globe, TrendingUp, Monitor, AlertTriangle, Bell, Plus } from "lucide-react";
+import { CheckCircle, Plus, TrendingUp, Monitor, Zap, RefreshCw, AlertTriangle, Info } from "lucide-react";
 import RealTimeChart from "@/components/ui/real-time-chart";
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { API_BASE_URL } from '@/utils/api';
-import { formatDistanceToNow } from 'date-fns';
+import ServiceCard from '@/components/ui/ServiceCard';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
+import EditServiceModal from '@/components/ui/EditServiceModal';
 
 interface MonitoringLog {
   _id: string;
   status: string;
   responseTime: number;
   createdAt: string;
+  ssl?: { daysUntilExpiry: number; };
 }
 
 interface MonitoringService {
@@ -24,28 +24,47 @@ interface MonitoringService {
   name: string;
   target: string;
   serviceType: string;
-  status: string;
+  interval: number;
   latestLog?: MonitoringLog;
+  logs: MonitoringLog[];
 }
-
-const regionData = [
-  { name: 'US East', value: 35, color: 'hsl(var(--chart-1))' },
-  { name: 'US West', value: 25, color: 'hsl(var(--chart-2))' },
-  { name: 'Europe', value: 20, color: 'hsl(var(--chart-3))' },
-  { name: 'Asia', value: 20, color: 'hsl(var(--chart-4))' },
-];
-
-const recentAlerts = [
-  { id: 1, message: "High response time detected", service: "API Server", time: "5 mins ago", severity: "warning" },
-  { id: 2, message: "Service back online", service: "CDN", time: "15 mins ago", severity: "success" },
-  { id: 3, message: "SSL certificate expires in 7 days", service: "Main Website", time: "2 hours ago", severity: "info" },
-];
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [services, setServices] = useState<MonitoringService[]>([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [editingService, setEditingService] = useState<MonitoringService | null>(null);
+  const [serviceToDelete, setServiceToDelete] = useState<MonitoringService | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const fetchServices = async () => {
+    const userStr = localStorage.getItem('user');
+    if (!userStr) return;
+
+    const user = JSON.parse(userStr);
+    const token = user?.accessToken;
+    if (!token) return;
+
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/monitoring`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setServices(data.data);
+      } else {
+        toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
+      }
+    } catch (error) {
+      toast({ title: 'Error', description: 'An error occurred while fetching services.', variant: 'destructive' });
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
@@ -57,48 +76,94 @@ const Dashboard = () => {
       return;
     }
 
-    const fetchServices = async () => {
-      const userStr = localStorage.getItem('user');
-      if (!userStr) return;
-
-      const user = JSON.parse(userStr);
-      const token = user?.accessToken;
-      if (!token) return;
-
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/v1/monitoring`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setServices(data.data);
-        } else {
-          toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
-        }
-      } catch (error) {
-        toast({ title: 'Error', description: 'An error occurred while fetching services.', variant: 'destructive' });
-      }
-    };
-
     fetchServices();
-    const intervalId = setInterval(fetchServices, 30000); // Refresh every 30 seconds
-
-    return () => clearInterval(intervalId);
   }, [navigate, toast]);
 
   const handleAddMonitor = () => {
     navigate('/monitoring/add');
   };
 
-  const onlineServices = services.filter(s => s.status === 'online').length;
+  const handleRefresh = () => {
+    fetchServices();
+  };
+
+  const handleEdit = (service: MonitoringService) => {
+    setEditingService(service);
+  };
+
+  const handleDelete = (service: MonitoringService) => {
+    setServiceToDelete(service);
+  };
+
+  const handleUpdate = async (updatedService: MonitoringService) => {
+    const userStr = localStorage.getItem('user');
+    if (!userStr) return;
+    const user = JSON.parse(userStr);
+    const token = user?.accessToken;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/monitoring/${updatedService._id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedService),
+      });
+
+      if (response.ok) {
+        toast({ title: 'Success', description: 'Service updated successfully.' });
+        setEditingService(null);
+        fetchServices();
+      } else {
+        const errorData = await response.json();
+        toast({ title: 'Error', description: errorData.message || 'Failed to update service.', variant: 'destructive' });
+      }
+    } catch (error) {
+      toast({ title: 'Error', description: 'An error occurred while updating the service.', variant: 'destructive' });
+    }
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!serviceToDelete) return;
+
+    const userStr = localStorage.getItem('user');
+    if (!userStr) return;
+    const user = JSON.parse(userStr);
+    const token = user?.accessToken;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/monitoring/${serviceToDelete._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        toast({ title: 'Success', description: 'Service deleted successfully.' });
+        setServiceToDelete(null);
+        fetchServices();
+      } else {
+        toast({ title: 'Error', description: 'Failed to delete service.', variant: 'destructive' });
+      }
+    } catch (error) {
+      toast({ title: 'Error', description: 'An error occurred while deleting the service.', variant: 'destructive' });
+    }
+  };
+
+  const onlineServices = services.filter(s => s.latestLog?.status === 'online').length;
   const offlineServices = services.length - onlineServices;
+  const incidents = services.reduce((acc, s) => acc + s.logs.filter(l => l.status === 'offline').length, 0);
 
   const avgResponseTime = services.length > 0
     ? Math.round(services.reduce((acc, s) => acc + (s.latestLog?.responseTime || 0), 0) / services.length)
     : 0;
+
+  const uptimePercentage = services.length > 0 ? (onlineServices / services.length) * 100 : 100;
+
+  const allSslOk = services.every(s => !s.target.startsWith('https://') || (s.latestLog?.ssl && s.latestLog.ssl.daysUntilExpiry > 0));
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -114,26 +179,34 @@ const Dashboard = () => {
                 : "This is your monitoring dashboard. Add a service to begin."}
             </p>
           </div>
-          <Button
-            variant="hero"
-            className="mt-4 lg:mt-0"
-            onClick={handleAddMonitor}
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            Add New Monitor
-          </Button>
+          <div className="flex items-center space-x-4 mt-4 lg:mt-0">
+            <Button
+              variant="outline"
+              onClick={handleRefresh}
+              disabled={loading}
+            >
+              <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+              Refresh
+            </Button>
+            <Button
+              variant="hero"
+              onClick={handleAddMonitor}
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Add New Monitor
+            </Button>
+          </div>
         </div>
 
-        {/* KPI Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Overall Uptime</CardTitle>
               <CheckCircle className="w-4 h-4 text-green-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-500">99.85%</div>
-              <p className="text-xs text-muted-foreground">Calculated from last 24h</p>
+              <div className="text-2xl font-bold text-green-500">{uptimePercentage.toFixed(2)}%</div>
+              <p className="text-xs text-muted-foreground">Calculated from last check</p>
             </CardContent>
           </Card>
 
@@ -161,19 +234,29 @@ const Dashboard = () => {
 
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">SSL</CardTitle>
-              <CheckCircle className="w-4 h-4 text-green-500" />
+              <CardTitle className="text-sm font-medium">Incidents</CardTitle>
+              <AlertTriangle className="w-4 h-4 text-red-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">OK</div>
-              <p className="text-xs text-muted-foreground">All certificates are valid</p>
+              <div className="text-2xl font-bold">{incidents}</div>
+              <p className="text-xs text-muted-foreground">In the last 24 hours</p>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">SSL</CardTitle>
+              <CheckCircle className={`w-4 h-4 ${allSslOk ? 'text-green-500' : 'text-red-500'}`} />
+            </CardHeader>
+            <CardContent>
+              <div className={`text-2xl font-bold ${allSslOk ? 'text-green-500' : 'text-red-500'}`}>{allSslOk ? 'OK' : 'Warning'}</div>
+              <p className="text-xs text-muted-foreground">{allSslOk ? 'All certificates are valid' : 'Some certificates need attention'}</p>
             </CardContent>
           </Card>
         </div>
 
         {services.length > 0 ? (
           <>
-            {/* Real-time Chart */}
             <Card className="mb-8">
               <CardHeader>
                 <CardTitle className="flex items-center">
@@ -183,135 +266,25 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="h-[350px]">
-                  <RealTimeChart />
+                  <RealTimeChart services={services} />
                 </div>
               </CardContent>
             </Card>
 
-            {/* Bottom Row */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <Card className="lg:col-span-2">
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Monitor className="w-5 h-5 mr-2" />
-                    Monitor Status
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Service</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Response Time</TableHead>
-                        <TableHead>Last Check</TableHead>
-                        <TableHead>SSL</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {services.map((service) => (
-                        <TableRow key={service._id}>
-                          <TableCell className="font-medium">
-                            <div>{service.name}</div>
-                            <div className="text-xs text-muted-foreground">{service.target}</div>
-                          </TableCell>
-                          <TableCell>
-                            <Badge variant={service.status === "online" ? "success" : "destructive"}>
-                              {service.status === "online" ? (
-                                <CheckCircle className="w-4 h-4 mr-2" />
-                              ) : (
-                                <XCircle className="w-4 h-4 mr-2" />
-                              )}
-                              {service.status}
-                            </Badge>
-                          </TableCell>
-                          <TableCell>{service.latestLog ? `${service.latestLog.responseTime}ms` : "N/A"}</TableCell>
-                          <TableCell>{service.latestLog ? `${formatDistanceToNow(new Date(service.latestLog.createdAt))} ago` : "N/A"}</TableCell>
-                          <TableCell>
-                            {service.latestLog?.ssl ? (
-                              <Badge variant={service.latestLog.ssl.daysUntilExpiry > 14 ? 'success' : 'warning'}>
-                                {service.latestLog.ssl.daysUntilExpiry} days left
-                              </Badge>
-                            ) : (
-                              'N/A'
-                            )}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-
-              <div className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <Globe className="w-5 h-5 mr-2" />
-                      Regional Performance
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ResponsiveContainer width="100%" height={200}>
-                      <PieChart>
-                        <Pie
-                          data={regionData}
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={40}
-                          outerRadius={80}
-                          paddingAngle={5}
-                          dataKey="value"
-                        >
-                          {regionData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
-                          ))}
-                        </Pie>
-                        <Tooltip />
-                      </PieChart>
-                    </ResponsiveContainer>
-                    <div className="mt-4 space-y-2">
-                      {regionData.map((region, index) => (
-                        <div key={index} className="flex items-center justify-between text-sm">
-                          <div className="flex items-center space-x-2">
-                            <div
-                              className="w-3 h-3 rounded-full"
-                              style={{ backgroundColor: region.color }}
-                            />
-                            <span>{region.name}</span>
-                          </div>
-                          <span>{region.value}%</span>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <Bell className="w-5 h-5 mr-2" />
-                      Recent Alerts
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {recentAlerts.map((alert) => (
-                        <div key={alert.id} className="flex items-start space-x-3">
-                          <div className={`w-2 h-2 rounded-full mt-2 ${
-                            alert.severity === 'warning' ? 'bg-yellow-500' :
-                            alert.severity === 'success' ? 'bg-green-500' : 'bg-blue-500'
-                          }`} />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium">{alert.message}</p>
-                            <p className="text-xs text-muted-foreground">{alert.service} • {alert.time}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {services.map((service) => (
+                <ServiceCard
+                  key={service._id}
+                  name={service.name}
+                  status={service.latestLog?.status || 'unknown'}
+                  target={service.target}
+                  serviceType={service.serviceType}
+                  logs={service.logs}
+                  lastChecked={service.latestLog?.createdAt}
+                  onEdit={() => handleEdit(service)}
+                  onDelete={() => handleDelete(service)}
+                />
+              ))}
             </div>
           </>
         ) : (
@@ -325,6 +298,29 @@ const Dashboard = () => {
           </Card>
         )}
       </div>
+
+      {editingService && (
+        <EditServiceModal
+          service={editingService}
+          onUpdate={handleUpdate}
+          onCancel={() => setEditingService(null)}
+        />
+      )}
+
+      <AlertDialog open={!!serviceToDelete} onOpenChange={() => setServiceToDelete(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete the monitoring service and all its associated data.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteConfirm}>Delete</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

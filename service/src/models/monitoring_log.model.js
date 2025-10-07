@@ -10,7 +10,7 @@ const monitoringLogSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["online", "offline", "pending"],
+      enum: ["online", "offline", "pending", "down", "error"],
       default: "pending",
     },
     responseTime: {

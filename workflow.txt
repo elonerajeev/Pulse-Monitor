@@ -18,7 +18,7 @@
                    │
                    ▼
         ┌────────────────────────┐
-        │  Backend_Core (Cron)   │
+        │  service (Cron)   │
         │ - Ping URLs            │
         │ - Write uptime logs    │
         └────────────────────────┘

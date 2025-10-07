@@ -13,7 +13,7 @@ const AddMonitoringService = () => {
   const [name, setName] = useState('');
   const [target, setTarget] = useState('');
   const [type, setType] = useState('website');
-  const [interval, setInterval] = useState(5);
+  const [interval, setInterval] = useState<number | ''>(5);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -23,6 +23,11 @@ const AddMonitoringService = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (interval === '' || interval <= 0) {
+      toast({ title: 'Error', description: 'Please enter a valid interval.', variant: 'destructive' });
+      return;
+    }
 
     const userStr = localStorage.getItem('user');
     if (!userStr) {
@@ -41,7 +46,7 @@ const AddMonitoringService = () => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/monitoring/add`, {
+      const response = await fetch(`${API_BASE_URL}/api/v1/monitoring`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,7 +113,10 @@ const AddMonitoringService = () => {
                 id="interval"
                 type="number"
                 value={interval}
-                onChange={(e) => setInterval(parseInt(e.target.value))}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setInterval(val === '' ? '' : parseInt(val, 10));
+                }}
                 min="1"
                 required
               />
