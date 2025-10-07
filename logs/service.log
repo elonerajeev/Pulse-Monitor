@@ -62,3 +62,10 @@ MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
    - Result: ONLINE (166.15967600001022ms)
 
 🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (406.6219370000181ms)
+
+🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
+   - Result: OFFLINE (9999.959364999959ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
