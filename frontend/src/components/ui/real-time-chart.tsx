@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import {
+  ComposedChart,
+  Line,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+  ReferenceLine,
+} from 'recharts';
 
 interface MonitoringLog {
   _id: string;
@@ -21,6 +32,8 @@ interface MonitoringService {
 interface RealTimeChartProps {
   services?: MonitoringService[];
 }
+
+const IDEAL_RESPONSE_TIME = 500; // ms
 
 const roundToNearest5Minutes = (date: Date) => {
   const minutes = 5;
@@ -62,13 +75,13 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
       dummyServices[0].logs.push({
         _id: `log1-${i}`,
         status: 'healthy',
-        responseTime: Math.floor(Math.random() * (200 - 50 + 1) + 50),
+        responseTime: Math.floor(Math.random() * (i > 15 && i < 20 ? 700 : 200 - 50 + 1) + 50),
         createdAt: time.toISOString(),
       });
       dummyServices[1].logs.push({
         _id: `log2-${i}`,
         status: 'healthy',
-        responseTime: Math.floor(Math.random() * (300 - 100 + 1) + 100),
+        responseTime: Math.floor(Math.random() * (i > 10 && i < 15 ? 800 : 300 - 100 + 1) + 100),
         createdAt: time.toISOString(),
       });
     }
@@ -95,7 +108,12 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
           if (!timeMap.has(time)) {
             timeMap.set(time, { time });
           }
-          timeMap.get(time)[service.name] = log.responseTime;
+          const entry = timeMap.get(time);
+          entry[service.name] = log.responseTime;
+
+          if (log.responseTime > IDEAL_RESPONSE_TIME) {
+            entry[`${service.name}-excess`] = log.responseTime;
+          }
         });
       }
     });
@@ -111,7 +129,7 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data}>
+      <ComposedChart data={data}>
         <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--muted))" />
         <XAxis dataKey="time" stroke="hsl(var(--muted-foreground))" fontSize={12} />
         <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} unit="ms" />
@@ -122,20 +140,40 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
           }}
         />
         <Legend wrapperStyle={{ fontSize: '14px' }} />
+        
+        <ReferenceLine
+          y={IDEAL_RESPONSE_TIME}
+          label={{ value: 'Ideal', position: 'insideTopRight', fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
+          stroke="hsl(var(--primary))"
+          strokeDasharray="4 4"
+        />
+
         {chartServices.map(service => (
-          <Line
-            key={service.name}
-            type="monotone"
-            dataKey={service.name}
-            name={service.name}
-            stroke={serviceColors[service.name]}
-            strokeWidth={2}
-            dot={false}
-            activeDot={{ r: 6 }}
-            connectNulls
-          />
+          <React.Fragment key={service.name}>
+            <Line
+              type="monotone"
+              dataKey={service.name}
+              name={service.name}
+              stroke={serviceColors[service.name]}
+              strokeWidth={2}
+              dot={false}
+              activeDot={{ r: 6 }}
+              connectNulls
+            />
+            <Area
+              type="monotone"
+              dataKey={`${service.name}-excess`}
+              fill="#ef4444" // red-500
+              fillOpacity={0.3}
+              stroke="none"
+              baseValue={IDEAL_RESPONSE_TIME}
+              connectNulls={false}
+              legendType="none"
+              tooltipType="none"
+            />
+          </React.Fragment>
         ))}
-      </LineChart>
+      </ComposedChart>
     </ResponsiveContainer>
   );
 };

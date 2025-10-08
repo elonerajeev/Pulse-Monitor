@@ -1,5 +1,5 @@
 
-up to date, audited 147 packages in 2s
+up to date, audited 147 packages in 3s
 
 24 packages are looking for funding
   run `npm fund` for details
@@ -14,32 +14,36 @@ found 0 vulnerabilities
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/index.js`[39m
-[dotenv@17.2.3] injecting env (1) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+[dotenv@17.2.3] injecting env (1) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
 Server is running on port 3000
 MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
 
 -- Running Monitoring Scheduler --
 
 🔍 Monitoring required for: My Production Website (https://zintellix.com/)
-   - Result: ONLINE (446.88561300000583ms)
+   - Result: ONLINE (459.6777829999919ms)
 
 🔍 Monitoring required for: Elonerajeev (www.google.com)
-   - Result: ONLINE (339.76846400000795ms)
+   - Result: ONLINE (464.7078920000058ms)
 
 🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
-   - Result: ONLINE (490.30051199998707ms)
+   - Result: ONLINE (672.522788000002ms)
 
 🔍 Monitoring required for: GitHub (https://github.com/)
-   - Result: ONLINE (287.51341699999466ms)
+   - Result: ONLINE (310.7109739999869ms)
 
 🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
-   - Result: ONLINE (172.5126259999961ms)
+   - Result: ONLINE (167.83658699999796ms)
 
 🔍 Monitoring required for: Google (https://www.google.com/)
-   - Result: ONLINE (399.57867799999076ms)
+   - Result: ONLINE (217.97717599998577ms)
 
 🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
-   - Result: OFFLINE (10002.376163999987ms)
+   - Result: OFFLINE (10001.868698999984ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: Testing (hi)
+   - Result: OFFLINE (20.354099999996834ms)
    - Error: [object Object]
 
 -- Monitoring Scheduler Finished --
@@ -47,25 +51,86 @@ MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
 -- Running Monitoring Scheduler --
 
 🔍 Monitoring required for: My Production Website (https://zintellix.com/)
-   - Result: ONLINE (477.99196100002155ms)
+   - Result: ONLINE (472.99310199997853ms)
 
 🔍 Monitoring required for: Elonerajeev (www.google.com)
-   - Result: ONLINE (472.21057199995266ms)
+   - Result: ONLINE (317.0578139999998ms)
 
 🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
-   - Result: ONLINE (480.32806199998595ms)
+   - Result: ONLINE (494.6029620000045ms)
 
 🔍 Monitoring required for: GitHub (https://github.com/)
-   - Result: ONLINE (304.8505260000238ms)
+   - Result: ONLINE (305.2989439999801ms)
 
 🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
-   - Result: ONLINE (166.15967600001022ms)
+   - Result: ONLINE (165.7015769999707ms)
 
 🔍 Monitoring required for: Google (https://www.google.com/)
-   - Result: ONLINE (406.6219370000181ms)
+   - Result: ONLINE (331.6081050000503ms)
 
 🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
-   - Result: OFFLINE (9999.959364999959ms)
+   - Result: OFFLINE (10001.043868999986ms)
    - Error: [object Object]
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (36.620568999962416ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (450.72957799991127ms)
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Result: ONLINE (326.32287999999244ms)
+
+🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
+   - Result: ONLINE (516.882386000012ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (306.56495099992026ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (168.59216600004584ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (224.63101400004234ms)
+
+🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
+   - Result: OFFLINE (10001.376111000078ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (36.77842899993993ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (541.2178380000405ms)
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Result: ONLINE (419.44159599998966ms)
+
+🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
+   - Result: ONLINE (564.5457140000071ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (303.1493920001667ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (166.8417700000573ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (383.1944669999648ms)
+
+🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
+   - Result: OFFLINE (10001.36362399999ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (86.878795000026ms)
 
 -- Monitoring Scheduler Finished --

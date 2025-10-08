@@ -152,15 +152,15 @@ const Dashboard = () => {
     }
   };
 
-  const onlineServices = services.filter(s => s.latestLog?.status === 'online').length;
-  const offlineServices = services.length - onlineServices;
+  const onlineServices = services.filter(s => s.latestLog?.status === 'online');
+  const offlineServicesCount = services.length - onlineServices.length;
   const incidents = services.reduce((acc, s) => acc + s.logs.filter(l => l.status === 'offline').length, 0);
 
-  const avgResponseTime = services.length > 0
-    ? Math.round(services.reduce((acc, s) => acc + (s.latestLog?.responseTime || 0), 0) / services.length)
+  const avgResponseTime = onlineServices.length > 0
+    ? Math.round(onlineServices.reduce((acc, s) => acc + (s.latestLog?.responseTime || 0), 0) / onlineServices.length)
     : 0;
 
-  const uptimePercentage = services.length > 0 ? (onlineServices / services.length) * 100 : 100;
+  const uptimePercentage = services.length > 0 ? (onlineServices.length / services.length) * 100 : 100;
 
   const allSslOk = services.every(s => !s.target.startsWith('https://') || (s.latestLog?.ssl && s.latestLog.ssl.daysUntilExpiry > 0));
 
@@ -217,7 +217,7 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{avgResponseTime}ms</div>
-              <p className="text-xs text-muted-foreground">From last check</p>
+              <p className="text-xs text-muted-foreground">From last check (online services)</p>
             </CardContent>
           </Card>
 
@@ -228,7 +228,7 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{services.length}</div>
-              <p className="text-xs text-muted-foreground">{onlineServices} online, {offlineServices} down</p>
+              <p className="text-xs text-muted-foreground">{onlineServices.length} online, {offlineServicesCount} down</p>
             </CardContent>
           </Card>
 
@@ -266,7 +266,7 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="h-[350px]">
-                  <RealTimeChart services={services} />
+                  <RealTimeChart services={onlineServices} />
                 </div>
               </CardContent>
             </Card>
@@ -281,6 +281,7 @@ const Dashboard = () => {
                   serviceType={service.serviceType}
                   logs={service.logs}
                   lastChecked={service.latestLog?.createdAt}
+                  sslDaysUntilExpiry={service.latestLog?.ssl?.daysUntilExpiry}
                   onEdit={() => handleEdit(service)}
                   onDelete={() => handleDelete(service)}
                 />

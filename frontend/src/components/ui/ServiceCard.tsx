@@ -1,6 +1,6 @@
 import React from 'react';
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import { MoreVertical, CheckCircle, AlertTriangle, Clock } from 'lucide-react';
+import { MoreVertical, CheckCircle, AlertTriangle, Clock, ShieldCheck } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu';
 import { Button } from './button';
 
@@ -28,11 +28,12 @@ interface ServiceCardProps {
   serviceType: string;
   logs: MonitoringLog[];
   lastChecked?: string;
+  sslDaysUntilExpiry?: number;
   onEdit: () => void;
   onDelete: () => void;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ name, status, target, serviceType, logs = [], lastChecked, onEdit, onDelete }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ name, status, target, serviceType, logs = [], lastChecked, sslDaysUntilExpiry, onEdit, onDelete }) => {
   const statusColor = status === 'online' ? 'text-green-500' : 'text-red-500';
   const statusBgColor = status === 'online' ? 'bg-green-500/10' : 'bg-red-500/10';
   const latestLog = logs.length > 0 ? logs[logs.length - 1] : null;
@@ -47,6 +48,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ name, status, target, service
     const date = new Date(dateString);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
+  
+  const sslColor = sslDaysUntilExpiry === undefined
+    ? 'text-muted-foreground'
+    : sslDaysUntilExpiry > 14
+      ? 'text-green-500'
+      : sslDaysUntilExpiry > 0
+        ? 'text-yellow-500'
+        : 'text-red-500';
+
 
   return (
     <div className="bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
@@ -121,17 +131,19 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ name, status, target, service
             <span className="text-muted-foreground flex items-center"><Clock className="h-4 w-4 mr-2"/>Last Checked</span>
             <span className="font-semibold">{formatTime(lastChecked || new Date().toISOString())}</span>
           </div>
-          {latestLog?.ssl && (
-            <div className="flex justify-between items-center">
-              <span className="text-muted-foreground flex items-center">
-                <CheckCircle className={`h-4 w-4 mr-2 ${latestLog.ssl.daysUntilExpiry > 14 ? 'text-green-500' : 'text-yellow-500'}`}/>
-                SSL
-              </span>
-              <span className={`font-semibold ${latestLog.ssl.daysUntilExpiry > 14 ? 'text-green-500' : 'text-yellow-500'}`}>
-                {latestLog.ssl.daysUntilExpiry} days left
-              </span>
-            </div>
-          )}
+          <div className="flex justify-between items-center">
+            <span className="text-muted-foreground flex items-center">
+              <ShieldCheck className={`h-4 w-4 mr-2 ${sslColor}`} />
+              SSL
+            </span>
+            <span className={`font-semibold ${sslColor}`}>
+              {sslDaysUntilExpiry === undefined
+                ? 'N/A'
+                : sslDaysUntilExpiry > 0
+                  ? `${sslDaysUntilExpiry} days left`
+                  : 'Expired'}
+            </span>
+          </div>
         </div>
       </div>
 

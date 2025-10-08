@@ -1,5 +1,5 @@
 
-up to date, audited 535 packages in 5s
+up to date, audited 535 packages in 6s
 
 83 packages are looking for funding
   run `npm fund` for details
@@ -15,7 +15,7 @@ Run `npm audit` for details.
 > vite
 
 
-  VITE v5.4.19  ready in 346 ms
+  VITE v5.4.19  ready in 875 ms
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
