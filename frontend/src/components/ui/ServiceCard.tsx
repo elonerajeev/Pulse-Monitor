@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import { MoreVertical, CheckCircle, AlertTriangle, Clock, ShieldCheck } from 'lucide-react';
+import { MoreVertical, CheckCircle, AlertTriangle, Clock, ShieldCheck, RefreshCw } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu';
 import { Button } from './button';
 
@@ -31,9 +32,10 @@ interface ServiceCardProps {
   sslDaysUntilExpiry?: number;
   onEdit: () => void;
   onDelete: () => void;
+  onRefresh: () => void;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ name, status, target, serviceType, logs = [], lastChecked, sslDaysUntilExpiry, onEdit, onDelete }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ name, status, target, serviceType, logs = [], lastChecked, sslDaysUntilExpiry, onEdit, onDelete, onRefresh }) => {
   const statusColor = status === 'online' ? 'text-green-500' : 'text-red-500';
   const statusBgColor = status === 'online' ? 'bg-green-500/10' : 'bg-red-500/10';
   const latestLog = logs.length > 0 ? logs[logs.length - 1] : null;
@@ -63,17 +65,22 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ name, status, target, service
       <div className="p-4 border-b border-border">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-card-foreground truncate pr-2" title={name}>{name}</h3>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="flex-shrink-0">
-                <MoreVertical className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={onEdit}>Edit</DropdownMenuItem>
-              <DropdownMenuItem onClick={onDelete} className="text-red-500">Delete</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="flex items-center">
+            <Button variant="ghost" size="icon" className="flex-shrink-0" onClick={onRefresh}>
+              <RefreshCw className="h-4 w-4" />
+            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="flex-shrink-0">
+                  <MoreVertical className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={onEdit}>Edit</DropdownMenuItem>
+                <DropdownMenuItem onClick={onDelete} className="text-red-500">Delete</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
         <p className="text-sm text-muted-foreground truncate mt-1" title={target}>{target}</p>
       </div>

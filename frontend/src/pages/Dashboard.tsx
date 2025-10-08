@@ -83,8 +83,18 @@ const Dashboard = () => {
     navigate('/monitoring/add');
   };
 
-  const handleRefresh = () => {
-    fetchServices();
+  const handleRefresh = (serviceId?: string) => {
+    if (serviceId) {
+      const serviceToRefresh = services.find(s => s._id === serviceId);
+      if (serviceToRefresh) {
+        // In a real application, you would fetch updated data for the specific service
+        // For now, we'll just refetch all services to simulate an update
+        toast({ title: 'Refreshing...', description: `Refreshing ${serviceToRefresh.name}` });
+        fetchServices();
+      }
+    } else {
+      fetchServices();
+    }
   };
 
   const handleEdit = (service: MonitoringService) => {
@@ -182,7 +192,7 @@ const Dashboard = () => {
           <div className="flex items-center space-x-4 mt-4 lg:mt-0">
             <Button
               variant="outline"
-              onClick={handleRefresh}
+              onClick={() => handleRefresh()}
               disabled={loading}
             >
               <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
@@ -284,6 +294,7 @@ const Dashboard = () => {
                   sslDaysUntilExpiry={service.latestLog?.ssl?.daysUntilExpiry}
                   onEdit={() => handleEdit(service)}
                   onDelete={() => handleDelete(service)}
+                  onRefresh={() => handleRefresh(service._id)}
                 />
               ))}
             </div>

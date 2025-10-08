@@ -19,3 +19,9 @@ Run `npm audit` for details.
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
+5:09:39 AM [vite] hmr update /src/components/ui/real-time-chart.tsx, /src/index.css
+5:16:31 AM [vite] hmr update /src/components/ui/ServiceCard.tsx, /src/index.css
+5:20:10 AM [vite] hmr update /src/components/ui/ServiceCard.tsx, /src/index.css
+5:21:27 AM [vite] hmr update /src/components/ui/ServiceCard.tsx, /src/index.css
+5:22:12 AM [vite] hmr update /src/pages/Dashboard.tsx, /src/index.css
+5:23:39 AM [vite] hmr update /src/components/ui/real-time-chart.tsx, /src/index.css

@@ -33,7 +33,8 @@ interface RealTimeChartProps {
   services?: MonitoringService[];
 }
 
-const IDEAL_RESPONSE_TIME = 500; // ms
+const IDEAL_RESPONSE_TIME = 300; // ms
+const ACTION_NEEDED_RESPONSE_TIME = 1000; // ms
 
 const roundToNearest5Minutes = (date: Date) => {
   const minutes = 5;
@@ -97,28 +98,38 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
   }, [chartServices]);
 
   useEffect(() => {
-    const timeMap = new Map<string, any>();
+    const timeMap = new Map<number, any>();
+    const twentyFourHoursAgo = new Date();
+    twentyFourHoursAgo.setDate(twentyFourHoursAgo.getDate() - 1);
 
     chartServices.forEach(service => {
       if (service.logs) {
-        service.logs.forEach(log => {
-          const roundedDate = roundToNearest5Minutes(new Date(log.createdAt));
-          const time = roundedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        service.logs
+          .filter(log => new Date(log.createdAt) > twentyFourHoursAgo)
+          .forEach(log => {
+            const roundedDate = roundToNearest5Minutes(new Date(log.createdAt));
+            const timeKey = roundedDate.getTime();
 
-          if (!timeMap.has(time)) {
-            timeMap.set(time, { time });
-          }
-          const entry = timeMap.get(time);
-          entry[service.name] = log.responseTime;
+            if (!timeMap.has(timeKey)) {
+              timeMap.set(timeKey, { time: timeKey });
+            }
+            const entry = timeMap.get(timeKey);
+            entry[service.name] = log.responseTime;
 
-          if (log.responseTime > IDEAL_RESPONSE_TIME) {
-            entry[`${service.name}-excess`] = log.responseTime;
-          }
-        });
+            if (log.responseTime > ACTION_NEEDED_RESPONSE_TIME) {
+              entry[`${service.name}-excess`] = log.responseTime;
+            }
+          });
       }
     });
 
-    const chartData = Array.from(timeMap.values()).sort((a, b) => a.time.localeCompare(b.time));
+    const sortedData = Array.from(timeMap.values()).sort((a, b) => a.time - b.time);
+
+    const chartData = sortedData.map(d => ({
+      ...d,
+      time: new Date(d.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    }));
+
     setData(chartData);
   }, [chartServices]);
 
@@ -143,8 +154,15 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
         
         <ReferenceLine
           y={IDEAL_RESPONSE_TIME}
-          label={{ value: 'Ideal', position: 'insideTopRight', fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
-          stroke="hsl(var(--primary))"
+          label={{ value: 'Ideal', position: 'insideTopRight', fill: 'hsl(var(--success))' }}
+          stroke="hsl(var(--success))"
+          strokeDasharray="4 4"
+        />
+
+        <ReferenceLine
+          y={ACTION_NEEDED_RESPONSE_TIME}
+          label={{ value: 'Action Needed', position: 'insideTopRight', fill: 'hsl(var(--destructive))' }}
+          stroke="hsl(var(--destructive))"
           strokeDasharray="4 4"
         />
 
@@ -166,7 +184,7 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
               fill="#ef4444" // red-500
               fillOpacity={0.3}
               stroke="none"
-              baseValue={IDEAL_RESPONSE_TIME}
+              baseValue={ACTION_NEEDED_RESPONSE_TIME}
               connectNulls={false}
               legendType="none"
               tooltipType="none"

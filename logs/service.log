@@ -134,3 +134,148 @@ MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
    - Result: ONLINE (86.878795000026ms)
 
 -- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (542.9087249999866ms)
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Result: ONLINE (300.455483000027ms)
+
+🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
+   - Result: ONLINE (477.869439000031ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (300.37016299995594ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (175.57660600007512ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (263.3799439999275ms)
+
+🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
+   - Result: OFFLINE (10000.596256999997ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (37.9480090001598ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (446.84842299995944ms)
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Result: ONLINE (263.51814700011164ms)
+
+🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
+   - Result: ONLINE (625.6820119998883ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (305.4961149999872ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (165.56408799998462ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (331.92349600000307ms)
+
+🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
+   - Result: OFFLINE (10001.352492999984ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (33.86749899992719ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (545.5735969999805ms)
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Result: ONLINE (491.6646569999866ms)
+
+🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
+   - Result: ONLINE (629.457825000165ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (311.80368300015107ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (165.22296599997208ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (396.45519099989906ms)
+
+🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
+   - Result: OFFLINE (10001.479134999914ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (43.20693799993023ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (421.06897000037134ms)
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Result: ONLINE (226.35271500004455ms)
+
+🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
+   - Result: ONLINE (639.6466860002838ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (309.2624530000612ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (165.2100559999235ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (318.5197829999961ms)
+
+🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
+   - Result: OFFLINE (10000.433091999963ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (38.08877900009975ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (457.22761100018397ms)
+
+🔍 Monitoring required for: Elonerajeev (www.google.com)
+   - Result: ONLINE (486.18667000019923ms)
+
+🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
+   - Result: ONLINE (635.5563260000199ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (318.3650520001538ms)
+
+🔍 Monitoring required for: wikipedia (https://www.wikipedia.org/)
+   - Result: ONLINE (165.2261059996672ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (374.9879020000808ms)
+
+🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
+   - Result: OFFLINE (10000.767928000074ms)
+   - Error: [object Object]
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (39.285948999691755ms)
+
+-- Monitoring Scheduler Finished --
