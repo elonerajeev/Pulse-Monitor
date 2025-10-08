@@ -230,7 +230,7 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      <Navbar isAuthenticated={false} />
+      <Navbar isAuthenticated={isAuthenticated} />
       <BackgroundDecorator />
       {/* Hero Section */}
       <section className="py-20 md:py-32">

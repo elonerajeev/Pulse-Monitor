@@ -227,6 +227,9 @@ npm install && npm run dev
 
 <div align="center">
 
+### 🖼️ **Demo Image**
+<img src="./src/assests/website demo images/demo.png" alt="Demo Image" width="80%" style="border-radius: 10px;"/>
+
 ### 🌙 **Dark Theme Dashboard**
 
 <img src="./src/assests/website demo images/Dashboard.png" alt="Dashboard Dark Theme" width="80%" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);"/>

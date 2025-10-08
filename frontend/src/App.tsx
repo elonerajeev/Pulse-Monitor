@@ -11,6 +11,10 @@ import Documentation from "./pages/Documentation";
 import NotFound from "./pages/NotFound";
 import Terms from "./pages/Terms";
 import DemoDashboard from "./pages/DemoDashboard";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import Settings from "./pages/Settings";
+import SwitchProfile from "./pages/SwitchProfile";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +30,10 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/demo-dashboard" element={<DemoDashboard />} />
           <Route path="/monitoring/add" element={<AddMonitoringService />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/switch-profile" element={<SwitchProfile />} />
           {/* <Route path="/testimonials" element={<Testimonials />} /> */}
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/terms" element={<Terms />} />

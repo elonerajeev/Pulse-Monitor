@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, Edit, LayoutDashboard, LogOut, Plus, Settings, UserCog, Users } from "lucide-react";
 import { Button } from "./button";
 import { ThemeToggle } from "./theme-toggle";
-import { useAuth } from "@/hooks/useAuth"; // Import the custom hook
+import { useAuth } from "@/hooks/useAuth";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import NotificationBell, { Notification } from "./NotificationBell";
 
-const Navbar = () => {
+interface NavbarProps {
+  isAuthenticated: boolean;
+  isDemo?: boolean;
+  notifications?: Notification[];
+}
+
+const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, isDemo = false, notifications = [] }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, user } = useAuth(); // Use the custom hook
+  const { user } = useAuth(); 
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -76,18 +83,61 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-2">
             <ThemeToggle />
             {isAuthenticated ? (
-              <Popover>
-                <PopoverTrigger>
-                  <Avatar>
-                    <AvatarImage src={user?.avatarUrl} />
-                    <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
-                  </Avatar>
-                </PopoverTrigger>
-                <PopoverContent>
-                  <Button onClick={() => navigate("/dashboard")} className="w-full mb-2">Dashboard</Button>
-                  <Button onClick={handleLogout} variant="destructive" className="w-full">Logout</Button>
-                </PopoverContent>
-              </Popover>
+              <>
+                {isDemo && <NotificationBell notifications={notifications} />}
+                <Popover>
+                  <PopoverTrigger>
+                    <Avatar>
+                      <AvatarImage src={user?.avatarUrl} />
+                      <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
+                    </Avatar>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-64">
+                    <div className="p-2">
+                      <div className="flex items-center space-x-3 mb-3">
+                        <Avatar>
+                          <AvatarImage src={user?.avatarUrl} />
+                          <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="font-semibold">{user?.name}</p>
+                          <p className="text-sm text-muted-foreground">{user?.email}</p>
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/profile")}>
+                          <User className="mr-2 h-4 w-4" />
+                          Profile Details
+                        </Button>
+                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/profile/edit")}>
+                          <Edit className="mr-2 h-4 w-4" />
+                          Edit Profile
+                        </Button>
+                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/dashboard")}>
+                          <LayoutDashboard className="mr-2 h-4 w-4" />
+                          Dashboard
+                        </Button>
+                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/monitoring/add")}>
+                          <Plus className="mr-2 h-4 w-4" />
+                          Add Monitoring Service
+                        </Button>
+                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/settings")}>
+                          <Settings className="mr-2 h-4 w-4" />
+                          Settings
+                        </Button>
+                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/switch-profile")}>
+                          <Users className="mr-2 h-4 w-4" />
+                          Switch Profile
+                        </Button>
+                        <Button variant="destructive" className="w-full justify-start mt-2" onClick={handleLogout}>
+                          <LogOut className="mr-2 h-4 w-4" />
+                          Logout
+                        </Button>
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              </>
             ) : (
               <>
                 <Button variant="ghost" asChild>

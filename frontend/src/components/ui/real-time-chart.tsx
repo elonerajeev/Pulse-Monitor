@@ -34,7 +34,7 @@ interface RealTimeChartProps {
 }
 
 const IDEAL_RESPONSE_TIME = 300; // ms
-const ACTION_NEEDED_RESPONSE_TIME = 1000; // ms
+const ACTION_NEEDED_RESPONSE_TIME = 700; // ms
 
 const roundToNearest5Minutes = (date: Date) => {
   const minutes = 5;
@@ -76,13 +76,13 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
       dummyServices[0].logs.push({
         _id: `log1-${i}`,
         status: 'healthy',
-        responseTime: Math.floor(Math.random() * (i > 15 && i < 20 ? 700 : 200 - 50 + 1) + 50),
+        responseTime: Math.floor(Math.random() * (i > 15 && i < 20 ? 1200 : 200 - 50 + 1) + 50),
         createdAt: time.toISOString(),
       });
       dummyServices[1].logs.push({
         _id: `log2-${i}`,
         status: 'healthy',
-        responseTime: Math.floor(Math.random() * (i > 10 && i < 15 ? 800 : 300 - 100 + 1) + 100),
+        responseTime: Math.floor(Math.random() * (i > 10 && i < 15 ? 1100 : 300 - 100 + 1) + 100),
         createdAt: time.toISOString(),
       });
     }
