@@ -29,6 +29,14 @@ const monitoringSchema = new Schema(
       ref: "User",
       required: true,
     },
+    alertEmail: {
+      type: String,
+      trim: true,
+    },
+    alert: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

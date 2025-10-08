@@ -1,9 +1,11 @@
+
 import cron from "node-cron";
 import { getAllMonitoringServices, saveMonitoringResult, updateMonitoringStatus } from "../services/monitoringService.js";
 import { monitorWebsite } from "../monitor.js";
+import { sendEmail } from "../services/alertService.js";
+import User from "../models/user.model.js";
 
 export const startMonitoring = () => {
-  // This cron job runs every 5 minutes to check which services need monitoring.
   cron.schedule("*/5 * * * *", async () => {
     console.log("\n-- Running Monitoring Scheduler --");
     const services = await getAllMonitoringServices();
@@ -21,10 +23,23 @@ export const startMonitoring = () => {
           if (result.error) {
             console.error(`   - Error: ${result.error}`);
           }
-
+          if (service.alert && result.status !== 'online' && result.status !== 200) {
+            const user = await User.findById(service.owner);
+            if (user && service.alertEmail) {
+              const alertData = {
+                userName: user.name,
+                serviceName: service.name,
+                serviceTarget: service.target,
+                status: result.status,
+                timestamp: now.toUTCString(),
+                responseTime: result.responseTime,
+                error: result.error || 'N/A',
+              };
+              await sendEmail(service.alertEmail, alertData);
+            }
+          }
         } catch (error) {
           console.error(`   - FATAL: An unexpected error occurred during monitoring: ${error.message}`);
-          // Optionally update the status to 'offline' or a special 'error' state
           await updateMonitoringStatus(service._id, 'offline');
         }
     }
