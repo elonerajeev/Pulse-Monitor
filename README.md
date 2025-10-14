@@ -271,7 +271,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## 📧 Contact
 
 - **Rajeev Kumar** - [elonerajeev@gmail.com](mailto:elonerajeev@gmail.com)
-- **Project Link:** [https://github.com/elonerajeev/lightwatch-dash](https://github.com/elonerajeev/lightwatch-dash)
+- **Project Link:** [https://github.com/elonerajeev/Pulse-Monitor.git](https://github.com/elonerajeev/Pulse-Monitor.git)
 
 ---
 
