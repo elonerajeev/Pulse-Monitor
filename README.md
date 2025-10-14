@@ -1,8 +1,7 @@
-
 # 🚀 PulseMonitor - Enterprise-Grade Service Monitoring Platform
 
 <div align="center">
-  <img src="frontend/src/assests/website icons.jpg" alt="PulseMonitor Logo" width="120" style="border-radius: 20px;"/>
+  <img src="frontend/src/assests/website%20icons.jpg" alt="PulseMonitor Logo" width="120" style="border-radius: 20px;"/>
 
   <h3>🎯 Never Miss a Beat - Monitor Everything, Everywhere</h3>
 
@@ -17,13 +16,6 @@
     <a href="#-quick-start">Quick Start</a> •
     <a href="#-features">Features</a> •
     <a href="#-documentation">Docs</a>
-  </p>
-
-  <p align="center">
-    <img src="https://img.shields.io/github/stars/elonerajeev/lightwatch-dash?style=for-the-badge&logo=github&color=yellow" alt="GitHub stars"/>
-    <img src="https://img.shields.io/github/forks/elonerajeev/lightwatch-dash?style=for-the-badge&logo=github&color=blue" alt="GitHub forks"/>
-    <img src="https://img.shields.io/github/license/elonerajeev/lightwatch-dash?style=for-the-badge&color=green" alt="License"/>
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge" alt="PRs Welcome"/>
   </p>
 
   <p align="center">
@@ -75,6 +67,48 @@
 
 ---
 
+## 📂 Folder Structure
+
+The project is organized into three main directories: `frontend`, `backend`, and `service`.
+
+```
+.
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── db/
+│   │   ├── middlewares/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── utils/
+│   │   └── app.js
+│   ├── .env.example
+│   └── package.json
+├── frontend/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── lib/
+│   │   ├── pages/
+│   │   └── App.tsx
+│   ├── index.html
+│   └── package.json
+├── service/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── jobs/
+│   │   ├── models/
+│   │   ├── services/
+│   │   └── index.js
+│   ├── .env.example
+│   └── package.json
+├── README.md
+└── package.json
+```
+
+---
+
 ## 🏛️ Architecture
 
 PulseMonitor is built with a modern, scalable architecture that separates concerns into three main components:
@@ -84,7 +118,7 @@ PulseMonitor is built with a modern, scalable architecture that separates concer
 - **Monitoring Service:** A dedicated Node.js service that performs the actual monitoring of services and sends data to the backend.
 
 <div align="center">
-  <img src="" alt="PulseMonitor Architecture" width="80%" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"/>
+  <img src="architecture.mmd" alt="PulseMonitor Architecture" width="80%" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"/>
 </div>
 
 ---
@@ -112,7 +146,8 @@ PulseMonitor is built with a modern, scalable architecture that separates concer
 The following diagram illustrates the workflow and dataflow within the PulseMonitor ecosystem:
 
 <div align="center">
-  <img src="https://i.imgur.com/hK2x5kL.png" alt="PulseMonitor Workflow" width="80%" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"/>
+  <h2> Watch the WORKFLOW.md file for more details</h2>
+  <!-- <img src="" alt="PulseMonitor Workflow" width="80%" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"/> -->
 </div>
 
 1. The **User** interacts with the **Frontend** to add, remove, or view monitoring services.
@@ -139,7 +174,7 @@ The following diagram illustrates the workflow and dataflow within the PulseMoni
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/elonerajeev/lightwatch-dash.git
+    git clone https://github.com/elonerajeev/Pulse-Monitor.git
     cd lightwatch-dash
     ```
 
@@ -188,21 +223,22 @@ The following diagram illustrates the workflow and dataflow within the PulseMoni
 
 <div align="center">
 
-### 🌙 **Dark Theme Dashboard**
-
-<img src="frontend/src/assests/website demo images/Dashboard.png" alt="Dashboard Dark Theme" width="80%" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);"/>
-
 ### ☀️ **Home Page**
 
-<img src="frontend/src/assests/website demo images/Home-Page.png" alt="Home page Theme" width="80%" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"/>
+<img src="frontend/src/assests/website%20demo%20images/Home-Page.png" alt="Home page Theme" width="80%" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"/>
+
+### 📱 **User Deshboard**
+
+<img src="frontend/src/assests/website demo images/realDeshboard.png" alt="Customber Experience/Review" width="80%" style="border-radius: 10px;"/>
+
 
 ### 📱 **Customer Experience/Review**
 
-<img src="frontend/src/assests/website demo images/Customers review.png" alt="Customber Experience/Review" width="80%" style="border-radius: 10px;"/>
+<img src="frontend/src/assests/website%20demo%20images/Customers%20review.png" alt="Customber Experience/Review" width="80%" style="border-radius: 10px;"/>
 
 ### 📱 **Developer Documentation**
 
-<img src="frontend/src/assests/website demo images/Docs.png" alt="Developer Documentation" width="80%" style="border-radius: 10px;"/>
+<img src="frontend/src/assests/website%20demo%20images/Docs.png" alt="Developer Documentation" width="80%" style="border-radius: 10px;"/>
 
 </div>
 

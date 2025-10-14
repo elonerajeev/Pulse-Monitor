@@ -1,5 +1,5 @@
 
-up to date, audited 151 packages in 2s
+up to date, audited 151 packages in 6s
 
 24 packages are looking for funding
   run `npm fund` for details
@@ -19,58 +19,160 @@ Run `npm audit` for details.
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/index.js`[39m
-[dotenv@17.2.3] injecting env (5) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
 Server is running on port 3000
 MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
 
 -- Running Monitoring Scheduler --
 
 🔍 Monitoring required for: My Production Website (https://zintellix.com/)
-   - Result: ONLINE (446.0712780000176ms)
-
-🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
-   - Result: ONLINE (651.7124080000212ms)
-
-🔍 Monitoring required for: GitHub (https://github.com/)
-   - Result: ONLINE (311.29203700000653ms)
+   - Result: ONLINE (577.5993819999858ms)
 
 🔍 Monitoring required for: Google (https://www.google.com/)
-   - Result: ONLINE (64.50421300000744ms)
-
-🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
-   - Result: OFFLINE (10002.807105000014ms)
-   - Error: [object Object]
+   - Result: ONLINE (58.38964599999599ms)
 
 🔍 Monitoring required for: Apple Website (https://www.apple.com/)
-   - Result: ONLINE (95.71064900001511ms)
+   - Result: ONLINE (38.88447900000028ms)
 
-🔍 Monitoring required for: Portfolio website (https://rajeevxportfolio.netlify.app/)
-   - Result: ONLINE (957.429701999994ms)
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (47.168093999964185ms)
+
+🔍 Monitoring required for: YouTube.com (https://www.youtube.com/)
+   - Result: ONLINE (125.74959399999352ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (288.2281339999754ms)
 
 -- Monitoring Scheduler Finished --
 
 -- Running Monitoring Scheduler --
 
 🔍 Monitoring required for: My Production Website (https://zintellix.com/)
-   - Result: ONLINE (428.7164069999708ms)
-
-🔍 Monitoring required for: Main Website - Example.com (https://example.com/)
-   - Result: ONLINE (636.0462459999835ms)
-
-🔍 Monitoring required for: GitHub (https://github.com/)
-   - Result: ONLINE (294.3134990000399ms)
+   - Result: ONLINE (554.5730430000694ms)
 
 🔍 Monitoring required for: Google (https://www.google.com/)
-   - Result: ONLINE (63.29143700003624ms)
-
-🔍 Monitoring required for: EC2 Server (http://34.228.165.142:3000/)
-   - Result: OFFLINE (10001.551303999964ms)
-   - Error: [object Object]
+   - Result: ONLINE (60.13815000001341ms)
 
 🔍 Monitoring required for: Apple Website (https://www.apple.com/)
-   - Result: ONLINE (129.62529100000393ms)
+   - Result: ONLINE (57.079489999916404ms)
 
-🔍 Monitoring required for: Portfolio website (https://rajeevxportfolio.netlify.app/)
-   - Result: ONLINE (635.5539580000332ms)
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (49.37900399998762ms)
+
+🔍 Monitoring required for: YouTube.com (https://www.youtube.com/)
+   - Result: ONLINE (259.73823999997694ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (289.1546200000448ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (582.7286059999606ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (53.095258999965154ms)
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (37.979636000003666ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (44.33743199997116ms)
+
+🔍 Monitoring required for: YouTube.com (https://www.youtube.com/)
+   - Result: ONLINE (136.96935300005134ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (286.35785999998916ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (480.37197099998593ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (93.58403899986297ms)
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (35.16229999996722ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (47.54396899999119ms)
+
+🔍 Monitoring required for: YouTube.com (https://www.youtube.com/)
+   - Result: ONLINE (265.68368000001647ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (287.1584370001219ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (468.0022070000414ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (50.063089000061154ms)
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (45.135838999878615ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (52.22602299996652ms)
+
+🔍 Monitoring required for: YouTube.com (https://www.youtube.com/)
+   - Result: ONLINE (209.9363200000953ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (289.9364329997916ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (443.2282479999121ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (52.35084199998528ms)
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (37.64787600003183ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (44.79593600006774ms)
+
+🔍 Monitoring required for: YouTube.com (https://www.youtube.com/)
+   - Result: ONLINE (188.05872999993153ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (292.55960600008257ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website (https://zintellix.com/)
+   - Result: ONLINE (557.7472050001379ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (58.60718200006522ms)
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (79.18627599999309ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (52.62549200002104ms)
+
+🔍 Monitoring required for: YouTube.com (https://www.youtube.com/)
+   - Result: ONLINE (191.05840500001796ms)
+
+🔍 Monitoring required for: GitHub (https://github.com/)
+   - Result: ONLINE (288.19004000001587ms)
 
 -- Monitoring Scheduler Finished --
