@@ -1,17 +1,15 @@
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 import { API_BASE_URL } from '@/utils/api';
 import { Github, Loader2, Chrome } from 'lucide-react';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [isGitHubLoading, setIsGitHubLoading] = useState(false);
@@ -36,26 +34,17 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast({
-          title: 'Login Successful',
+        toast.success('Login Successful', {
           description: 'Welcome back!',
         });
         localStorage.setItem('isAuthenticated', 'true');
         localStorage.setItem('user', JSON.stringify(data.data));
         navigate('/dashboard');
       } else {
-        toast({
-          title: 'Login Failed',
-          description: data.message || 'An error occurred.',
-          variant: 'destructive',
-        });
+        toast.error(data.message || 'An error occurred.');
       }
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Could not connect to the server. Please try again later.',
-        variant: 'destructive',
-      });
+      toast.error('Could not connect to the server. Please try again later.');
     } finally {
       setIsLoading(false);
     }

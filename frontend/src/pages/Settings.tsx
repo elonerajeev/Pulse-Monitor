@@ -3,8 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 const Settings = () => {
+  const handleSave = () => {
+    toast.success("Settings saved successfully");
+  };
+
   return (
     <div>
       <Navbar isAuthenticated={true} />
@@ -31,7 +36,7 @@ const Settings = () => {
               </div>
             </RadioGroup>
           </div>
-          <Button>Save Settings</Button>
+          <Button onClick={handleSave}>Save Settings</Button>
         </div>
       </div>
     </div>

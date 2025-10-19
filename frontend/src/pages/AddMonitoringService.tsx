@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 import { API_BASE_URL } from '@/utils/api';
 import Navbar from '@/components/ui/navbar';
 
 const AddMonitoringService = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
   const [name, setName] = useState('');
   const [target, setTarget] = useState('');
   const [type, setType] = useState('website');
@@ -25,13 +24,13 @@ const AddMonitoringService = () => {
     e.preventDefault();
 
     if (interval === '' || interval <= 0) {
-      toast({ title: 'Error', description: 'Please enter a valid interval.', variant: 'destructive' });
+      toast.error('Please enter a valid interval.');
       return;
     }
 
     const userStr = localStorage.getItem('user');
     if (!userStr) {
-      toast({ title: 'Error', description: 'You must be logged in to add a service.', variant: 'destructive' });
+      toast.error('You must be logged in to add a service.');
       navigate('/login');
       return;
     }
@@ -40,7 +39,7 @@ const AddMonitoringService = () => {
     const token = user?.accessToken;
 
     if (!token) {
-      toast({ title: 'Error', description: 'Authentication token not found. Please log in again.', variant: 'destructive' });
+      toast.error('Authentication token not found. Please log in again.');
       navigate('/login');
       return;
     }
@@ -58,13 +57,19 @@ const AddMonitoringService = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast({ title: 'Success', description: 'Monitoring service added successfully.' });
+        toast.success('Monitoring service added successfully.', {
+          duration: 60000,
+          action: {
+            label: 'OK',
+            onClick: () => {},
+          },
+        });
         navigate('/dashboard');
       } else {
-        toast({ title: 'Error', description: data.message || 'Failed to add monitoring service.', variant: 'destructive' });
+        toast.error(data.message || 'Failed to add monitoring service.');
       }
     } catch (error) {
-      toast({ title: 'Error', description: 'An error occurred while adding the monitoring service.', variant: 'destructive' });
+      toast.error('An error occurred while adding the monitoring service.');
     }
   };
 

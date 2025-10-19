@@ -1,5 +1,5 @@
 
-up to date, audited 149 packages in 6s
+up to date, audited 149 packages in 4s
 
 24 packages are looking for funding
   run `npm fund` for details
@@ -14,43 +14,67 @@ found 0 vulnerabilities
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/server.js`[39m
-[dotenv@17.2.2] injecting env (4) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
-[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[dotenv@17.2.2] injecting env (4) from .env -- tip: 📡 observe env with Radar: https://dotenvx.com/radar
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 📡 auto-backup env with Radar: https://dotenvx.com/radar
 Server is running on http://localhost:5000
 MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDE3OTQyNSwiZXhwIjoxNzYwNzg0MjI1fQ.U_qctNzF815f9Wve0Z6kPjO83zpw2bTZBIGBICiZk_s
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760179425, exp: 1760784225 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2NTY5NCwiZXhwIjoxNzYxNDcwNDk0fQ.lJHxdFPygCoeIlBD4uEfqogvuHcbxYRYVxVJzVv_Vfc
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760865694, exp: 1761470494 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDE3OTQyNSwiZXhwIjoxNzYwNzg0MjI1fQ.U_qctNzF815f9Wve0Z6kPjO83zpw2bTZBIGBICiZk_s
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760179425, exp: 1760784225 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2NTY5NCwiZXhwIjoxNzYxNDcwNDk0fQ.lJHxdFPygCoeIlBD4uEfqogvuHcbxYRYVxVJzVv_Vfc
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760865694, exp: 1761470494 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDE3OTQyNSwiZXhwIjoxNzYwNzg0MjI1fQ.U_qctNzF815f9Wve0Z6kPjO83zpw2bTZBIGBICiZk_s
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760179425, exp: 1760784225 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2NTY5NCwiZXhwIjoxNzYxNDcwNDk0fQ.lJHxdFPygCoeIlBD4uEfqogvuHcbxYRYVxVJzVv_Vfc
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760865694, exp: 1761470494 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDE3OTQyNSwiZXhwIjoxNzYwNzg0MjI1fQ.U_qctNzF815f9Wve0Z6kPjO83zpw2bTZBIGBICiZk_s
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760179425, exp: 1760784225 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2NTY5NCwiZXhwIjoxNzYxNDcwNDk0fQ.lJHxdFPygCoeIlBD4uEfqogvuHcbxYRYVxVJzVv_Vfc
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760865694, exp: 1761470494 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDE3OTQyNSwiZXhwIjoxNzYwNzg0MjI1fQ.U_qctNzF815f9Wve0Z6kPjO83zpw2bTZBIGBICiZk_s
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760179425, exp: 1760784225 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2NTY5NCwiZXhwIjoxNzYxNDcwNDk0fQ.lJHxdFPygCoeIlBD4uEfqogvuHcbxYRYVxVJzVv_Vfc
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760865694, exp: 1761470494 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDE3OTQyNSwiZXhwIjoxNzYwNzg0MjI1fQ.U_qctNzF815f9Wve0Z6kPjO83zpw2bTZBIGBICiZk_s
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760179425, exp: 1760784225 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2NTY5NCwiZXhwIjoxNzYxNDcwNDk0fQ.lJHxdFPygCoeIlBD4uEfqogvuHcbxYRYVxVJzVv_Vfc
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760865694, exp: 1761470494 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDE3OTQyNSwiZXhwIjoxNzYwNzg0MjI1fQ.U_qctNzF815f9Wve0Z6kPjO83zpw2bTZBIGBICiZk_s
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760179425, exp: 1760784225 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2NTY5NCwiZXhwIjoxNzYxNDcwNDk0fQ.lJHxdFPygCoeIlBD4uEfqogvuHcbxYRYVxVJzVv_Vfc
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760865694, exp: 1761470494 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDE3OTQyNSwiZXhwIjoxNzYwNzg0MjI1fQ.U_qctNzF815f9Wve0Z6kPjO83zpw2bTZBIGBICiZk_s
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760179425, exp: 1760784225 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2Njk0MiwiZXhwIjoxNzYwODcwNTQyfQ.x99bR99KnHDMruCupkkwdKZGA9EcrctLCrxqg0MRmLY
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760866942, exp: 1760870542 }
 Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDE3OTQyNSwiZXhwIjoxNzYwNzg0MjI1fQ.U_qctNzF815f9Wve0Z6kPjO83zpw2bTZBIGBICiZk_s
-Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760179425, exp: 1760784225 }
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2Njk0MiwiZXhwIjoxNzYwODcwNTQyfQ.x99bR99KnHDMruCupkkwdKZGA9EcrctLCrxqg0MRmLY
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760866942, exp: 1760870542 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2Njk0MiwiZXhwIjoxNzYwODcwNTQyfQ.x99bR99KnHDMruCupkkwdKZGA9EcrctLCrxqg0MRmLY
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760866942, exp: 1760870542 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2Njk0MiwiZXhwIjoxNzYwODcwNTQyfQ.x99bR99KnHDMruCupkkwdKZGA9EcrctLCrxqg0MRmLY
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760866942, exp: 1760870542 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MDg2Njk0MiwiZXhwIjoxNzYwODcwNTQyfQ.x99bR99KnHDMruCupkkwdKZGA9EcrctLCrxqg0MRmLY
+Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1760866942, exp: 1760870542 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2MDg2NzUyNSwiZXhwIjoxNzYwODcxMTI1fQ.v9986-323h7g_Tsqx3cpDnSK0t_EBYeUkWnwz-T6wY4
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1760867525, exp: 1760871125 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2MDg2NzUyNSwiZXhwIjoxNzYwODcxMTI1fQ.v9986-323h7g_Tsqx3cpDnSK0t_EBYeUkWnwz-T6wY4
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1760867525, exp: 1760871125 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2MDg2NzUyNSwiZXhwIjoxNzYwODcxMTI1fQ.v9986-323h7g_Tsqx3cpDnSK0t_EBYeUkWnwz-T6wY4
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1760867525, exp: 1760871125 }

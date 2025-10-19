@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const EditProfile = () => {
   const { user } = useAuth();
@@ -12,7 +13,7 @@ const EditProfile = () => {
   const handleUpdate = () => {
     const updatedUser = { ...user, name, email };
     localStorage.setItem('user', JSON.stringify(updatedUser));
-    // You might want to show a toast notification here to indicate that the profile has been updated.
+    toast.success("Profile updated successfully");
   };
 
   return (

@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import NotificationBell, { Notification } from "./NotificationBell";
+import { toast } from "sonner";
 
 interface NavbarProps {
   isAuthenticated: boolean;
@@ -54,6 +55,9 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, isDemo = false, notifi
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("user");
+    toast.success("Logout Successful", {
+      description: "You have been successfully logged out.",
+    });
     navigate("/login");
   };
 

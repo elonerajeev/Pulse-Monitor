@@ -1,5 +1,5 @@
 
-up to date, audited 535 packages in 10s
+up to date, audited 535 packages in 8s
 
 83 packages are looking for funding
   run `npm fund` for details
@@ -15,7 +15,15 @@ Run `npm audit` for details.
 > vite
 
 
-  VITE v5.4.19  ready in 2152 ms
+  VITE v5.4.19  ready in 576 ms
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
+9:43:54 AM [vite] hmr update /src/pages/AddMonitoringService.tsx, /src/index.css
+9:43:54 AM [vite] hmr update /src/pages/AddMonitoringService.tsx, /src/index.css
+9:44:57 AM [vite] hmr update /src/pages/AddMonitoringService.tsx, /src/index.css
+9:48:44 AM [vite] hmr update /src/pages/Auth/Login.tsx, /src/index.css
+9:49:27 AM [vite] hmr update /src/pages/Auth/Signup.tsx, /src/index.css
+9:50:27 AM [vite] hmr update /src/components/ui/navbar.tsx, /src/index.css
+9:51:02 AM [vite] hmr update /src/pages/EditProfile.tsx, /src/index.css
+9:51:21 AM [vite] hmr update /src/pages/Settings.tsx, /src/index.css

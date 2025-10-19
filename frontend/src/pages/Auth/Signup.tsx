@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Activity, Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { API_BASE_URL } from "../../utils/api";
 import Navbar from "@/components/ui/navbar";
 import BackgroundIcons from "@/components/ui/background-icons";
@@ -29,7 +29,6 @@ const Signup = () => {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -42,19 +41,15 @@ const Signup = () => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      toast({
-        title: "Passwords do not match",
+      toast.error("Passwords do not match", {
         description: "Please check your passwords and try again.",
-        variant: "destructive",
       });
       return;
     }
 
     if (!agreedToTerms) {
-      toast({
-        title: "Terms and Conditions",
+      toast.error("Terms and Conditions", {
         description: "You must agree to the terms and conditions to sign up.",
-        variant: "destructive",
       });
       return;
     }
@@ -78,23 +73,18 @@ const Signup = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast({
-          title: "Registration Successful",
+        toast.success("Registration Successful", {
           description: "You can now log in with your credentials.",
         });
         navigate("/login");
       } else {
-        toast({
-          title: "Registration Failed",
+        toast.error("Registration Failed", {
           description: data.message || "An error occurred.",
-          variant: "destructive",
         });
       }
     } catch (error) {
-      toast({
-        title: "Error",
+      toast.error("Error", {
         description: "Could not connect to the server. Please try again later.",
-        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
