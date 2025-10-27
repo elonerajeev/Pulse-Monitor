@@ -1,12 +1,23 @@
+
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { API_BASE_URL } from '@/utils/api';
-import { Github, Loader2, Chrome } from 'lucide-react';
+import { Github, Loader2, Chrome, Activity, Eye, EyeOff } from 'lucide-react';
+import Navbar from '@/components/ui/navbar';
+import BackgroundIcons from '@/components/ui/background-icons';
+import useNotifications from '@/hooks/use-notifications';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,6 +25,8 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isGitHubLoading, setIsGitHubLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const { addNotification } = useNotifications();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -34,6 +47,11 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
+        addNotification({
+          message: 'Welcome back!',
+          service: 'Authentication',
+          severity: 'success',
+        });
         toast.success('Login Successful', {
           description: 'Welcome back!',
         });
@@ -49,60 +67,42 @@ const Login = () => {
       setIsLoading(false);
     }
   };
-  
+
   const handleGitHubLogin = () => {
     setIsGitHubLoading(true);
     window.location.href = `${API_BASE_URL}/api/v1/users/auth/github`;
   };
-  
+
   const handleGoogleLogin = () => {
     setIsGoogleLoading(true);
     window.location.href = `${API_BASE_URL}/api/v1/users/auth/google`;
   };
 
   return (
-    <div className="relative flex-col items-center justify-center min-h-screen lg:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-        <div
-          className="absolute inset-0 bg-cover"
-          style={{
-            backgroundImage:
-              'url(https://images.unsplash.com/photo-1590069261209-f8e9b8642343?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1376&q=80)',
-          }}
-        />
-        <div className="relative z-20 flex items-center text-lg font-medium">
-          <Link to="/" className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mr-2 h-6 w-6"
-            >
-              <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-            </svg>
-            Statscraft
-          </Link>
-        </div>
-        <div className="relative z-20 mt-auto">
-          <blockquote className="space-y-2">
-            <p className="text-lg">
-              &ldquo;This tool has saved me countless hours of work and helped me monitor my applications faster than ever before.&rdquo;
-            </p>
-            <footer className="text-sm">Sofia Davis</footer>
-          </blockquote>
-        </div>
-      </div>
-      <div className="flex items-center justify-center py-12 lg:p-8">
-        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <Card>
+    <div className="min-h-screen bg-background relative">
+      <BackgroundIcons />
+      <Navbar isAuthenticated={false} />
+      <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] p-4">
+        <div className="w-full max-w-md">
+          <Card className="border-none shadow-lg rounded-2xl bg-background/80 backdrop-blur-sm">
             <CardHeader className="text-center">
-              <CardTitle>Welcome back!</CardTitle>
-              <CardDescription>Enter your credentials to access your dashboard.</CardDescription>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex space-x-2">
+                  <span className="w-3 h-3 bg-red-500 rounded-full"></span>
+                  <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                  <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+                </div>
+                <div className="flex items-center justify-center flex-grow">
+                  <Activity className="w-10 h-10 text-primary" />
+                  <h1 className="text-2xl font-bold ml-2">PulseMonitor</h1>
+                </div>
+              </div>
+              <CardTitle className="text-2xl">Welcome back!</CardTitle>
+              <CardDescription>
+                Enter your credentials to access your dashboard.
+              </CardDescription>
             </CardHeader>
+
             <form onSubmit={handleLogin}>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -117,24 +117,43 @@ const Login = () => {
                     required
                   />
                 </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="password">Password</Label>
-                  <Input
-                    id="password"
-                    name="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    required
-                  />
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      name="password"
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Enter your password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Login
-                </Button>
               </CardContent>
-              <CardFooter className="flex flex-col space-y-4">
+
+              <CardFooter className="flex flex-col space-y-3">
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    'Login'
+                  )}
+                </Button>
+
                 <div className="relative w-full">
                   <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t" />
@@ -145,6 +164,7 @@ const Login = () => {
                     </span>
                   </div>
                 </div>
+
                 <div className="grid grid-cols-2 gap-4 w-full">
                   <Button variant="outline" onClick={handleGitHubLogin} disabled={isGitHubLoading}>
                     {isGitHubLoading ? (
@@ -163,8 +183,9 @@ const Login = () => {
                     Google
                   </Button>
                 </div>
+
                 <p className="text-center text-sm text-muted-foreground">
-                  Don't have an account?{" "}
+                  Don't have an account?{' '}
                   <Link
                     to="/signup"
                     className="text-primary hover:underline font-medium"

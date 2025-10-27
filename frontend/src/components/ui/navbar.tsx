@@ -6,22 +6,20 @@ import { ThemeToggle } from "./theme-toggle";
 import { useAuth } from "@/hooks/useAuth";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import NotificationBell, { Notification } from "./NotificationBell";
+import NotificationBell from "./NotificationBell";
 import { toast } from "sonner";
+import useNotifications from "@/hooks/use-notifications";
 
 interface NavbarProps {
   isAuthenticated: boolean;
-  isDemo?: boolean;
-  notifications?: Notification[];
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, isDemo = false, notifications = [] }) => {
+const Navbar: React.FC<NavbarProps> = ({ isAuthenticated }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth(); 
+  const { user } = useAuth();
+  const { notifications, addNotification } = useNotifications();
   const location = useLocation();
   const navigate = useNavigate();
-
-  const isLandingPage = location.pathname === "/";
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -53,6 +51,11 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, isDemo = false, notifi
   };
 
   const handleLogout = () => {
+    addNotification({
+      message: "You have been successfully logged out.",
+      service: "Authentication",
+      severity: "info",
+    });
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("user");
     toast.success("Logout Successful", {
@@ -88,7 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, isDemo = false, notifi
             <ThemeToggle />
             {isAuthenticated ? (
               <>
-                {isDemo && <NotificationBell notifications={notifications} />}
+                <NotificationBell notifications={notifications} />
                 <Popover>
                   <PopoverTrigger>
                     <Avatar>

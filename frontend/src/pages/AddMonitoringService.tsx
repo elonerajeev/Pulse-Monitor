@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { API_BASE_URL } from '@/utils/api';
 import Navbar from '@/components/ui/navbar';
+import useNotifications from '@/hooks/use-notifications';
 
 const AddMonitoringService = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const AddMonitoringService = () => {
   const [type, setType] = useState('website');
   const [interval, setInterval] = useState<number | ''>(5);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { addNotification } = useNotifications();
 
   useEffect(() => {
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
@@ -57,6 +59,11 @@ const AddMonitoringService = () => {
       const data = await response.json();
 
       if (response.ok) {
+        addNotification({
+          message: `Service '${name}' added successfully.`,
+          service: 'Monitoring',
+          severity: 'success',
+        });
         toast.success('Monitoring service added successfully.', {
           duration: 60000,
           action: {

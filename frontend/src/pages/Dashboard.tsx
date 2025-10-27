@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/ui/navbar';
@@ -10,6 +10,7 @@ import { API_BASE_URL } from '@/utils/api';
 import ServiceCard from '@/components/ui/ServiceCard';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import EditServiceModal from '@/components/ui/EditServiceModal';
+import useNotifications from '@/hooks/use-notifications';
 
 interface MonitoringLog {
   _id: string;
@@ -37,6 +38,8 @@ const Dashboard = () => {
   const [editingService, setEditingService] = useState<MonitoringService | null>(null);
   const [serviceToDelete, setServiceToDelete] = useState<MonitoringService | null>(null);
   const [loading, setLoading] = useState(false);
+  const { addNotification } = useNotifications();
+  const prevServicesRef = useRef<MonitoringService[]>([]);
 
   const fetchServices = async () => {
     const userStr = localStorage.getItem('user');
@@ -56,7 +59,21 @@ const Dashboard = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setServices(data.data);
+        const newServices = data.data;
+        
+        newServices.forEach((service: MonitoringService) => {
+          const prevService = prevServicesRef.current.find(p => p._id === service._id);
+          if (prevService && prevService.latestLog?.status === 'online' && service.latestLog?.status === 'offline') {
+            addNotification({
+              message: `Service '${service.name}' is down.`,
+              service: 'Monitoring',
+              severity: 'error',
+            });
+          }
+        });
+
+        setServices(newServices);
+        prevServicesRef.current = newServices;
       } else {
         toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
       }
@@ -122,6 +139,11 @@ const Dashboard = () => {
       });
 
       if (response.ok) {
+        addNotification({
+          message: `Service '${updatedService.name}' updated successfully.`,
+          service: 'Monitoring',
+          severity: 'info',
+        });
         toast({ title: 'Success', description: 'Service updated successfully.' });
         setEditingService(null);
         fetchServices();
@@ -151,6 +173,11 @@ const Dashboard = () => {
       });
 
       if (response.ok) {
+        addNotification({
+          message: `Service '${serviceToDelete.name}' deleted successfully.`,
+          service: 'Monitoring',
+          severity: 'info',
+        });
         toast({ title: 'Success', description: 'Service deleted successfully.' });
         setServiceToDelete(null);
         fetchServices();
