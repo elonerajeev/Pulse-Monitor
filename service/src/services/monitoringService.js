@@ -28,7 +28,7 @@ export const saveMonitoringResult = async (monitoringId, result) => {
 export const updateMonitoringStatus = async (monitoringId, newStatus) => {
   const monitoring = await Monitoring.findById(monitoringId).populate('owner');
 
-  if (monitoring && !monitoring.isNotified && newStatus === 'online') {
+  if (monitoring && monitoring.status !== newStatus) {
     const user = monitoring.owner;
 
     if (user) {
@@ -36,7 +36,7 @@ export const updateMonitoringStatus = async (monitoringId, newStatus) => {
       const notification = new Notification({
         userId: user._id,
         monitoringId: monitoring._id,
-        message: `Your monitoring service '${monitoring.name}' is now active.`,
+        message: `Your monitoring service '${monitoring.name}' is now ${newStatus}.`,
       });
       await notification.save();
 
@@ -45,17 +45,18 @@ export const updateMonitoringStatus = async (monitoringId, newStatus) => {
         userName: user.name,
         serviceName: monitoring.name,
         serviceTarget: monitoring.target,
-        status: 'Active',
+        status: newStatus,
         timestamp: new Date().toUTCString(),
-        responseTime: '-',
-        error: 'N/A',
+        responseTime: '-', // This could be improved to include actual response time
+        error: 'N/A', // This could be improved to include actual error
       };
-      const subject = `PulseMonitor: ${monitoring.name} is now Active`;
-      await sendEmail(user.email, subject, emailData);
+      const subject = `PulseMonitor: ${monitoring.name} is now ${newStatus}`;
+      await sendEmail(user.email, subject, 'alert', emailData);
     }
-    await Monitoring.findByIdAndUpdate(monitoringId, { status: newStatus, isNotified: true });
+    await Monitoring.findByIdAndUpdate(monitoringId, { status: newStatus });
 
-  } else {
+  } else if (monitoring) {
+    // Even if status has not changed, ensure it is correctly set in the Monitoring model
     await Monitoring.findByIdAndUpdate(monitoringId, { status: newStatus });
   }
 };

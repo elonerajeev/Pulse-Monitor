@@ -42,10 +42,6 @@ const monitoringSchema = new Schema(
       enum: ['pending', 'online', 'offline'],
       default: 'pending',
     },
-    isNotified: {
-      type: Boolean,
-      default: false,
-    },
   },
   { timestamps: true }
 );

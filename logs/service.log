@@ -218,3 +218,149 @@ Message ID: <46dbd8d2-416c-e6df-3006-793fd7165795@gmail.com>
    - Result: ONLINE (43.19410899991635ms)
 
 -- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (48.449403000064194ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (36.287440000101924ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (287.68471800000407ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (560.6146919999737ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (33.158848999999464ms)
+
+-- Monitoring Scheduler Finished --
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/index.js`[39m
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+Server is running on port 3000
+MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/index.js`[39m
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+Server is running on port 3000
+MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/index.js`[39m
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+Server is running on port 3000
+MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (55.35501500000828ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (35.48665200002142ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (285.6375699999917ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (428.8822619999992ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (37.4121500000183ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (147.5058260000078ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (36.45722099998966ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (283.6523960000486ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (431.03572400001576ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (37.937343000026885ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (53.93509000004269ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (34.91229799995199ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (288.38506100000814ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (443.8915499999421ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (34.39860499999486ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+✅ Email sent successfully!
+Message ID: <80aed44e-32c8-03df-4b22-688845bb7076@gmail.com>
+   - Result: ONLINE (549.6055819999892ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (59.92540300008841ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (33.909790999954566ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (287.7948280000128ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (426.60937700001523ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (35.70038100006059ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: ONLINE (548.1210660000797ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (49.971535000018775ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (32.69192799995653ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (284.5056690000929ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (429.44970400002785ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (28.298906999872997ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+✅ Email sent successfully!
+Message ID: <6002959b-b9ca-8728-9df1-438ba45269d7@gmail.com>
+   - Result: OFFLINE (10000.868742999854ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --

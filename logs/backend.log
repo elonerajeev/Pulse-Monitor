@@ -279,3 +279,46 @@ Attempting to verify JWT...
 Cookies:  [Object: null prototype] {}
 Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTIzYjRkN2ZlMGJlOTc3MTQ3Mzk2YiIsImlhdCI6MTc2MTY3NTM0MCwiZXhwIjoxNzYxNjc4OTQwfQ.qFIZiTfGjkCB8VYIg11mYuG_0zpni4uX36orHB-PLag
 Decoded token:  { id: '68e23b4d7fe0be977147396b', iat: 1761675340, exp: 1761678940 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEwNGQ0NTY1ZDdkZDBjNjZjM2Y5NSIsImlhdCI6MTc2MTY3NjM0NSwiZXhwIjoxNzYxNjc5OTQ1fQ.BRAFB9kTzWR8PEVQGERNi5aguW9o0KRbHym5mcsqzCs
+Decoded token:  { id: '690104d4565d7dd0c66c3f95', iat: 1761676345, exp: 1761679945 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEwNGQ0NTY1ZDdkZDBjNjZjM2Y5NSIsImlhdCI6MTc2MTY3NjM2NSwiZXhwIjoxNzYxNjc5OTY1fQ.TI8AoBZQ_TQuIU68GA513m4sDaJb3jnjwySNsrnlE_U
+Decoded token:  { id: '690104d4565d7dd0c66c3f95', iat: 1761676365, exp: 1761679965 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEwNGQ0NTY1ZDdkZDBjNjZjM2Y5NSIsImlhdCI6MTc2MTY3NjM2NSwiZXhwIjoxNzYxNjc5OTY1fQ.TI8AoBZQ_TQuIU68GA513m4sDaJb3jnjwySNsrnlE_U
+Decoded token:  { id: '690104d4565d7dd0c66c3f95', iat: 1761676365, exp: 1761679965 }
+ReferenceError: sendEmail is not defined
+    at file:///home/user/server/backend/src/controllers/monitoring.controller.js:42:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEwNGQ0NTY1ZDdkZDBjNjZjM2Y5NSIsImlhdCI6MTc2MTY3NjM2NSwiZXhwIjoxNzYxNjc5OTY1fQ.TI8AoBZQ_TQuIU68GA513m4sDaJb3jnjwySNsrnlE_U
+Decoded token:  { id: '690104d4565d7dd0c66c3f95', iat: 1761676365, exp: 1761679965 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEwNGQ0NTY1ZDdkZDBjNjZjM2Y5NSIsImlhdCI6MTc2MTY3NjM2NSwiZXhwIjoxNzYxNjc5OTY1fQ.TI8AoBZQ_TQuIU68GA513m4sDaJb3jnjwySNsrnlE_U
+Decoded token:  { id: '690104d4565d7dd0c66c3f95', iat: 1761676365, exp: 1761679965 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEwNGQ0NTY1ZDdkZDBjNjZjM2Y5NSIsImlhdCI6MTc2MTY3NjM2NSwiZXhwIjoxNzYxNjc5OTY1fQ.TI8AoBZQ_TQuIU68GA513m4sDaJb3jnjwySNsrnlE_U
+Decoded token:  { id: '690104d4565d7dd0c66c3f95', iat: 1761676365, exp: 1761679965 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEwNGQ0NTY1ZDdkZDBjNjZjM2Y5NSIsImlhdCI6MTc2MTY3NjM2NSwiZXhwIjoxNzYxNjc5OTY1fQ.TI8AoBZQ_TQuIU68GA513m4sDaJb3jnjwySNsrnlE_U
+Decoded token:  { id: '690104d4565d7dd0c66c3f95', iat: 1761676365, exp: 1761679965 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEwNGQ0NTY1ZDdkZDBjNjZjM2Y5NSIsImlhdCI6MTc2MTY3NjM2NSwiZXhwIjoxNzYxNjc5OTY1fQ.TI8AoBZQ_TQuIU68GA513m4sDaJb3jnjwySNsrnlE_U
+Decoded token:  { id: '690104d4565d7dd0c66c3f95', iat: 1761676365, exp: 1761679965 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEwNGQ0NTY1ZDdkZDBjNjZjM2Y5NSIsImlhdCI6MTc2MTY3NjM2NSwiZXhwIjoxNzYxNjc5OTY1fQ.TI8AoBZQ_TQuIU68GA513m4sDaJb3jnjwySNsrnlE_U
+Decoded token:  { id: '690104d4565d7dd0c66c3f95', iat: 1761676365, exp: 1761679965 }
+Attempting to verify JWT...
+Cookies:  [Object: null prototype] {}
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDEwNGQ0NTY1ZDdkZDBjNjZjM2Y5NSIsImlhdCI6MTc2MTY3NjM2NSwiZXhwIjoxNzYxNjc5OTY1fQ.TI8AoBZQ_TQuIU68GA513m4sDaJb3jnjwySNsrnlE_U
+Decoded token:  { id: '690104d4565d7dd0c66c3f95', iat: 1761676365, exp: 1761679965 }

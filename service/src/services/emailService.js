@@ -25,9 +25,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmail = async (to, subject, data) => {
+export const sendEmail = async (to, subject, template, data) => {
   try {
-    const htmlBody = populateTemplate(alertTemplate, data);
+    let htmlBody;
+    if (template === 'alert') {
+      htmlBody = populateTemplate(alertTemplate, data);
+    } else {
+      throw new Error('Invalid email template specified');
+    }
 
     const mailOptions = {
       from: `"PulseMonitor" <${process.env.FROM_EMAIL}>`,
