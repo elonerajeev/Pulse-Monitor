@@ -31,6 +31,16 @@ const createMonitoring = asyncHandler(async (req, res) => {
     status: 'pending',
   });
 
+  // Send email notification
+  const emailData = {
+    userName: req.user.name,
+    serviceName: monitoring.name,
+    serviceTarget: monitoring.target,
+    interval: monitoring.interval,
+  };
+  const subject = `New Monitoring Service Added: ${monitoring.name}`;
+  await sendEmail(req.user.email, subject, 'serviceAdded', emailData);
+
   return res
     .status(201)
     .json(new ApiResponse(201, monitoring, "Monitoring service created successfully"));

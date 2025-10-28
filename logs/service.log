@@ -19,6 +19,202 @@ Run `npm audit` for details.
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/index.js`[39m
-[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
 Server is running on port 3000
 MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website1 (https://zintellix.com/)
+   - Result: ONLINE (443.5238650000101ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (54.41118899999128ms)
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (49.116207999992184ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (38.8723800000007ms)
+
+🔍 Monitoring required for: YouTube.com-URL (https://www.youtube.com/)
+   - Result: ONLINE (196.17405899999721ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (304.9335769999889ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (413.3120450000133ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (137.7476319999987ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (137.66629200000898ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (137.95971799999825ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (137.45334599999478ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (137.44421300000977ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (137.38788699998986ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (137.5653139999922ms)
+
+🔍 Monitoring required for: XElone (https://zintellix.com/)
+   - Result: ONLINE (137.32083599999896ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website1 (https://zintellix.com/)
+   - Result: ONLINE (431.9179379999987ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (55.14674699999159ms)
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (52.383309999946505ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (39.20634000003338ms)
+
+🔍 Monitoring required for: YouTube.com-URL (https://www.youtube.com/)
+   - Result: ONLINE (99.63784000003943ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (301.85781399998814ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (420.1403130000108ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.74386099999538ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.4234830000205ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.6620839999523ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.51703200000338ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.76196499995422ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (139.6337010000134ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.4490929999738ms)
+
+🔍 Monitoring required for: XElone (https://zintellix.com/)
+   - Result: ONLINE (138.53564899996854ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+✅ Email sent successfully!
+Message ID: <46dbd8d2-416c-e6df-3006-793fd7165795@gmail.com>
+   - Result: ONLINE (48.524778999970295ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website1 (https://zintellix.com/)
+   - Result: ONLINE (430.12998399999924ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (53.26044399989769ms)
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (32.05479799991008ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (36.106995000038296ms)
+
+🔍 Monitoring required for: YouTube.com-URL (https://www.youtube.com/)
+   - Result: ONLINE (177.75302699999884ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (299.69936199998483ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (427.1771980000194ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (141.84728099999484ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (139.12884999997914ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.50323000003118ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.69698200002313ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.43326199997682ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.55922299996018ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.77441800001543ms)
+
+🔍 Monitoring required for: XElone (https://zintellix.com/)
+   - Result: ONLINE (138.69079999998212ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (33.97205099998973ms)
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: My Production Website1 (https://zintellix.com/)
+   - Result: ONLINE (429.0648200000869ms)
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (54.66270700003952ms)
+
+🔍 Monitoring required for: Apple Website (https://www.apple.com/)
+   - Result: ONLINE (34.977105999947526ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (34.07819000002928ms)
+
+🔍 Monitoring required for: YouTube.com-URL (https://www.youtube.com/)
+   - Result: ONLINE (247.00958700000774ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (288.10565799998585ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (416.4322659999598ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.4950649999082ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.38435800001025ms)
+
+🔍 Monitoring required for: rajeev (https://zintellix.com/)
+   - Result: ONLINE (138.45765100000426ms)
+
+🔍 Monitoring required for: XElone (https://zintellix.com/)
+   - Result: ONLINE (138.42175199999474ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (43.19410899991635ms)
+
+-- Monitoring Scheduler Finished --
