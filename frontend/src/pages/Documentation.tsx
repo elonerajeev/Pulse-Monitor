@@ -17,10 +17,16 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/ui/navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Documentation = () => {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem('isAuthenticated') === 'true';
+    setIsAuthenticated(authStatus);
+  }, []);
 
   const copyToClipboard = (code: string, id: string) => {
     navigator.clipboard.writeText(code);
@@ -120,7 +126,7 @@ const Documentation = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar isAuthenticated={isAuthenticated} />
 
       {/* Hero */}
       <section className="py-20 bg-gradient-to-b from-muted/50 to-background">

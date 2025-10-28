@@ -17,7 +17,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ isAuthenticated }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
-  const { notifications, addNotification } = useNotifications();
+  const { notifications, addNotification, clearNotification, clearAllNotifications } = useNotifications();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -91,7 +91,11 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated }) => {
             <ThemeToggle />
             {isAuthenticated ? (
               <>
-                <NotificationBell notifications={notifications} />
+                <NotificationBell 
+                  notifications={notifications} 
+                  onClear={clearNotification} 
+                  onClearAll={clearAllNotifications} 
+                />
                 <Popover>
                   <PopoverTrigger>
                     <Avatar>
@@ -112,29 +116,17 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated }) => {
                         </div>
                       </div>
                       <div className="space-y-1">
-                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/profile")}>
-                          <User className="mr-2 h-4 w-4" />
-                          Profile Details
+                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/dashboard")}>
+                          <LayoutDashboard className="mr-2 h-4 w-4" />
+                          Dashboard
                         </Button>
                         <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/profile/edit")}>
                           <Edit className="mr-2 h-4 w-4" />
                           Edit Profile
                         </Button>
-                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/dashboard")}>
-                          <LayoutDashboard className="mr-2 h-4 w-4" />
-                          Dashboard
-                        </Button>
-                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/monitoring/add")}>
-                          <Plus className="mr-2 h-4 w-4" />
-                          Add Monitoring Service
-                        </Button>
                         <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/settings")}>
                           <Settings className="mr-2 h-4 w-4" />
                           Settings
-                        </Button>
-                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/switch-profile")}>
-                          <Users className="mr-2 h-4 w-4" />
-                          Switch Profile
                         </Button>
                         <Button variant="destructive" className="w-full justify-start mt-2" onClick={handleLogout}>
                           <LogOut className="mr-2 h-4 w-4" />

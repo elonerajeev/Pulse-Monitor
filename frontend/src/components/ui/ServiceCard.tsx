@@ -29,13 +29,13 @@ interface ServiceCardProps {
   serviceType: string;
   logs: MonitoringLog[];
   lastChecked?: string;
-  sslDaysUntilExpiry?: number;
+  ssl?: { daysUntilExpiry: number; };
   onEdit: () => void;
   onDelete: () => void;
   onRefresh: () => void;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ name, status, target, serviceType, logs = [], lastChecked, sslDaysUntilExpiry, onEdit, onDelete, onRefresh }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ name, status, target, serviceType, logs = [], lastChecked, ssl, onEdit, onDelete, onRefresh }) => {
   const statusColor = status === 'online' ? 'text-green-500' : 'text-red-500';
   const statusBgColor = status === 'online' ? 'bg-green-500/10' : 'bg-red-500/10';
   const latestLog = logs.length > 0 ? logs[logs.length - 1] : null;
@@ -51,6 +51,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ name, status, target, service
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
   
+  const sslDaysUntilExpiry = ssl?.daysUntilExpiry;
   const sslColor = sslDaysUntilExpiry === undefined
     ? 'text-muted-foreground'
     : sslDaysUntilExpiry > 14

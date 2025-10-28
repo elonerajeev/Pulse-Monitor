@@ -24,7 +24,20 @@ const useNotifications = () => {
     });
   };
 
-  return { notifications, addNotification };
+  const clearNotification = (id: string | number) => {
+    setNotifications((prev) => {
+      const updatedNotifications = prev.filter((n) => n.id !== id);
+      localStorage.setItem('notifications', JSON.stringify(updatedNotifications));
+      return updatedNotifications;
+    });
+  };
+
+  const clearAllNotifications = () => {
+    setNotifications([]);
+    localStorage.setItem('notifications', JSON.stringify([]));
+  };
+
+  return { notifications, addNotification, clearNotification, clearAllNotifications };
 };
 
 export default useNotifications;

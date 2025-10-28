@@ -6,7 +6,7 @@
   <h3>🎯 Never Miss a Beat - Monitor Everything, Everywhere</h3>
 
   <p align="center">
-    <strong>The most elegant and powerful real-time monitoring solution for modern applications</strong><br/>
+    <strong>The most elegant and powerful reral-time monitoring solution for modern applications</strong><br/>
     <em>Built for developers, trusted by enterprises</em>
   </p>
 
