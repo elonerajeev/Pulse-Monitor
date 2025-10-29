@@ -4,6 +4,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { Monitoring } from "../models/monitoring.model.js";
 import { MonitoringLog } from "../models/monitoring_log.model.js";
 import mongoose from "mongoose";
+import { sendEmail } from "../services/emailService.js";
 
 const createMonitoring = asyncHandler(async (req, res) => {
   const { name, target, serviceType, interval } = req.body;
