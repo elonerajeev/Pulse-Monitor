@@ -1,5 +1,5 @@
 
-up to date, audited 151 packages in 3s
+up to date, audited 151 packages in 4s
 
 24 packages are looking for funding
   run `npm fund` for details
@@ -19,7 +19,421 @@ Run `npm audit` for details.
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/index.js`[39m
-[dotenv@17.2.3] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
 [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
 Server is running on port 3000
 MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (56.235498000001826ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (46.106543999998394ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (296.7247889999999ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (436.025958000002ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (59.86200599999938ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10001.642738000002ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (56.74082200002158ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (39.43269300000975ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (295.5492480000248ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (432.1460369999986ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (34.39952800003812ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10002.45679799997ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (52.443373999907635ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (43.9265599999344ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (289.5275210000109ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (467.7891889999155ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (28.30793100001756ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10004.535789999994ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (55.670576000004075ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (52.23227599996608ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (334.0268619999988ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (428.86669499997515ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (43.285998999956064ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.865758000058ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (60.42409900017083ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (39.77679800009355ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (309.5994289999362ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (432.41108700004406ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (34.31418800004758ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.521761999931ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (47.09362299996428ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (48.733551000012085ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (283.7112849999685ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (566.3544659998734ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (24.79095000005327ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.231187999947ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (64.37880499986932ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (45.73848499986343ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (285.73247100017034ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (440.4292959999293ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (33.640679999953136ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10001.81677299994ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (816.7157060001045ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (167.8834100002423ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (292.3726349999197ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (447.9109090003185ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (31.40086599998176ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10001.921918000095ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (782.1556830001064ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (168.25049200002104ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (288.77712200023234ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (418.969681000337ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (26.010141999926418ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.858277000021ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (762.3151560002007ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (168.34338700026274ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (290.94912300026044ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (443.2824040004052ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (34.098836000077426ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.82918599993ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (760.3861460001208ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (166.2785140001215ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (281.53129100007936ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (459.8639139998704ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (32.75350600015372ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.34668800002ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (78.13490899978206ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (50.26396999973804ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (281.3371379999444ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (423.52541599981487ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (34.87651300011203ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10001.191170000006ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (51.345960000064224ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (43.421162999700755ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (283.99162800004706ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (444.9361640000716ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (33.53719099983573ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.25680100033ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (61.58431900013238ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (47.72491400036961ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (282.7714829999022ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (484.4515880001709ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (32.18031199974939ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.149344999809ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (51.27944799978286ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (38.88618399947882ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (281.87213499937207ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (441.33067299984396ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (34.0166400000453ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.236810999922ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (48.4234980000183ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (38.502462999895215ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (293.7531729992479ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (423.3951809993014ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (31.40082500036806ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10001.099608999677ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (54.5073929997161ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (38.31997200008482ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (285.68017400056124ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (436.8881270000711ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (37.84702800028026ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.93363500014ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --
+
+-- Running Monitoring Scheduler --
+
+🔍 Monitoring required for: Google (https://www.google.com/)
+   - Result: ONLINE (66.0121320001781ms)
+
+🔍 Monitoring required for: Hi (www.google.com)
+   - Result: ONLINE (62.04767300002277ms)
+
+🔍 Monitoring required for: GitHub-url (https://github.com/)
+   - Result: ONLINE (306.9302420001477ms)
+
+🔍 Monitoring required for: Elonerajeev123 (https://zintellix.com/)
+   - Result: ONLINE (432.3525670003146ms)
+
+🔍 Monitoring required for: Tesla Website Monitoring (https://www.tesla.com/en_in/)
+   - Result: ONLINE (26.97302700020373ms)
+
+🔍 Monitoring required for: My Ec2 Instance (http://50.19.2.101:3000/)
+   - Result: OFFLINE (10000.398947000504ms)
+   - Error: [object Object]
+
+-- Monitoring Scheduler Finished --

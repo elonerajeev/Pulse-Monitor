@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "server-81845678-b0224"
-  }
+  },
+  "targets": {
+    "server-81845678-b0224": {
+      "hosting": {
+        "pulsemonitor": [
+          "public"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

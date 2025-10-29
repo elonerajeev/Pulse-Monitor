@@ -1,13 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Activity, 
-  Book, 
-  Code, 
-  PlayCircle, 
-  Settings, 
-  Webhook,
+import {
+  Activity,
+  Book,
+  Code,
+  PlayCircle,
+  Settings,
   Monitor,
   Bell,
   BarChart3,
@@ -49,7 +48,7 @@ const Documentation = () => {
     },
     {
       title: "Set up notifications",
-      description: "Configure email, Slack, or Telegram alerts",
+      description: "Receive email alerts when your service status changes",
       icon: Bell,
       time: "2 minutes"
     },
@@ -63,64 +62,107 @@ const Documentation = () => {
 
   const apiExamples = [
     {
+      title: "Register User",
+      method: "POST",
+      endpoint: "/api/v1/auth/register",
+      code: `{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "confirmPassword": "password123"
+}`,
+      description: "Create a new user account"
+    },
+    {
+      title: "Login User",
+      method: "POST",
+      endpoint: "/api/v1/auth/login",
+      code: `{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}`,
+      description: "Authenticate and receive a JWT"
+    },
+    {
       title: "Create Monitor",
       method: "POST",
-      endpoint: "/api/v1/monitors",
-      code: `{\n  "url": "https://api.example.com/health",\n  "name": "API Health Check",\n  "interval": 300,\n  "regions": ["us-east", "eu-west"],\n  "expected_status": 200,\n  "timeout": 30\n}`,
+      endpoint: "/api/v1/monitoring",
+      code: `{
+  "name": "My API",
+  "target": "https://api.example.com",
+  "serviceType": "website",
+  "interval": 5
+}`,
       description: "Create a new monitor for your service"
     },
     {
-      title: "Get Monitor Status",
+      title: "Get All Monitors",
       method: "GET",
-      endpoint: "/api/v1/monitors/{id}",
-      code: `{\n  "id": "mon_1234567890",\n  "url": "https://api.example.com/health",\n  "status": "up",\n  "last_check": "2024-01-15T10:30:00Z",\n  "response_time": 245,\n  "uptime_percentage": 99.95\n}`,
-      description: "Retrieve current status and metrics"
+      endpoint: "/api/v1/monitoring",
+      code: `// Returns an array of all monitoring services\n// for the authenticated user.`,
+      description: "Retrieve all your configured monitors"
     },
     {
-      title: "Set up Webhook",
-      method: "POST",
-      endpoint: "/api/v1/notifications/webhooks",
-      code: `{\n  "url": "https://hooks.slack.com/services/...",\n  "events": ["down", "up", "slow_response"],\n  "name": "Slack Alerts",\n  "active": true\n}`,
-      description: "Configure webhook notifications"
+      title: "Update Monitor",
+      method: "PATCH",
+      endpoint: "/api/v1/monitoring/{id}",
+      code: `{
+  "name": "New Monitor Name",
+  "interval": 10
+}`,
+      description: "Update a monitor's properties"
+    },
+    {
+      title: "Delete Monitor",
+      method: "DELETE",
+      endpoint: "/api/v1/monitoring/{id}",
+      code: `// No request body required.\n// Deletes the monitor with the specified ID.`,
+      description: "Delete a monitoring service"
     }
   ];
 
   const integrations = [
     {
+      name: "Email",
+      description: "Traditional email alerts and reports",
+      setup: "Enabled by default for your account email",
+      icon: "📧",
+      status: "Working"
+    },
+    {
       name: "Slack",
       description: "Instant notifications in your team channels",
       setup: "Add webhook URL from Slack app settings",
-      icon: "💬"
+      icon: "💬",
+      status: "Coming Soon"
     },
     {
       name: "Telegram",
       description: "Personal or group chat notifications",
       setup: "Create bot and add bot token",
-      icon: "📱"
-    },
-    {
-      name: "Email",
-      description: "Traditional email alerts and reports",
-      setup: "Verify email address in settings",
-      icon: "📧"
-    },
-    {
-      name: "PagerDuty",
-      description: "Escalation and incident management",
-      setup: "Connect via integration key",
-      icon: "🚨"
+      icon: "📱",
+      status: "Coming Soon"
     },
     {
       name: "Discord",
       description: "Community and team Discord servers",
       setup: "Create webhook in channel settings",
-      icon: "🎮"
+      icon: "🎮",
+      status: "Coming Soon"
+    },
+    {
+      name: "PagerDuty",
+      description: "Escalation and incident management",
+      setup: "Connect via integration key",
+      icon: "🚨",
+      status: "Coming Soon"
     },
     {
       name: "Microsoft Teams",
       description: "Enterprise team collaboration",
       setup: "Configure incoming webhook connector",
-      icon: "👔"
+      icon: "👔",
+      status: "Coming Soon"
     }
   ];
 
@@ -152,10 +194,12 @@ const Documentation = () => {
                 Start Free Trial
               </Button>
             </Link>
-            <Button variant="outline" size="lg">
-              <ExternalLink className="w-5 h-5 mr-2" />
-              API Reference
-            </Button>
+            <Link to="/api-reference">
+              <Button variant="outline" size="lg">
+                <ExternalLink className="w-5 h-5 mr-2" />
+                API Reference
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -196,9 +240,9 @@ const Documentation = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {apiExamples.map((example, index) => (
-              <Card key={index} className="group hover:shadow-lg transition-all duration-300">
+              <Card key={index} className="group hover:shadow-lg transition-all duration-300 flex flex-col">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="flex items-center">
@@ -215,9 +259,9 @@ const Documentation = () => {
                   <p className="text-sm text-muted-foreground">{example.description}</p>
                   <code className="text-xs bg-muted px-2 py-1 rounded">{example.endpoint}</code>
                 </CardHeader>
-                <CardContent>
-                  <div className="relative">
-                    <pre className="bg-muted/50 p-4 rounded-lg text-sm overflow-x-auto">
+                <CardContent className="flex-grow">
+                  <div className="relative h-full">
+                    <pre className="bg-muted/50 p-4 rounded-lg text-sm overflow-x-auto h-full">
                       <code>{example.code}</code>
                     </pre>
                     <Button
@@ -252,9 +296,14 @@ const Documentation = () => {
             {integrations.map((integration, index) => (
               <Card key={index} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <span className="text-2xl mr-3">{integration.icon}</span>
-                    {integration.name}
+                  <CardTitle className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <span className="text-2xl mr-3">{integration.icon}</span>
+                      {integration.name}
+                    </div>
+                    <Badge variant={integration.status === 'Working' ? 'success' : 'outline'}>
+                      {integration.status}
+                    </Badge>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -283,10 +332,8 @@ const Documentation = () => {
                     Monitor Configuration
                   </h4>
                   <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• Set appropriate check intervals (1-5 minutes for critical services)</li>
-                    <li>• Use multiple regions for global services</li>
+                    <li>• Set appropriate check intervals (5 minutes for critical services)</li>
                     <li>• Configure realistic timeout values</li>
-                    <li>• Monitor both endpoints and databases</li>
                   </ul>
                 </div>
                 <div>
@@ -296,9 +343,7 @@ const Documentation = () => {
                   </h4>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li>• Avoid alert fatigue with smart thresholds</li>
-                    <li>• Use escalation policies for critical issues</li>
                     <li>• Test notification channels regularly</li>
-                    <li>• Set up maintenance windows</li>
                   </ul>
                 </div>
               </div>
@@ -319,10 +364,12 @@ const Documentation = () => {
                   <ExternalLink className="w-5 h-5 mr-2" />
                   Contact Support
                 </Button>
-                <Button variant="outline" size="lg" className="text-white border-white hover:bg-white hover:text-primary">
-                  <Book className="w-5 h-5 mr-2" />
-                  View Full Docs
-                </Button>
+                <Link to="/api-reference">
+                  <Button variant="outline" size="lg" className="text-white border-white hover:bg-white hover:text-primary">
+                    <Book className="w-5 h-5 mr-2" />
+                    View Full Docs
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import Settings from "./pages/Settings";
 import SwitchProfile from "./pages/SwitchProfile";
+import ApiReference from "./pages/ApiReference";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/switch-profile" element={<SwitchProfile />} />
           {/* <Route path="/testimonials" element={<Testimonials />} /> */}
           <Route path="/documentation" element={<Documentation />} />
+          <Route path="/api-reference" element={<ApiReference />} />
           <Route path="/terms" element={<Terms />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
