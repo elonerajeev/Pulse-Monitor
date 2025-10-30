@@ -1,4 +1,7 @@
 {
+  "firebase_hosting": {
+    "deploymentHostingUrl": "https://server-81845678-b0224.web.app"
+  },
   "cloud_run_deploy": {},
   "gemini_api": {}
 }
