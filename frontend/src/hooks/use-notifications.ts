@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Notification } from '@/components/ui/NotificationBell';
 
 const useNotifications = () => {
@@ -11,7 +11,7 @@ const useNotifications = () => {
     }
   }, []);
 
-  const addNotification = (notification: Omit<Notification, 'id' | 'time'>) => {
+  const addNotification = useCallback((notification: Omit<Notification, 'id' | 'time'>) => {
     const newNotification: Notification = {
       ...notification,
       id: new Date().toISOString(),
@@ -22,7 +22,7 @@ const useNotifications = () => {
       localStorage.setItem('notifications', JSON.stringify(updatedNotifications));
       return updatedNotifications;
     });
-  };
+  }, []);
 
   const clearNotification = (id: string | number) => {
     setNotifications((prev) => {

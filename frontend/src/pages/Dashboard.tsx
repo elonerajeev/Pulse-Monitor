@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/ui/navbar';
@@ -40,8 +40,10 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const { addNotification } = useNotifications();
   const prevServicesRef = useRef<MonitoringService[]>([]);
+  const [autoRefresh, setAutoRefresh] = useState(false);
+  const [countdown, setCountdown] = useState(180);
 
-  const fetchServices = async () => {
+  const fetchServices = useCallback(async () => {
     const userStr = localStorage.getItem('user');
     if (!userStr) return;
 
@@ -58,30 +60,30 @@ const Dashboard = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        const newServices = data.data;
-        
-        newServices.forEach((service: MonitoringService) => {
-          const prevService = prevServicesRef.current.find(p => p._id === service._id);
-          if (prevService && prevService.latestLog?.status === 'online' && service.latestLog?.status === 'offline') {
-            addNotification({
-              message: `Service '${service.name}' is down.`,
-              service: 'Monitoring',
-              severity: 'error',
-            });
-          }
-        });
+      const data = await response.json();
+      const newServices = data.data;
+      
+      newServices.forEach((service: MonitoringService) => {
+        const prevService = prevServicesRef.current.find(p => p._id === service._id);
+        if (prevService && prevService.latestLog?.status === 'online' && service.latestLog?.status === 'offline') {
+          addNotification({
+            message: `Service '${service.name}' is down.`,
+            service: 'Monitoring',
+            severity: 'error',
+          });
+        }
+      });
 
-        setServices(newServices);
-        prevServicesRef.current = newServices;
-      } else {
-        toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
-      }
+      setServices(newServices);
+      prevServicesRef.current = newServices;
+    } else {
+      toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
+    }
     } catch (error) {
-      toast({ title: 'Error', description: 'An error occurred while fetching services.', variant: 'destructive' });
+      toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
     }
     setLoading(false);
-  };
+  }, [toast, addNotification]);
 
   useEffect(() => {
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
@@ -94,18 +96,37 @@ const Dashboard = () => {
     }
 
     fetchServices();
-  }, [navigate, toast]);
+  }, [navigate, toast, fetchServices]);
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+    if (autoRefresh) {
+      intervalId = setInterval(() => {
+        setCountdown(prevCountdown => {
+          if (prevCountdown <= 1) {
+            fetchServices();
+            return 180;
+          }
+          return prevCountdown - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(intervalId);
+  }, [autoRefresh, fetchServices]);
 
   const handleAddMonitor = () => {
     navigate('/monitoring/add');
+  };
+
+  const toggleAutoRefresh = () => {
+    setAutoRefresh(prev => !prev);
+    setCountdown(180);
   };
 
   const handleRefresh = (serviceId?: string) => {
     if (serviceId) {
       const serviceToRefresh = services.find(s => s._id === serviceId);
       if (serviceToRefresh) {
-        // In a real application, you would fetch updated data for the specific service
-        // For now, we'll just refetch all services to simulate an update
         toast({ title: 'Refreshing...', description: `Refreshing ${serviceToRefresh.name}` });
         fetchServices();
       }
@@ -140,19 +161,19 @@ const Dashboard = () => {
 
       if (response.ok) {
         addNotification({
-          message: `Service '${updatedService.name}' updated successfully.`,
-          service: 'Monitoring',
-          severity: 'info',
-        });
-        toast({ title: 'Success', description: 'Service updated successfully.' });
-        setEditingService(null);
-        fetchServices();
-      } else {
-        const errorData = await response.json();
-        toast({ title: 'Error', description: errorData.message || 'Failed to update service.', variant: 'destructive' });
-      }
+        message: `Service '${updatedService.name}' updated successfully.`,
+        service: 'Monitoring',
+        severity: 'info',
+      });
+      toast({ title: 'Success', description: 'Service updated successfully.' });
+      setEditingService(null);
+      fetchServices();
+    } else {
+      const errorData = await response.json();
+      toast({ title: 'Error', description: errorData.message || 'Failed to update service.', variant: 'destructive' });
+    }
     } catch (error) {
-      toast({ title: 'Error', description: 'An error occurred while updating the service.', variant: 'destructive' });
+      toast({ title: 'Error', description: 'Failed to update service.', variant: 'destructive' });
     }
   };
 
@@ -188,7 +209,6 @@ const Dashboard = () => {
       toast({ title: 'Error', description: 'An error occurred while deleting the service.', variant: 'destructive' });
     }
   };
-
   const onlineServices = services.filter(s => s.latestLog?.status === 'online');
   const offlineServicesCount = services.length - onlineServices.length;
   const incidents = services.reduce((acc, s) => acc + s.logs.filter(l => l.status === 'offline').length, 0);
@@ -224,6 +244,12 @@ const Dashboard = () => {
             >
               <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
               Refresh
+            </Button>
+            <Button
+              variant="outline"
+              onClick={toggleAutoRefresh}
+            >
+              {autoRefresh ? `Auto Refresh: ${countdown}s` : 'Enable Auto Refresh'}
             </Button>
             <Button
               variant="hero"
