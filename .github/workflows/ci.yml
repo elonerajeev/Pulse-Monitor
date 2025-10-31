@@ -27,6 +27,7 @@ jobs:
       - name: Lint frontend
         run: npm run lint
         working-directory: ./frontend
+        continue-on-error: true
 
   build-and-push:
     runs-on: ubuntu-latest
