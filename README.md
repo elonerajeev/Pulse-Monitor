@@ -1,4 +1,13 @@
 # 🚀 PulseMonitor - Enterprise-Grade Service Monitoring Platform
+<div align="center">
+  <a href="https://pulsemonitorlog.netlify.app/" target="_blank">
+    <img 
+      src="https://img.shields.io/badge/🚀%20Live%20Demo-Click%20Here-brightgreen?style=for-the-badge&logo=netlify&logoColor=white" 
+      alt="Live Demo Button"
+      style="height:80px; width:auto; margin-top:20px;"
+    />
+  </a>
+</div>
 
 <div align="center">
   <img src="frontend/src/assests/website%20icons.jpg" alt="PulseMonitor Logo" width="120" style="border-radius: 20px;"/>
@@ -12,7 +21,7 @@
 
   <p align="center">
     <a href="#-why-pulsemonitor">Why PulseMonitor</a> •
-    <a href="#-live-demo">Live Demo</a> •
+    <a href="https://pulsemonitorlog.netlify.app/">Live Demo</a> •
     <a href="#-quick-start">Quick Start</a> •
     <a href="#-features">Features</a> •
     <a href="#-documentation">Docs</a>
@@ -175,7 +184,7 @@ The following diagram illustrates the workflow and dataflow within the PulseMoni
 
     ```bash
     git clone https://github.com/elonerajeev/Pulse-Monitor.git
-    cd lightwatch-dash
+    cd Pulse-Monitor
     ```
 
 2.  **Install dependencies for all services:**
