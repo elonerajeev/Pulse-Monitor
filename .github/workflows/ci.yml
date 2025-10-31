@@ -91,5 +91,5 @@ jobs:
       - name: Deploy Backend to Render
         run: curl -X POST ${{ secrets.RENDER_BACKEND_DEPLOY_HOOK_URL }}
 
-      - name: Deploy Service to Render
-        run: curl -X POST ${{ secrets.RENDER_SERVICE_DEPLOY_HOOK_URL }}
+      # - name: Deploy Service to Render
+      #   run: curl -X POST ${{ secrets.RENDER_SERVICE_DEPLOY_HOOK_URL }}
