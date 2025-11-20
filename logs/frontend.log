@@ -22,3 +22,328 @@ Run `npm audit` for details.
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
+6:22:11 PM [vite] hmr update /src/hooks/useAuth.tsx, /src/index.css, /src/pages/Dashboard.tsx, /src/pages/AddMonitoringService.tsx
+6:22:11 PM [vite] Pre-transform error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:10:0: ERROR: Cannot use a declaration in a single-statement context
+6:22:11 PM [vite] Pre-transform error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:10:0: ERROR: Cannot use a declaration in a single-statement context
+6:22:11 PM [vite] Internal server error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:10:0: ERROR: Cannot use a declaration in a single-statement context
+  Plugin: vite:esbuild
+  File: /home/user/server/frontend/src/utils/api.ts:10:0
+  
+  Cannot use a declaration in a single-statement context
+  8  |  https://pulse-monitor-backend.onrender.com
+  9  |  
+  10 |  const api = axios.create({
+     |  ^
+  11 |    baseURL: API_BASE_URL,
+  12 |    withCredentials: true,
+  
+      at failureErrorWithLog (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+      at /home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
+      at responseCallbacks.<computed> (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
+      at handleIncomingPacket (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+      at Socket.readFromStdout (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+6:22:11 PM [vite] Pre-transform error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:10:0: ERROR: Cannot use a declaration in a single-statement context
+6:22:21 PM [vite] hmr update /src/hooks/useAuth.tsx, /src/index.css, /src/pages/Dashboard.tsx, /src/pages/AddMonitoringService.tsx
+6:22:21 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:26: ERROR: Expected ";" but found ":"
+6:22:21 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:26: ERROR: Expected ";" but found ":"
+6:22:21 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:26: ERROR: Expected ";" but found ":"
+6:22:21 PM [vite] Internal server error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:26: ERROR: Expected ";" but found ":"
+  Plugin: vite:esbuild
+  File: /home/user/server/frontend/src/utils/api.ts:8:6
+  
+  The symbol "API_BASE_URL" has already been declared
+  6  |  
+  7  |  const API_BASE_URL = "http://localhost:5000/api/v1";
+  8  |  const API_BASE_URL = https://pulse-monitor-backend.onrender.com
+     |        ^
+  9  |  
+  10 |  const api = axios.create({
+  
+  Expected ";" but found ":"
+  6  |  
+  7  |  const API_BASE_URL = "http://localhost:5000/api/v1";
+  8  |  const API_BASE_URL = https://pulse-monitor-backend.onrender.com
+     |                            ^
+  9  |  
+  10 |  const api = axios.create({
+  
+      at failureErrorWithLog (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+      at /home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
+      at responseCallbacks.<computed> (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
+      at handleIncomingPacket (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+      at Socket.readFromStdout (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+6:22:23 PM [vite] hmr update /src/hooks/useAuth.tsx, /src/index.css, /src/pages/Dashboard.tsx, /src/pages/AddMonitoringService.tsx
+6:22:24 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:64: ERROR: Unterminated string literal
+6:22:24 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:64: ERROR: Unterminated string literal
+6:22:24 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:64: ERROR: Unterminated string literal
+6:22:24 PM [vite] Internal server error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:64: ERROR: Unterminated string literal
+  Plugin: vite:esbuild
+  File: /home/user/server/frontend/src/utils/api.ts:8:6
+  
+  The symbol "API_BASE_URL" has already been declared
+  6  |  
+  7  |  const API_BASE_URL = "http://localhost:5000/api/v1";
+  8  |  const API_BASE_URL = "https://pulse-monitor-backend.onrender.com
+     |        ^
+  9  |  
+  10 |  const api = axios.create({
+  
+  Unterminated string literal
+  6  |  
+  7  |  const API_BASE_URL = "http://localhost:5000/api/v1";
+  8  |  const API_BASE_URL = "https://pulse-monitor-backend.onrender.com
+     |                                                                  ^
+  9  |  
+  10 |  const api = axios.create({
+  
+      at failureErrorWithLog (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+      at /home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
+      at responseCallbacks.<computed> (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
+      at handleIncomingPacket (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+      at Socket.readFromStdout (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+6:22:30 PM [vite] hmr update /src/hooks/useAuth.tsx, /src/index.css, /src/pages/Dashboard.tsx, /src/pages/AddMonitoringService.tsx
+6:22:30 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:68: ERROR: Unterminated string literal
+6:22:30 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:68: ERROR: Unterminated string literal
+6:22:30 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:68: ERROR: Unterminated string literal
+6:22:30 PM [vite] Internal server error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:68: ERROR: Unterminated string literal
+  Plugin: vite:esbuild
+  File: /home/user/server/frontend/src/utils/api.ts:8:6
+  
+  The symbol "API_BASE_URL" has already been declared
+  6  |  
+  7  |  const API_BASE_URL = "http://localhost:5000/api/v1";
+  8  |  const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api
+     |        ^
+  9  |  
+  10 |  const api = axios.create({
+  
+  Unterminated string literal
+  6  |  
+  7  |  const API_BASE_URL = "http://localhost:5000/api/v1";
+  8  |  const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api
+     |                                                                      ^
+  9  |  
+  10 |  const api = axios.create({
+  
+      at failureErrorWithLog (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+      at /home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
+      at responseCallbacks.<computed> (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
+      at handleIncomingPacket (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+      at Socket.readFromStdout (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+6:22:32 PM [vite] hmr update /src/hooks/useAuth.tsx, /src/index.css, /src/pages/Dashboard.tsx, /src/pages/AddMonitoringService.tsx
+6:22:32 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:71: ERROR: Unterminated string literal
+6:22:32 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:71: ERROR: Unterminated string literal
+6:22:32 PM [vite] Pre-transform error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:71: ERROR: Unterminated string literal
+6:22:32 PM [vite] Internal server error: Transform failed with 2 errors:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+/home/user/server/frontend/src/utils/api.ts:8:71: ERROR: Unterminated string literal
+  Plugin: vite:esbuild
+  File: /home/user/server/frontend/src/utils/api.ts:8:6
+  
+  The symbol "API_BASE_URL" has already been declared
+  6  |  
+  7  |  const API_BASE_URL = "http://localhost:5000/api/v1";
+  8  |  const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api/vi
+     |        ^
+  9  |  
+  10 |  const api = axios.create({
+  
+  Unterminated string literal
+  6  |  
+  7  |  const API_BASE_URL = "http://localhost:5000/api/v1";
+  8  |  const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api/vi
+     |                                                                         ^
+  9  |  
+  10 |  const api = axios.create({
+  
+      at failureErrorWithLog (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+      at /home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
+      at responseCallbacks.<computed> (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
+      at handleIncomingPacket (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+      at Socket.readFromStdout (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+6:22:33 PM [vite] hmr update /src/hooks/useAuth.tsx, /src/index.css, /src/pages/Dashboard.tsx, /src/pages/AddMonitoringService.tsx
+6:22:33 PM [vite] Pre-transform error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+6:22:33 PM [vite] Pre-transform error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+6:22:34 PM [vite] Internal server error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+  Plugin: vite:esbuild
+  File: /home/user/server/frontend/src/utils/api.ts:8:6
+  
+  The symbol "API_BASE_URL" has already been declared
+  6  |  
+  7  |  const API_BASE_URL = "http://localhost:5000/api/v1";
+  8  |  const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api/vi"
+     |        ^
+  9  |  
+  10 |  const api = axios.create({
+  
+      at failureErrorWithLog (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+      at /home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
+      at responseCallbacks.<computed> (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
+      at handleIncomingPacket (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+      at Socket.readFromStdout (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+6:22:34 PM [vite] Pre-transform error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+6:22:36 PM [vite] hmr update /src/hooks/useAuth.tsx, /src/index.css, /src/pages/Dashboard.tsx, /src/pages/AddMonitoringService.tsx
+6:22:36 PM [vite] Pre-transform error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+6:22:36 PM [vite] Pre-transform error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+6:22:37 PM [vite] Internal server error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+  Plugin: vite:esbuild
+  File: /home/user/server/frontend/src/utils/api.ts:8:6
+  
+  The symbol "API_BASE_URL" has already been declared
+  6  |  
+  7  |  const API_BASE_URL = "http://localhost:5000/api/v1";
+  8  |  const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api/vi";
+     |        ^
+  9  |  
+  10 |  const api = axios.create({
+  
+      at failureErrorWithLog (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+      at /home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
+      at responseCallbacks.<computed> (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
+      at handleIncomingPacket (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+      at Socket.readFromStdout (/home/user/server/frontend/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
+6:22:37 PM [vite] Pre-transform error: Transform failed with 1 error:
+/home/user/server/frontend/src/utils/api.ts:8:6: ERROR: The symbol "API_BASE_URL" has already been declared
+6:22:42 PM [vite] hmr update /src/hooks/useAuth.tsx, /src/index.css, /src/pages/Dashboard.tsx, /src/pages/AddMonitoringService.tsx
+6:22:43 PM [vite] hmr invalidate /src/hooks/useAuth.tsx Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+6:22:43 PM [vite] hmr update /src/App.tsx, /src/index.css, /src/pages/Careers.tsx, /src/pages/Contact.tsx, /src/pages/Auth/Login.tsx, /src/pages/Privacy.tsx, /src/pages/Landing.tsx, /src/pages/About.tsx, /src/pages/Blog.tsx, /src/pages/Settings.tsx, /src/pages/Profile.tsx, /src/pages/EditProfile.tsx, /src/pages/Auth/Signup.tsx, /src/components/ui/navbar.tsx
+6:22:43 PM [vite] hmr update /src/hooks/useAuth.tsx, /src/index.css, /src/pages/Dashboard.tsx, /src/pages/AddMonitoringService.tsx
+6:22:46 PM [vite] hmr invalidate /src/hooks/useAuth.tsx Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+6:22:46 PM [vite] hmr update /src/App.tsx, /src/index.css, /src/pages/Careers.tsx, /src/pages/Contact.tsx, /src/pages/Auth/Login.tsx, /src/pages/Privacy.tsx, /src/pages/Landing.tsx, /src/pages/About.tsx, /src/pages/Blog.tsx, /src/pages/Settings.tsx, /src/pages/Profile.tsx, /src/pages/EditProfile.tsx, /src/pages/Auth/Signup.tsx, /src/components/ui/navbar.tsx
+6:23:41 PM [vite] hmr update /src/pages/Auth/Login.tsx, /src/index.css
+6:23:41 PM [vite] Internal server error: /home/user/server/frontend/src/pages/Auth/Login.tsx: Identifier 'API_BASE_URL' has already been declared. (22:6)
+
+  20 |
+  21 | const API_BASE_URL = "http://localhost:8000/api/v1";
+> 22 | const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api/vi";
+     |       ^
+  23 |
+  24 | const Login = () => {
+  25 |   const navigate = useNavigate();
+  Plugin: vite:react-babel
+  File: /home/user/server/frontend/src/pages/Auth/Login.tsx:22:6
+  20 |  
+  21 |  const API_BASE_URL = "http://localhost:8000/api/v1";
+  22 |  const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api/vi";
+     |        ^
+  23 |  
+  24 |  const Login = () => {
+      at constructor (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+      at TypeScriptParserMixin.raise (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:6624:19)
+      at TypeScriptScopeHandler.checkRedeclarationInScope (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:1646:19)
+      at TypeScriptScopeHandler.declareName (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:1612:12)
+      at TypeScriptScopeHandler.declareName (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4909:11)
+      at TypeScriptParserMixin.declareNameFromIdentifier (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:7594:16)
+      at TypeScriptParserMixin.checkIdentifier (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:7590:12)
+      at TypeScriptParserMixin.checkLVal (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:7527:12)
+      at TypeScriptParserMixin.parseVarId (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13488:10)
+      at TypeScriptParserMixin.parseVarId (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9805:11)
+      at TypeScriptParserMixin.parseVar (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13459:12)
+      at TypeScriptParserMixin.parseVarStatement (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13306:10)
+      at TypeScriptParserMixin.parseVarStatement (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9469:31)
+      at TypeScriptParserMixin.parseStatementContent (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12927:23)
+      at TypeScriptParserMixin.parseStatementContent (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9569:18)
+      at TypeScriptParserMixin.parseStatementLike (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12843:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12820:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13392:36)
+      at TypeScriptParserMixin.parseBlockBody (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13385:10)
+      at TypeScriptParserMixin.parseProgram (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12698:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12688:25)
+      at TypeScriptParserMixin.parse (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14568:25)
+      at TypeScriptParserMixin.parse (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10183:18)
+      at parse (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14602:38)
+      at parser (/home/user/server/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/user/server/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/user/server/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (/home/user/server/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (/home/user/server/frontend/node_modules/gensync/index.js:261:32)
+      at /home/user/server/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/user/server/frontend/node_modules/gensync/index.js:223:11)
+      at /home/user/server/frontend/node_modules/gensync/index.js:189:28
+      at /home/user/server/frontend/node_modules/@babel/core/lib/gensync-utils/async.js:67:7
+      at /home/user/server/frontend/node_modules/gensync/index.js:113:33
+      at step (/home/user/server/frontend/node_modules/gensync/index.js:287:14)
+      at /home/user/server/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/user/server/frontend/node_modules/gensync/index.js:223:11)
+6:23:47 PM [vite] hmr update /src/pages/Auth/Login.tsx, /src/index.css
+6:23:48 PM [vite] hmr update /src/pages/Auth/Login.tsx, /src/index.css
