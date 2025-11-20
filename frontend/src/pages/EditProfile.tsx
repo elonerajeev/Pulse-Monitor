@@ -9,22 +9,20 @@ import { toast } from "sonner";
 import Navbar from "@/components/ui/navbar";
 
 const EditProfile = () => {
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, isAuthenticated } = useAuth();
   const [name, setName] = useState(user?.name || "");
   const [email, setEmail] = useState(user?.email || "");
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const authStatus = localStorage.getItem('isAuthenticated') === 'true';
-    setIsAuthenticated(authStatus);
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    updateUser({ name, email });
-    toast.success("Profile updated successfully");
-    navigate("/profile");
+    try {
+      await updateUser({ name, email });
+      toast.success("Profile updated successfully");
+      navigate("/profile");
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "Failed to update profile.");
+    }
   };
 
   return (

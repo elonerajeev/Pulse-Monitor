@@ -1,7 +1,10 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import generateToken from "../utils/token.util.js";
+import {
+  generateTokens,
+  verifyRefreshToken,
+} from "../utils/token.util.js";
 import User from "../models/user.model.js";
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -22,21 +25,27 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const user = await User.create({ name, email, password });
 
-  const createdUser = await User.findById(user._id).select("-password");
+  const { accessToken, refreshToken } = generateTokens(user._id);
+
+  user.refreshToken = refreshToken;
+  await user.save();
+
+  const createdUser = await User.findById(user._id).select("-password -refreshToken");
 
   if (!createdUser) {
     throw new ApiError(500, "Something went wrong while registering the user");
   }
 
-  const accessToken = generateToken(user._id);
-
-  return res.status(201).json(
-    new ApiResponse(
-      201,
-      { user: createdUser, accessToken },
-      "User registered successfully"
-    )
-  );
+  return res
+    .status(201)
+    .cookie("refreshToken", refreshToken, { httpOnly: true, secure: true })
+    .json(
+      new ApiResponse(
+        201,
+        { user: createdUser, accessToken },
+        "User registered successfully"
+      )
+    );
 });
 
 const loginUser = asyncHandler(async (req, res) => {
@@ -58,20 +67,81 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(401, "Invalid credentials");
   }
 
-  const accessToken = generateToken(user._id);
+  const { accessToken, refreshToken } = generateTokens(user._id);
 
-  const loggedInUser = await User.findById(user._id).select("-password");
+  user.refreshToken = refreshToken;
+  await user.save();
 
-  return res.status(200).json(
-    new ApiResponse(
-      200,
-      {
-        user: loggedInUser,
-        accessToken,
-      },
-      "User logged in successfully"
-    )
-  );
+  const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
+
+  return res
+    .status(200)
+    .cookie("refreshToken", refreshToken, { httpOnly: true, secure: true })
+    .json(
+      new ApiResponse(
+        200,
+        {
+          user: loggedInUser,
+          accessToken,
+        },
+        "User logged in successfully"
+      )
+    );
 });
 
-export { registerUser, loginUser };
+const logoutUser = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  await User.findByIdAndUpdate(userId, {
+    $unset: {
+      refreshToken: 1, // this removes the field from the document
+    },
+  });
+
+  return res
+    .status(200)
+    .clearCookie("refreshToken", { httpOnly: true, secure: true })
+    .clearCookie("accessToken", { httpOnly: true, secure: true })
+    .json(new ApiResponse(200, {}, "User logged out successfully"));
+});
+
+const refreshAccessToken = asyncHandler(async (req, res) => {
+  const incomingRefreshToken =
+    req.cookies.refreshToken || req.body.refreshToken;
+
+  if (!incomingRefreshToken) {
+    throw new ApiError(401, "Refresh token is required");
+  }
+
+  try {
+    const decodedToken = verifyRefreshToken(incomingRefreshToken);
+    const user = await User.findById(decodedToken?.id);
+
+    if (!user) {
+      throw new ApiError(401, "Invalid refresh token");
+    }
+
+    if (incomingRefreshToken !== user.refreshToken) {
+      throw new ApiError(401, "Refresh token is expired or used");
+    }
+
+    const { accessToken, refreshToken } = generateTokens(user._id);
+
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    return res
+      .status(200)
+      .cookie("refreshToken", refreshToken, { httpOnly: true, secure: true })
+      .json(
+        new ApiResponse(
+          200,
+          { accessToken },
+          "Access token refreshed successfully"
+        )
+      );
+  } catch (error) {
+    throw new ApiError(401, "Invalid refresh token");
+  }
+});
+
+export { registerUser, loginUser, logoutUser, refreshAccessToken };

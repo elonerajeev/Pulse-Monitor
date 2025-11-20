@@ -6,6 +6,7 @@ const monitoringLogSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Monitoring",
       required: true,
+      index: true,
     },
     status: {
       type: String,

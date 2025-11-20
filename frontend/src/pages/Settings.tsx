@@ -4,15 +4,17 @@ import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/useAuth";
 
 const Settings = () => {
+  const { isAuthenticated } = useAuth();
   const handleSave = () => {
     toast.success("Settings saved successfully");
   };
 
   return (
     <div>
-      <Navbar isAuthenticated={true} />
+      <Navbar isAuthenticated={isAuthenticated} />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Settings</h1>
         <div className="space-y-8">

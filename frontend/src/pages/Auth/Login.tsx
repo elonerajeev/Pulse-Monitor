@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -13,14 +12,17 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { API_BASE_URL } from '@/utils/api';
+import { useAuth } from '@/hooks/useAuth';
 import { Github, Loader2, Chrome, Activity, Eye, EyeOff } from 'lucide-react';
 import Navbar from '@/components/ui/navbar';
 import BackgroundIcons from '@/components/ui/background-icons';
 import useNotifications from '@/hooks/use-notifications';
 
+const API_BASE_URL = "http://localhost:8000/api/v1";
+
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [isGitHubLoading, setIsGitHubLoading] = useState(false);
@@ -38,31 +40,18 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      await login(formData);
+      addNotification({
+        message: 'Welcome back!',
+        service: 'Authentication',
+        severity: 'success',
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        addNotification({
-          message: 'Welcome back!',
-          service: 'Authentication',
-          severity: 'success',
-        });
-        toast.success('Login Successful', {
-          description: 'Welcome back!',
-        });
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('user', JSON.stringify(data.data));
-        navigate('/dashboard');
-      } else {
-        toast.error(data.message || 'An error occurred.');
-      }
-    } catch (error) {
-      toast.error('Could not connect to the server. Please try again later.');
+      toast.success('Login Successful', {
+        description: 'Welcome back!',
+      });
+      navigate('/dashboard');
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'An error occurred.');
     } finally {
       setIsLoading(false);
     }
@@ -70,12 +59,12 @@ const Login = () => {
 
   const handleGitHubLogin = () => {
     setIsGitHubLoading(true);
-    window.location.href = `${API_BASE_URL}/api/v1/users/auth/github`;
+    window.location.href = `${API_BASE_URL}/users/auth/github`;
   };
 
   const handleGoogleLogin = () => {
     setIsGoogleLoading(true);
-    window.location.href = `${API_BASE_URL}/api/v1/users/auth/google`;
+    window.location.href = `${API_BASE_URL}/users/auth/google`;
   };
 
   return (

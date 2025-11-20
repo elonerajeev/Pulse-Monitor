@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Plus, TrendingUp, Monitor, Zap, RefreshCw, AlertTriangle, Info } from "lucide-react";
 import RealTimeChart from "@/components/ui/real-time-chart";
-import { API_BASE_URL } from '@/utils/api';
+import api from '@/utils/api';
 import ServiceCard from '@/components/ui/ServiceCard';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import EditServiceModal from '@/components/ui/EditServiceModal';
@@ -44,41 +44,29 @@ const Dashboard = () => {
   const [countdown, setCountdown] = useState(180);
 
   const fetchServices = useCallback(async () => {
-    const userStr = localStorage.getItem('user');
-    if (!userStr) return;
-
-    const user = JSON.parse(userStr);
-    const token = user?.accessToken;
-    if (!token) return;
-
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/monitoring`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const response = await api.get('/monitoring');
 
-      if (response.ok) {
-      const data = await response.json();
-      const newServices = data.data;
-      
-      newServices.forEach((service: MonitoringService) => {
-        const prevService = prevServicesRef.current.find(p => p._id === service._id);
-        if (prevService && prevService.latestLog?.status === 'online' && service.latestLog?.status === 'offline') {
-          addNotification({
-            message: `Service '${service.name}' is down.`,
-            service: 'Monitoring',
-            severity: 'error',
-          });
-        }
-      });
+      if (response.status === 200) {
+        const newServices = response.data.data;
 
-      setServices(newServices);
-      prevServicesRef.current = newServices;
-    } else {
-      toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
-    }
+        newServices.forEach((service: MonitoringService) => {
+          const prevService = prevServicesRef.current.find(p => p._id === service._id);
+          if (prevService && prevService.latestLog?.status === 'online' && service.latestLog?.status === 'offline') {
+            addNotification({
+              message: `Service '${service.name}' is down.`,
+              service: 'Monitoring',
+              severity: 'error',
+            });
+          }
+        });
+
+        setServices(newServices);
+        prevServicesRef.current = newServices;
+      } else {
+        toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
+      }
     } catch (error) {
       toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
     }
@@ -144,34 +132,22 @@ const Dashboard = () => {
   };
 
   const handleUpdate = async (updatedService: MonitoringService) => {
-    const userStr = localStorage.getItem('user');
-    if (!userStr) return;
-    const user = JSON.parse(userStr);
-    const token = user?.accessToken;
-
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/monitoring/${updatedService._id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(updatedService),
-      });
+      const response = await api.patch(`/monitoring/${updatedService._id}`, updatedService);
 
-      if (response.ok) {
+      if (response.status === 200) {
         addNotification({
-        message: `Service '${updatedService.name}' updated successfully.`,
-        service: 'Monitoring',
-        severity: 'info',
-      });
-      toast({ title: 'Success', description: 'Service updated successfully.' });
-      setEditingService(null);
-      fetchServices();
-    } else {
-      const errorData = await response.json();
-      toast({ title: 'Error', description: errorData.message || 'Failed to update service.', variant: 'destructive' });
-    }
+          message: `Service '${updatedService.name}' updated successfully.`,
+          service: 'Monitoring',
+          severity: 'info',
+        });
+        toast({ title: 'Success', description: 'Service updated successfully.' });
+        setEditingService(null);
+        fetchServices();
+      } else {
+        const errorData = response.data;
+        toast({ title: 'Error', description: errorData.message || 'Failed to update service.', variant: 'destructive' });
+      }
     } catch (error) {
       toast({ title: 'Error', description: 'Failed to update service.', variant: 'destructive' });
     }
@@ -180,20 +156,10 @@ const Dashboard = () => {
   const handleDeleteConfirm = async () => {
     if (!serviceToDelete) return;
 
-    const userStr = localStorage.getItem('user');
-    if (!userStr) return;
-    const user = JSON.parse(userStr);
-    const token = user?.accessToken;
-
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/monitoring/${serviceToDelete._id}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const response = await api.delete(`/monitoring/${serviceToDelete._id}`);
 
-      if (response.ok) {
+      if (response.status === 200) {
         addNotification({
           message: `Service '${serviceToDelete.name}' deleted successfully.`,
           service: 'Monitoring',

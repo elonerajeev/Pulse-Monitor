@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { API_BASE_URL } from '@/utils/api';
+import api from '@/utils/api';
 import Navbar from '@/components/ui/navbar';
 import useNotifications from '@/hooks/use-notifications';
 
@@ -30,35 +30,15 @@ const AddMonitoringService = () => {
       return;
     }
 
-    const userStr = localStorage.getItem('user');
-    if (!userStr) {
-      toast.error('You must be logged in to add a service.');
-      navigate('/login');
-      return;
-    }
-
-    const user = JSON.parse(userStr);
-    const token = user?.accessToken;
-
-    if (!token) {
-      toast.error('Authentication token not found. Please log in again.');
-      navigate('/login');
-      return;
-    }
-
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/monitoring`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ name, target, serviceType: type, interval }),
+      const response = await api.post('/monitoring', {
+        name,
+        target,
+        serviceType: type,
+        interval,
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
+      if (response.status === 201) {
         addNotification({
           message: `Service '${name}' added successfully.`,
           service: 'Monitoring',
@@ -73,10 +53,10 @@ const AddMonitoringService = () => {
         });
         navigate('/dashboard');
       } else {
-        toast.error(data.message || 'Failed to add monitoring service.');
+        toast.error(response.data.message || 'Failed to add monitoring service.');
       }
-    } catch (error) {
-      toast.error('An error occurred while adding the monitoring service.');
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'An error occurred while adding the monitoring service.');
     }
   };
 

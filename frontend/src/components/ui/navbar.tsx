@@ -16,7 +16,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ isAuthenticated }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { notifications, addNotification, clearNotification, clearAllNotifications } = useNotifications();
   const location = useLocation();
   const navigate = useNavigate();
@@ -51,17 +51,15 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated }) => {
   };
 
   const handleLogout = () => {
+    logout();
     addNotification({
       message: "You have been successfully logged out.",
       service: "Authentication",
       severity: "info",
     });
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("user");
     toast.success("Logout Successful", {
       description: "You have been successfully logged out.",
     });
-    navigate("/login");
   };
 
 

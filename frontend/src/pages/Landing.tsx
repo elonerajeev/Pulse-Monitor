@@ -24,6 +24,7 @@ import MetricsGrid from "@/components/ui/metrics-grid";
 import World from "@/components/ui/World"; // Corrected import
 import BackgroundDecorator from "@/components/ui/background-decorator";
 import { useAuth } from "@/hooks/useAuth";
+import Footer from "@/components/ui/Footer";
 
 const Landing = () => {
   const { isAuthenticated } = useAuth();
@@ -532,61 +533,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Column 1 - Logo & Description */}
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <Activity className="w-8 h-8 text-primary" />
-                <span className="text-xl font-bold">PulseMonitor</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Simple, reliable monitoring for developers and teams. Keep your services online 24/7.
-              </p>
-            </div>
-
-            {/* Column 2 - Product */}
-            <div>
-              <h3 className="font-semibold mb-4">Product</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li><Link to="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link></li>
-                <li><Link to="/documentation" className="hover:text-foreground transition-colors">Documentation</Link></li>
-                <li><a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a></li>
-                <li><a href="#testimonials" className="hover:text-foreground transition-colors">Testimonials</a></li>
-              </ul>
-            </div>
-
-            {/* Column 3 - Company */}
-            <div>
-              <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
-              </ul>
-            </div>
-
-            {/* Column 4 - Legal & Social */}
-            <div>
-              <h3 className="font-semibold mb-4">Legal & Social</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">GitHub</a></li>
-                <li><a href="#" className-="hover:text-foreground transition-colors">Twitter</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t mt-12 pt-8 text-center text-sm text-muted-foreground">
-            <p>© 2024 PulseMonitor. All rights reserved. Built with ❤️ for developers.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

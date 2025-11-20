@@ -14,7 +14,7 @@ import { Activity, Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "sonner";
-import { API_BASE_URL } from "../../utils/api";
+import { useAuth } from "@/hooks/useAuth";
 import Navbar from "@/components/ui/navbar";
 import BackgroundIcons from "@/components/ui/background-icons";
 
@@ -29,6 +29,7 @@ const Signup = () => {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -57,34 +58,19 @@ const Signup = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.username,
-          email: formData.email,
-          password: formData.password,
-          confirmPassword: formData.confirmPassword,
-        }),
+      await register({
+        name: formData.username,
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        toast.success("Registration Successful", {
-          description: "You can now log in with your credentials.",
-        });
-        navigate("/login");
-      } else {
-        toast.error("Registration Failed", {
-          description: data.message || "An error occurred.",
-        });
-      }
-    } catch (error) {
-      toast.error("Error", {
-        description: "Could not connect to the server. Please try again later.",
+      toast.success("Registration Successful", {
+        description: "You can now log in with your credentials.",
+      });
+      navigate("/login");
+    } catch (error: any) {
+      toast.error("Registration Failed", {
+        description: error.response?.data?.message || "An error occurred.",
       });
     } finally {
       setIsLoading(false);
