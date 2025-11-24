@@ -37,6 +37,15 @@ const Landing = () => {
       navigate("/signup");
     }
   };
+
+  const handlePricingClick = () => {
+    if (isAuthenticated) {
+      navigate("/coming-soon");
+    } else {
+      navigate("/signup");
+    }
+  };
+
   const features = [
     {
       icon: Monitor,
@@ -504,7 +513,7 @@ const Landing = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button onClick={handleGetStarted} variant={plan.variant} className="w-full" size="lg">
+                  <Button onClick={handlePricingClick} variant={plan.variant} className="w-full" size="lg">
                       {plan.cta}
                     </Button>
                 </CardContent>

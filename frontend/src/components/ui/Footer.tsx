@@ -1,5 +1,7 @@
 import { Activity } from "lucide-react";
 import { Link } from "react-router-dom";
+import ComingSoon from '@/pages/ComingSoon';
+
 
 const Footer = () => {
   return (
@@ -34,8 +36,8 @@ const Footer = () => {
             <h3 className="font-semibold mb-4">Company</h3>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li><Link to="/about" className="cursor-pointer hover:text-foreground">About Us</Link></li>
-              <li><Link to="/blog" className="cursor-pointer hover:text-foreground">Blog</Link></li>
-              <li><Link to="/careers" className="cursor-pointer hover:text-foreground">Careers</Link></li>
+              <li><Link to="/coming-soon" className="cursor-pointer hover:text-foreground">Blog</Link></li>
+              <li><Link to="/coming-soon" className="cursor-pointer hover:text-foreground">Careers</Link></li>
               <li><Link to="/contact" className="cursor-pointer hover:text-foreground">Contact</Link></li>
             </ul>
           </div>

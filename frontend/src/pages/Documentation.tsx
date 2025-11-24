@@ -14,18 +14,27 @@ import {
   Copy,
   CheckCircle
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/ui/navbar";
 import { useState, useEffect } from "react";
 
 const Documentation = () => {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
     setIsAuthenticated(authStatus);
   }, []);
+
+  const handleStartTrialClick = () => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    } else {
+      navigate('/signup');
+    }
+  };
 
   const copyToClipboard = (code: string, id: string) => {
     navigator.clipboard.writeText(code);
@@ -188,12 +197,10 @@ const Documentation = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/signup">
-              <Button variant="hero" size="lg">
+            <Button variant="hero" size="lg" onClick={handleStartTrialClick}>
                 <PlayCircle className="w-5 h-5 mr-2" />
                 Start Free Trial
-              </Button>
-            </Link>
+            </Button>
             <Link to="/api-reference">
               <Button variant="outline" size="lg">
                 <ExternalLink className="w-5 h-5 mr-2" />

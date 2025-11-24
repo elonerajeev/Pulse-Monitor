@@ -74,6 +74,7 @@ const AddMonitoringService = () => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                placeholder="e.g., My Awesome Website"
                 required
               />
             </div>
@@ -84,6 +85,7 @@ const AddMonitoringService = () => {
                 type="text"
                 value={target}
                 onChange={(e) => setTarget(e.target.value)}
+                placeholder="e.g., https://my-website.com"
                 required
               />
             </div>
@@ -111,7 +113,9 @@ const AddMonitoringService = () => {
                 }}
                 min="1"
                 required
+                disabled
               />
+              <p className="text-red-500 text-sm mt-1">The check interval is fixed at 5 minutes.</p>
             </div>
             <Button type="submit" className="w-full">Add Service</Button>
           </form>

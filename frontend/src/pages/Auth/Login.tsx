@@ -18,8 +18,8 @@ import Navbar from '@/components/ui/navbar';
 import BackgroundIcons from '@/components/ui/background-icons';
 import useNotifications from '@/hooks/use-notifications';
 
-const API_BASE_URL = "http://localhost:8000/api/v1";
-// const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api/vi";
+// const API_BASE_URL = "http://localhost:8000/api/v1";
+const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api/vi";
 
 const Login = () => {
   const navigate = useNavigate();

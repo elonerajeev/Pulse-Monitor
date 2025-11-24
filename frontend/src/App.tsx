@@ -18,10 +18,9 @@ import Settings from "./pages/Settings";
 import SwitchProfile from "./pages/SwitchProfile";
 import ApiReference from "./pages/ApiReference";
 import About from "./pages/About";
-import Blog from "./pages/Blog";
-import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
+import ComingSoon from "./pages/ComingSoon";
 
 const queryClient = new QueryClient();
 
@@ -46,10 +45,9 @@ const App = () => (
             <Route path="/api-reference" element={<ApiReference />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/about" element={<About />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/careers" element={<Careers />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/coming-soon" element={<ComingSoon />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
