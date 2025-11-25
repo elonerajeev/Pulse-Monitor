@@ -81,6 +81,25 @@ const getMonitoringServices = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, services, "Monitoring services retrieved successfully"));
 });
 
+const getRecentMonitoringLogs = asyncHandler(async (req, res) => {
+    const limit = parseInt(req.query.limit, 10) || 5;
+    const logs = await MonitoringLog.find()
+        .sort({ createdAt: -1 })
+        .limit(limit)
+        .populate('monitoringId', 'name')
+        .lean();
+
+    const formattedLogs = logs.map(log => ({
+        ...log,
+        monitor: log.monitoringId,
+        message: `Service is ${log.status}`
+    }));
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, formattedLogs, "Recent logs fetched successfully"));
+});
+
 const updateMonitoring = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { name, target, serviceType, interval } = req.body;
@@ -148,4 +167,4 @@ const deleteMonitoring = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Monitoring service deleted successfully"));
 });
 
-export { createMonitoring, getMonitoringServices, updateMonitoring, deleteMonitoring };
+export { createMonitoring, getMonitoringServices, updateMonitoring, deleteMonitoring, getRecentMonitoringLogs };

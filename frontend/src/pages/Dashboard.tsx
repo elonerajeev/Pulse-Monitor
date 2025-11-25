@@ -11,6 +11,7 @@ import ServiceCard from '@/components/ui/ServiceCard';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import EditServiceModal from '@/components/ui/EditServiceModal';
 import useNotifications from '@/hooks/use-notifications';
+import RecentEvents from '@/components/dashboard/RecentEvents';
 
 interface MonitoringLog {
   _id: string;
@@ -299,6 +300,10 @@ const Dashboard = () => {
                 </div>
               </CardContent>
             </Card>
+
+            <div className="mb-8">
+              <RecentEvents />
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map((service) => (
