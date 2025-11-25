@@ -21,6 +21,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import ComingSoon from "./pages/ComingSoon";
+import ServiceDetailsPage from "./pages/ServiceDetailsPage";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/demo-dashboard" element={<DemoDashboard />} />
             <Route path="/monitoring/add" element={<AddMonitoringService />} />
+            <Route path="/monitoring/:id" element={<ServiceDetailsPage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit" element={<EditProfile />} />
             <Route path="/settings" element={<Settings />} />

@@ -24,6 +24,10 @@ const monitoringSchema = new Schema(
       default: 5, // Default to 5 minutes
       min: [5, "Interval must be at least 5 minutes"],
     },
+    location: {
+        type: String,
+        trim: true,
+    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "User",

@@ -7,12 +7,14 @@ import { toast } from 'sonner';
 import api from '@/utils/api';
 import Navbar from '@/components/ui/navbar';
 import useNotifications from '@/hooks/use-notifications';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const AddMonitoringService = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [target, setTarget] = useState('');
   const [type, setType] = useState('website');
+  const [location, setLocation] = useState('us-east');
   const [interval, setInterval] = useState<number | ''>(5);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { addNotification } = useNotifications();
@@ -35,6 +37,7 @@ const AddMonitoringService = () => {
         name,
         target,
         serviceType: type,
+        location,
         interval,
       });
 
@@ -100,6 +103,22 @@ const AddMonitoringService = () => {
                 <option value="website">Website</option>
                 <option value="server">Server</option>
               </select>
+            </div>
+            <div>
+              <Label htmlFor="location">Location</Label>
+              <Select value={location} onValueChange={setLocation}>
+                <SelectTrigger>
+                    <SelectValue placeholder="Location" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="us-east">US East</SelectItem>
+                    <SelectItem value="us-west">US West</SelectItem>
+                    <SelectItem value="eu-west">EU West</SelectItem>
+                    <SelectItem value="eu-central">EU Central</SelectItem>
+                    <SelectItem value="ap-south">AP South</SelectItem>
+                    <SelectItem value="ap-southeast">AP Southeast</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <Label htmlFor="interval">Check Interval (minutes)</Label>

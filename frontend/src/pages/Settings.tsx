@@ -5,11 +5,21 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
+import api from "@/utils/api";
 
 const Settings = () => {
   const { isAuthenticated } = useAuth();
   const handleSave = () => {
     toast.success("Settings saved successfully");
+  };
+
+  const handlePruneLogs = async () => {
+    try {
+      const response = await api.post("/monitoring/prune-logs");
+      toast.success(`Successfully pruned ${response.data.data.deletedCount} old logs.`);
+    } catch (error) {
+      toast.error("Failed to prune old logs.");
+    }
   };
 
   return (
@@ -37,6 +47,17 @@ const Settings = () => {
                 <Label htmlFor="dark">Dark</Label>
               </div>
             </RadioGroup>
+          </div>
+          <div>
+            <h2 className="text-xl font-semibold">Data Management</h2>
+            <div className="flex items-center space-x-2 mt-4">
+              <Button onClick={handlePruneLogs} variant="destructive">
+                Prune Old Logs
+              </Button>
+              <p className="text-sm text-muted-foreground">
+                Delete old logs to save space and improve performance.
+              </p>
+            </div>
           </div>
           <Button onClick={handleSave}>Save Settings</Button>
         </div>

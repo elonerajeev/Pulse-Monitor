@@ -1,10 +1,13 @@
 
-up to date, audited 151 packages in 3s
+up to date, audited 151 packages in 5s
 
 24 packages are looking for funding
   run `npm fund` for details
 
-1 moderate severity vulnerability
+2 moderate severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
 
 To address all issues (including breaking changes), run:
   npm audit fix --force
@@ -19,11 +22,17 @@ Run `npm audit` for details.
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/index.js`[39m
-[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
-[dotenv@17.2.3] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
 Server is running on port 3000
 MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
 ✅ Email sent successfully!
-Message ID: <8973b819-674e-684e-d77a-dceb7d270a19@gmail.com>
+Message ID: <f4bb4709-0dae-9e2f-ded3-037ecc6281ee@gmail.com>
 ✅ Email sent successfully!
-Message ID: <09245dd4-db69-9ac7-9748-4f7bc4bab37d@gmail.com>
+Message ID: <a8827b2d-f07d-ae79-8048-3fc99b9fb8e1@gmail.com>
+✅ Email sent successfully!
+Message ID: <2a0d7cb4-88bc-3900-f284-d87b1c51ec3e@gmail.com>
+✅ Email sent successfully!
+Message ID: <ced93800-b0e4-b488-bd05-cc78c535e6c3@gmail.com>
+✅ Email sent successfully!
+Message ID: <b4322506-d3a5-4f64-3d92-8313b44b9a49@gmail.com>

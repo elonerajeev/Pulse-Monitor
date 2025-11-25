@@ -1,16 +1,19 @@
-import React, { useEffect, useRef } from 'react';
-import createPanzoom from 'panzoom';
 
-const Globe = () => {
+import React, { useEffect, useRef } from 'react';
+
+interface Location {
+  lat: number;
+  lon: number;
+  city: string;
+  status: 'online' | 'offline' | 'degraded';
+}
+
+interface GlobeProps {
+  locations: Location[];
+}
+
+const Globe: React.FC<GlobeProps> = ({ locations }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const locations = [
-    { lat: 34.0522, lon: -118.2437, city: 'Los Angeles' },
-    { lat: 40.7128, lon: -74.0060, city: 'New York' },
-    { lat: 51.5074, lon: -0.1278, city: 'London' },
-    { lat: -23.5505, lon: -46.6333, city: 'Sao Paulo' },
-    { lat: 35.6895, lon: 139.6917, city: 'Tokyo' },
-    { lat: -33.8688, lon: 151.2093, city: 'Sydney' },
-  ];
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -22,22 +25,18 @@ const Globe = () => {
     let width = canvas.width = canvas.offsetWidth;
     let height = canvas.height = canvas.offsetHeight;
 
-    window.addEventListener('resize', () => {
+    const handleResize = () => {
       width = canvas.width = canvas.offsetWidth;
       height = canvas.height = canvas.offsetHeight;
-    });
+    };
+
+    window.addEventListener('resize', handleResize);
 
     const projection = {
       scale: height / 2.5,
       center: [width / 2, height / 2],
       rotation: [0, 0, 0],
     };
-
-    const panzoom = createPanzoom(canvas, {
-      maxZoom: 2,
-      minZoom: 0.5,
-      contain: 'outside',
-    });
 
     let autorotate: NodeJS.Timeout | null = null;
 
@@ -56,12 +55,6 @@ const Globe = () => {
 
     startAutorotate();
 
-    canvas.addEventListener('mousedown', stopAutorotate);
-    canvas.addEventListener('touchstart', stopAutorotate);
-    canvas.addEventListener('wheel', stopAutorotate);
-    canvas.addEventListener('mouseup', startAutorotate);
-    canvas.addEventListener('touchend', startAutorotate);
-
     function render() {
       ctx!.clearRect(0, 0, width, height);
 
@@ -77,8 +70,21 @@ const Globe = () => {
         drawGraticule(i, 'lon');
       }
 
-      ctx!.fillStyle = '#0f0';
       locations.forEach(loc => {
+        switch (loc.status) {
+          case 'online':
+            ctx!.fillStyle = '#0f0';
+            break;
+          case 'offline':
+            ctx!.fillStyle = '#f00';
+            break;
+          case 'degraded':
+            ctx!.fillStyle = '#ff0';
+            break;
+          default:
+            ctx!.fillStyle = '#888';
+        }
+
         const [x, y] = project(loc.lat, loc.lon);
         if (x !== -1) {
           ctx!.beginPath();
@@ -128,10 +134,9 @@ const Globe = () => {
 
     return () => {
       stopAutorotate();
-      panzoom.dispose();
-      window.removeEventListener('resize', () => {});
+      window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [locations]);
 
   return <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />;
 };
