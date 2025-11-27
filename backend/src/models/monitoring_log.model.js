@@ -37,6 +37,10 @@ const monitoringLogSchema = new Schema(
       message: String,
       code: String,
     },
+    requests: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

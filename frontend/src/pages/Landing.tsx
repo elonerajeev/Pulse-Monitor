@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import Navbar from "@/components/ui/navbar";
 import StatusDonut from "@/components/ui/status-donut";
 import RealTimeChart from "@/components/ui/real-time-chart";
 import MetricsGrid from "@/components/ui/metrics-grid";
@@ -240,7 +239,6 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      <Navbar isAuthenticated={isAuthenticated} />
       <BackgroundDecorator />
       {/* Hero Section */}
       <section className="py-20 md:py-32">

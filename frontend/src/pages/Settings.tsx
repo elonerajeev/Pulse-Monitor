@@ -1,4 +1,4 @@
-import Navbar from "@/components/ui/navbar";
+
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -24,7 +24,7 @@ const Settings = () => {
 
   return (
     <div>
-      <Navbar isAuthenticated={isAuthenticated} />
+
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Settings</h1>
         <div className="space-y-8">

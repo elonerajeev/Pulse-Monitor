@@ -1,4 +1,3 @@
-import Navbar from "@/components/ui/navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -6,7 +5,6 @@ import { Link } from "react-router-dom";
 const Terms = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar isAuthenticated={false} />
       <div className="flex items-center justify-center p-4">
         <div className="w-full max-w-4xl">
           <Card className="border-none shadow-lg rounded-2xl">

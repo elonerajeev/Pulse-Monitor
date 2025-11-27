@@ -1,16 +1,26 @@
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { initWebSocket } from './websocket.js'; // Import WebSocket initializer
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
 import express from "express";
 import cookieParser from "cookie-parser";
-import path from "path";
-import { fileURLToPath } from 'url';
 import cors from "cors";
-import helmet from "helmet"; // Import helmet
-import morgan from "morgan"; // Import morgan
+import helmet from "helmet";
+import morgan from "morgan";
 
 // Import routes
 import healthcheckRouter from "./routes/healthcheck.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import monitoringRouter from "./routes/monitoring.routes.js";
 import userRouter from "./routes/user.routes.js";
+import maintenanceWindowRouter from "./routes/maintenanceWindow.routes.js";
+import trafficRouter from "./routes/traffic.routes.js";
 
 const app = express();
 
@@ -35,18 +45,15 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(helmet()); // Use helmet middleware
-app.use(morgan('dev')); // Use morgan for request logging
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+app.use(helmet());
+app.use(morgan('dev'));
 
 app.set("view engine", "html");
 app.set("views", path.join(__dirname, "views"));
 
 // Middleware
-app.use(express.json({ limit: "50kb" })); // Increased limit for JSON payloads
-app.use(express.urlencoded({ extended: true, limit: "50kb" })); // Increased limit and extended for URL-encoded payloads
+app.use(express.json({ limit: "50kb" }));
+app.use(express.urlencoded({ extended: true, limit: "50kb" }));
 
 // Static files
 app.use(express.static(path.join(__dirname, "public")));
@@ -58,9 +65,14 @@ app.use("/api/v1/healthcheck", healthcheckRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/monitoring", monitoringRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/maintenance-windows", maintenanceWindowRouter);
+app.use("/api/v1/traffic", trafficRouter);
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
-export default app;
+// Initialize WebSocket and create the server
+const server = initWebSocket(app);
+
+export default server;

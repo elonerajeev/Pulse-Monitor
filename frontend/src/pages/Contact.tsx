@@ -1,13 +1,6 @@
-import Navbar from "@/components/ui/navbar";
-import { useAuth } from "@/hooks/useAuth";
-
 const Contact = () => {
-  const { isAuthenticated } = useAuth();
-
   return (
     <div>
-      <Navbar isAuthenticated={isAuthenticated} />
-
       <div className="container mx-auto px-4 py-20">
         <h1 className="text-4xl font-bold text-center mb-6">Contact Us</h1>
 
@@ -22,7 +15,7 @@ const Contact = () => {
           </p>
 
           <a
-            href="mailto:support@pulsemonitor.com"
+            href="mailto:pulsemonitor.log@gmail.com"
             className="text-primary text-xl font-semibold hover:underline"
           >
             pulsemonitor.log@gmail.com

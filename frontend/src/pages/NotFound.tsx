@@ -2,7 +2,7 @@ import { useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Activity, Home } from "lucide-react";
-import Navbar from "@/components/ui/navbar";
+
 
 const NotFound = () => {
   const location = useLocation();
@@ -23,7 +23,7 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar isAuthenticated={isAuthenticated} user={user} />
+
       <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 4rem)' }}>
         <div className="text-center max-w-md mx-auto px-4">
           <div className="mb-8">

@@ -15,7 +15,6 @@ import {
   CheckCircle
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "@/components/ui/navbar";
 import { useState, useEffect } from "react";
 
 const Documentation = () => {
@@ -177,8 +176,6 @@ const Documentation = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar isAuthenticated={isAuthenticated} />
-
       {/* Hero */}
       <section className="py-20 bg-gradient-to-b from-muted/50 to-background">
         <div className="container mx-auto px-4 text-center">

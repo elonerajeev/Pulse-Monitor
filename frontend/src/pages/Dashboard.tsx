@@ -1,12 +1,12 @@
-
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/ui/navbar';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Plus, TrendingUp, Monitor, Zap, RefreshCw, AlertTriangle, Globe as GlobeIcon } from "lucide-react";
+import { CheckCircle, Plus, TrendingUp, Monitor, Zap, RefreshCw, AlertTriangle, Globe as GlobeIcon, BarChart2 } from "lucide-react";
 import RealTimeChart from "@/components/ui/real-time-chart";
+import RealTimeTrafficChart from "@/components/ui/RealTimeTrafficChart";
 import api from '@/utils/api';
 import ServiceCard from '@/components/ui/ServiceCard';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
@@ -16,6 +16,8 @@ import Globe from '@/components/ui/globe';
 import SparklineChart from '@/components/ui/SparklineChart';
 import UptimeHeatmap from '@/components/dashboard/UptimeHeatmap';
 import IncidentsTable from '@/components/dashboard/IncidentsTable';
+import DashboardLayout from '@/components/DashboardLayout'; // Import DashboardLayout
+import { useAuth } from '@/hooks/useAuth'; // Import useAuth hook
 
 interface MonitoringLog {
   _id: string;
@@ -28,6 +30,7 @@ interface MonitoringLog {
     _id: string;
     name: string;
   };
+  requests: number;
 }
 
 interface MonitoringService {
@@ -39,6 +42,11 @@ interface MonitoringService {
   location?: string;
   latestLog?: MonitoringLog;
   logs: MonitoringLog[];
+}
+
+interface TrafficData {
+    time: string;
+    value: number;
 }
 
 const locationCoordinates: Record<string, { lat: number; lon: number }> = {
@@ -53,8 +61,9 @@ const locationCoordinates: Record<string, { lat: number; lon: number }> = {
 const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { isAuthenticated, logout } = useAuth(); // Use isAuthenticated from useAuth
   const [services, setServices] = useState<MonitoringService[]>([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [trafficData, setTrafficData] = useState<TrafficData[]>([]);
   const [editingService, setEditingService] = useState<MonitoringService | null>(null);
   const [serviceToDelete, setServiceToDelete] = useState<MonitoringService | null>(null);
   const [loading, setLoading] = useState(false);
@@ -107,6 +116,25 @@ const Dashboard = () => {
     setLoading(false);
   }, [toast, addNotification]);
 
+  const fetchTrafficData = useCallback(async () => {
+    try {
+        const response = await api.get('/traffic?site_id=pulse-monitor-pro.vercel.app');
+        if (response.status === 200) {
+            const { results } = response.data.data;
+            const formattedTraffic = results.map((item: { pageviews: number; date: string }) => ({
+                value: item.pageviews,
+                time: new Date(item.date).toLocaleDateString(),
+            }));
+            setTrafficData(formattedTraffic);
+        } else {
+            toast({ title: 'Error', description: 'Failed to fetch traffic data.', variant: 'destructive' });
+        }
+    } catch (error) {
+        console.error("Traffic fetch error:", error)
+        toast({ title: 'Error', description: 'Failed to fetch traffic data.', variant: 'destructive' });
+    }
+  }, [toast]);
+
   useEffect(() => {
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
     setIsAuthenticated(authStatus);
@@ -118,7 +146,8 @@ const Dashboard = () => {
     }
 
     fetchServices();
-  }, [navigate, toast, fetchServices]);
+    fetchTrafficData();
+  }, [navigate, toast, fetchServices, fetchTrafficData]);
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
@@ -127,6 +156,7 @@ const Dashboard = () => {
         setCountdown(prevCountdown => {
           if (prevCountdown <= 1) {
             fetchServices();
+            fetchTrafficData();
             return 180;
           }
           return prevCountdown - 1;
@@ -134,7 +164,7 @@ const Dashboard = () => {
       }, 1000);
     }
     return () => clearInterval(intervalId);
-  }, [autoRefresh, fetchServices]);
+  }, [autoRefresh, fetchServices, fetchTrafficData]);
 
   const handleAddMonitor = () => {
     navigate('/monitoring/add');
@@ -154,6 +184,7 @@ const Dashboard = () => {
       }
     } else {
       fetchServices();
+      fetchTrafficData();
     }
   };
 
@@ -211,7 +242,7 @@ const Dashboard = () => {
   };
   const onlineServices = services.filter(s => s.latestLog?.status === 'online');
   const offlineServicesCount = services.length - onlineServices.length;
-  
+
   const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
   const incidentsInLast24h = services.flatMap(s =>
@@ -221,7 +252,7 @@ const Dashboard = () => {
   );
 
   const allLogsForTable = useMemo(() => {
-    return services.flatMap(service => 
+    return services.flatMap(service =>
         service.logs.map(log => ({
             ...log,
             message: `Service is ${log.status}`,
@@ -355,7 +386,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-8">
+        <DashboardLayout>
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Overall Uptime</CardTitle>
@@ -432,80 +463,99 @@ const Dashboard = () => {
               <p className="text-xs text-muted-foreground">From {services.length} services</p>
             </CardContent>
           </Card>
-        </div>
 
-        <div className="mb-8">
-          <UptimeHeatmap data={uptimeHeatmapData} />
-        </div>
+          <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Daily Uptime (Last 90 Days)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <UptimeHeatmap data={uptimeHeatmapData} />
+              </CardContent>
+            </Card>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <div className="lg:col-span-2">
-                <Card>
-                  <CardHeader>
+            <Card>
+                <CardHeader>
                     <CardTitle className="flex items-center">
-                      <TrendingUp className="w-5 h-5 mr-2" />
-                      Real-time Response Time (ms)
+                        <GlobeIcon className="w-5 h-5 mr-2" />
+                        Global Status
                     </CardTitle>
-                  </CardHeader>
-                  <CardContent>
+                </CardHeader>
+                <CardContent>
                     <div className="h-[350px]">
-                      <RealTimeChart services={onlineServices} />
+                        <Globe locations={globeLocations} />
                     </div>
-                  </CardContent>
-                </Card>
-            </div>
-            <div>
-                <Card>
-                    <CardHeader>
-                        <CardTitle className="flex items-center">
-                            <GlobeIcon className="w-5 h-5 mr-2" />
-                            Global Status
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="h-[350px]">
-                            <Globe locations={globeLocations} />
-                        </div>
-                    </CardContent>
-                </Card>
-            </div>
-        </div>
+                </CardContent>
+            </Card>
 
-        {services.length > 0 ? (
-          <>
-            <div className="mb-8">
-              <IncidentsTable logs={allLogsForTable} />
-            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <TrendingUp className="w-5 h-5 mr-2" />
+                  Real-time Response Time (ms)
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="h-[350px]">
+                  <RealTimeChart services={onlineServices} />
+                </div>
+              </CardContent>
+            </Card>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((service) => (
-                <ServiceCard
-                  key={service._id}
-                  _id={service._id}
-                  name={service.name}
-                  status={service.latestLog?.status || 'unknown'}
-                  target={service.target}
-                  serviceType={service.serviceType}
-                  logs={service.logs}
-                  lastChecked={service.latestLog?.createdAt}
-                  sslDaysUntilExpiry={service.latestLog?.ssl?.daysUntilExpiry}
-                  onEdit={() => handleEdit(service)}
-                  onDelete={() => handleDelete(service)}
-                  onRefresh={() => handleRefresh(service._id)}
-                />
-              ))}
-            </div>
-          </>
-        ) : (
-          <Card>
-            <CardContent className="pt-6">
-              <div className="text-center text-muted-foreground">
-                <p>You are not monitoring any services yet.</p>
-                <p>Click the "Add New Monitor" button to get started.</p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <BarChart2 className="w-5 h-5 mr-2" />
+                  Real-time Traffic
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="h-[350px]">
+                  <RealTimeTrafficChart data={trafficData} />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {services.length > 0 && (
+            <Card className="lg:col-span-3">
+              <CardHeader>
+                <CardTitle>Recent Incidents</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <IncidentsTable logs={allLogsForTable} />
+              </CardContent>
+            </Card>
+          )}
+
+          {services.length > 0 ? (
+            services.map((service) => (
+              <ServiceCard
+                key={service._id}
+                _id={service._id}
+                name={service.name}
+                status={service.latestLog?.status || 'unknown'}
+                target={service.target}
+                serviceType={service.serviceType}
+                logs={service.logs}
+                lastChecked={service.latestLog?.createdAt}
+                sslDaysUntilExpiry={service.latestLog?.ssl?.daysUntilExpiry}
+                onEdit={() => handleEdit(service)}
+                onDelete={() => handleDelete(service)}
+                onRefresh={() => handleRefresh(service._id)}
+              />
+            ))
+          ) : (
+            <Card className="lg:col-span-3">
+              <CardContent className="pt-6">
+                <div className="text-center text-muted-foreground">
+                  <p>You are not monitoring any services yet.</p>
+                  <p>Click the "Add New Monitor" button to get started.</p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </DashboardLayout>
       </div>
 
       {editingService && (

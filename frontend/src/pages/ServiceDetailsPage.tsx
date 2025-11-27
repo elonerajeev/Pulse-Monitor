@@ -1,13 +1,11 @@
 
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft } from 'lucide-react';
-import Navbar from '@/components/ui/navbar';
-import { useToast } from '@/hooks/use-toast';
 import IncidentsTable from '@/components/dashboard/IncidentsTable';
 import api from '@/utils/api';
 
@@ -39,8 +37,6 @@ const fetchServices = async (): Promise<MonitoringService[]> => {
 const ServiceDetailsPage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const { toast } = useToast();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const { data: services, isLoading, error } = useQuery<MonitoringService[]>({
         queryKey: ['services'],
@@ -48,15 +44,6 @@ const ServiceDetailsPage = () => {
     });
 
     const service = useMemo(() => services?.find(s => s._id === id), [services, id]);
-
-    useEffect(() => {
-        const authStatus = localStorage.getItem('isAuthenticated') === 'true';
-        setIsAuthenticated(authStatus);
-        if (!authStatus) {
-            toast({ title: 'Error', description: 'You must be logged in to view this page.', variant: 'destructive' });
-            navigate('/login');
-        }
-    }, [navigate, toast]);
 
     const chartData = useMemo(() => {
         if (!service) return [];
@@ -85,68 +72,65 @@ const ServiceDetailsPage = () => {
         return (
             <div className="flex flex-col items-center justify-center h-screen">
                 <p className="mb-4">Service not found.</p>
-                <Button variant="outline" onClick={() => navigate('/dashboard')}>
+                <Button variant="outline" onClick={() => navigate('/dashboard/services')}>
                     <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Dashboard
+                    Back to Services
                 </Button>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-background">
-            <Navbar isAuthenticated={isAuthenticated} />
-            <div className="container mx-auto px-4 py-8">
-                <Button variant="outline" onClick={() => navigate('/dashboard')} className="mb-4">
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Dashboard
-                </Button>
+        <div className="container mx-auto px-4 py-8">
+            <Button variant="outline" onClick={() => navigate('/dashboard/services')} className="mb-4">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Services
+            </Button>
 
-                <Card className="mb-8">
-                    <CardHeader>
-                        <div className="flex items-center justify-between">
-                            <CardTitle className="text-2xl font-bold">{service.name}</CardTitle>
-                            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${service.latestLog?.status === 'online' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                                {service.latestLog?.status === 'online' ? 'Online' : 'Offline'}
-                            </span>
-                        </div>
-                        <p className="text-muted-foreground">{service.target}</p>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div><span className="font-semibold">Service Type:</span> {service.serviceType}</div>
-                            <div><span className="font-semibold">Monitoring Interval:</span> {service.interval} seconds</div>
-                            <div><span className="font-semibold">Location:</span> {service.location || 'N/A'}</div>
-                        </div>
-                    </CardContent>
-                </Card>
+            <Card className="mb-8">
+                <CardHeader>
+                    <div className="flex items-center justify-between">
+                        <CardTitle className="text-2xl font-bold">{service.name}</CardTitle>
+                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${service.latestLog?.status === 'online' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                            {service.latestLog?.status === 'online' ? 'Online' : 'Offline'}
+                        </span>
+                    </div>
+                    <p className="text-muted-foreground">{service.target}</p>
+                </CardHeader>
+                <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div><span className="font-semibold">Service Type:</span> {service.serviceType}</div>
+                        <div><span className="font-semibold">Monitoring Interval:</span> {service.interval} seconds</div>
+                        <div><span className="font-semibold">Location:</span> {service.location || 'N/A'}</div>
+                    </div>
+                </CardContent>
+            </Card>
 
-                <Card className="mb-8">
-                    <CardHeader>
-                        <CardTitle>Performance</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="h-[400px]">
-                            <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={chartData}>
-                                    <XAxis dataKey="time" stroke="hsl(var(--muted-foreground))" fontSize={12} tickLine={false} axisLine={false} />
-                                    <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} tickLine={false} axisLine={false} unit="ms" />
-                                    <Tooltip
-                                        contentStyle={{ backgroundColor: "hsl(var(--background))", borderColor: "hsl(var(--border))" }}
-                                    />
-                                    <Legend />
-                                    <Line type="monotone" dataKey="Response Time (ms)" stroke="hsl(var(--primary))" strokeWidth={2} dot={{ r: 2 }} />
-                                </LineChart>
-                            </ResponsiveContainer>
-                        </div>
-                        <div className="text-center mt-4 text-muted-foreground">
-                            Overall uptime (last 90 days): {uptimePercentage.toFixed(2)}%
-                        </div>
-                    </CardContent>
-                </Card>
+            <Card className="mb-8">
+                <CardHeader>
+                    <CardTitle>Performance</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="h-[400px]">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <LineChart data={chartData}>
+                                <XAxis dataKey="time" stroke="hsl(var(--muted-foreground))" fontSize={12} tickLine={false} axisLine={false} />
+                                <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} tickLine={false} axisLine={false} unit="ms" />
+                                <Tooltip
+                                    contentStyle={{ backgroundColor: "hsl(var(--background))", borderColor: "hsl(var(--border))" }}
+                                />
+                                <Legend />
+                                <Line type="monotone" dataKey="Response Time (ms)" stroke="hsl(var(--primary))" strokeWidth={2} dot={{ r: 2 }} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className="text-center mt-4 text-muted-foreground">
+                        Overall uptime (last 90 days): {uptimePercentage.toFixed(2)}%
+                    </div>
+                </CardContent>
+            </Card>
 
-                <IncidentsTable logs={service.logs} showServiceColumn={false} />
-            </div>
+            <IncidentsTable logs={service.logs} showServiceColumn={false} />
         </div>
     );
 };

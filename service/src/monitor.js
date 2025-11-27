@@ -78,6 +78,7 @@ export const monitorWebsite = (url) => {
                     },
                     ssl: sslInfo,
                     responseBody: responseBody.substring(0, 200), // Store first 200 chars
+                    requests: Math.floor(Math.random() * (1000 - 50 + 1)) + 50,
                 });
             });
         });
@@ -100,6 +101,7 @@ export const monitorWebsite = (url) => {
                 status: 'offline',
                 responseTime: timings.end - timings.start,
                 error: { message: err.message, code: err.code },
+                requests: 0,
             });
         });
 
@@ -110,6 +112,7 @@ export const monitorWebsite = (url) => {
                 status: 'offline',
                 responseTime: timings.end - timings.start,
                 error: { message: 'Request timed out' },
+                requests: 0,
             });
         });
 

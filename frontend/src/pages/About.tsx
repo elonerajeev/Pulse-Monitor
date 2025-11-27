@@ -1,4 +1,3 @@
-import Navbar from "@/components/ui/navbar";
 import { useAuth } from "@/hooks/useAuth";
 
 const About = () => {
@@ -6,8 +5,6 @@ const About = () => {
 
   return (
     <div>
-      <Navbar isAuthenticated={isAuthenticated} />
-
       <section className="bg-gradient-to-b from-background to-muted/40 py-20">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-center mb-6">About PulseMonitor</h1>
@@ -36,11 +33,14 @@ const About = () => {
             </div>
 
             <div className="p-6 rounded-xl bg-card shadow-sm border">
-              <h3 className="text-xl font-semibold mb-3">Our Values</h3>
-              <p className="text-muted-foreground">
-                Reliability, transparency, and craftsmanship. We believe that great engineering
-                comes from clarity and strong attention to detail.
-              </p>
+              <h3 className="text-xl font-semibold mb-3">Our Solution</h3>
+              <ul className="text-muted-foreground list-disc list-inside space-y-1">
+                <li>Instant detection within 60 seconds</li>
+                <li>Beautiful, intuitive dashboard</li>
+                <li>Zero-config deployment in 2 minutes</li>
+                <li>Enterprise features, startup-friendly pricing</li>
+                <li>Open source with full customization</li>
+              </ul>
             </div>
           </div>
         </div>

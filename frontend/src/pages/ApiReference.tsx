@@ -1,17 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Code, Copy, CheckCircle, Server, User, Settings, GitBranch } from "lucide-react";
-import Navbar from "@/components/ui/navbar";
 import { useState, useEffect } from "react";
 
 const ApiReference = () => {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const authStatus = localStorage.getItem('isAuthenticated') === 'true';
-    setIsAuthenticated(authStatus);
-  }, []);
 
   const copyToClipboard = (code: string, id: string) => {
     navigator.clipboard.writeText(code);
@@ -35,7 +28,6 @@ const ApiReference = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar isAuthenticated={isAuthenticated} />
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-4">API Reference & Developer Guide</h1>
         <p className="text-lg text-muted-foreground mb-12">

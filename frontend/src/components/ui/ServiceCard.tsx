@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { MoreVertical, CheckCircle, AlertTriangle, Clock, ShieldCheck, RefreshCw } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu';
@@ -35,9 +34,10 @@ interface ServiceCardProps {
   onEdit: () => void;
   onDelete: () => void;
   onRefresh: () => void;
+  onClick: () => void;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ _id, name, status, target, serviceType, logs = [], lastChecked, ssl, onEdit, onDelete, onRefresh }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ _id, name, status, target, serviceType, logs = [], lastChecked, ssl, onEdit, onDelete, onRefresh, onClick }) => {
   const statusColor = status === 'online' ? 'text-green-500' : 'text-red-500';
   const statusBgColor = status === 'online' ? 'bg-green-500/10' : 'bg-red-500/10';
   const latestLog = logs.length > 0 ? logs[logs.length - 1] : null;
@@ -63,25 +63,33 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ _id, name, status, target, se
         : 'text-red-500';
 
 
+  const handleButtonClick = (e: React.MouseEvent, action: () => void) => {
+    e.stopPropagation();
+    action();
+  };
+
   return (
-    <div className="bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
-      <Link to={`/monitoring/${_id}`} className="flex-grow flex flex-col">
+    <div 
+      className="bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col cursor-pointer"
+      onClick={onClick}
+    >
+      <div className="flex-grow flex flex-col">
         <div className="p-4 border-b border-border">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold text-card-foreground truncate pr-2" title={name}>{name}</h3>
             <div className="flex items-center">
-              <Button variant="ghost" size="icon" className="flex-shrink-0" onClick={(e) => {e.preventDefault(); onRefresh();}}>
+              <Button variant="ghost" size="icon" className="flex-shrink-0" onClick={(e) => handleButtonClick(e, onRefresh)}>
                 <RefreshCw className="h-4 w-4" />
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="flex-shrink-0" onClick={(e) => e.preventDefault()}>
+                  <Button variant="ghost" size="icon" className="flex-shrink-0" onClick={(e) => e.stopPropagation()}>
                     <MoreVertical className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={(e) => {e.preventDefault(); onEdit();}}>Edit</DropdownMenuItem>
-                  <DropdownMenuItem onClick={(e) => {e.preventDefault(); onDelete();}} className="text-red-500">Delete</DropdownMenuItem>
+                  <DropdownMenuItem onClick={(e) => handleButtonClick(e, onEdit)}>Edit</DropdownMenuItem>
+                  <DropdownMenuItem onClick={(e) => handleButtonClick(e, onDelete)} className="text-red-500">Delete</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -171,7 +179,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ _id, name, status, target, se
             </div>
           </div>
         )}
-      </Link>
+      </div>
     </div>
   );
 };

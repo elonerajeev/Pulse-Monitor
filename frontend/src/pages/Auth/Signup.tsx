@@ -15,7 +15,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
-import Navbar from "@/components/ui/navbar";
 import BackgroundIcons from "@/components/ui/background-icons";
 
 const Signup = () => {
@@ -80,7 +79,6 @@ const Signup = () => {
   return (
     <div className="min-h-screen bg-background relative">
       <BackgroundIcons />
-      <Navbar isAuthenticated={false} />
       <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] p-4">
         <div className="w-full max-w-md">
           <Card className="border-none shadow-lg rounded-2xl bg-background/80 backdrop-blur-sm">

@@ -33,6 +33,12 @@ const monitoringSchema = new Schema(
       ref: "User",
       required: true,
     },
+    dependencies: [ // Added dependencies field
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Monitoring",
+      },
+    ],
   },
   { timestamps: true }
 );

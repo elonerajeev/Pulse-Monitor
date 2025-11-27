@@ -1,20 +1,19 @@
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, XCircle, BarChart2, Zap, Globe, TrendingUp, Activity, Monitor, AlertTriangle, Bell, Settings, User, Moon, Sun, Mail, LogOut, Users, CreditCard, Shield, Eye, BellRing, Trash, PaintBucket, Languages, KeyRound, HelpCircle, Plus } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { CheckCircle, Zap, Monitor, AlertTriangle, TrendingUp, Plus, BarChart2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/ui/navbar";
 import RealTimeChart from "@/components/ui/real-time-chart";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import RealTimeTrafficChart from "@/components/ui/RealTimeTrafficChart"; // Corrected import
 import { useToast } from "@/components/ui/use-toast";
 import ServiceCard from "@/components/ui/ServiceCard";
-import NotificationBell, { Notification } from "@/components/ui/NotificationBell";
+import { Notification } from "@/components/ui/NotificationBell";
 
 const demoWebsites = [
-  { name: "TechCrunch", url: "https://techcrunch.com", status: "online", responseTime: 128, lastCheck: "1 min ago", uptime: 99.98, region: "US-East", logs: Array.from({ length: 10 }, () => ({ responseTime: Math.random() * 200, createdAt: new Date().toISOString() })) },
-  { name: "The Verge", url: "https://www.theverge.com", status: "online", responseTime: 234, lastCheck: "2 mins ago", uptime: 99.95, region: "EU-West", logs: Array.from({ length: 10 }, () => ({ responseTime: Math.random() * 300, createdAt: new Date().toISOString() })) },
-  { name: "Hacker News", url: "https://news.ycombinator.com", status: "offline", responseTime: 0, lastCheck: "5 mins ago", uptime: 98.50, region: "US-West", logs: Array.from({ length: 10 }, () => ({ responseTime: 0, createdAt: new Date().toISOString() })) },
-  { name: "GitHub", url: "https://github.com", status: "online", responseTime: 98, lastCheck: "30 secs ago", uptime: 99.99, region: "US-East", logs: Array.from({ length: 10 }, () => ({ responseTime: Math.random() * 150, createdAt: new Date().toISOString() })) },
+  { name: "TechCrunch", url: "https://techcrunch.com", status: "online", responseTime: 128, lastCheck: "1 min ago", uptime: 99.98, region: "US-East", logs: Array.from({ length: 10 }, () => ({ responseTime: Math.random() * 200, createdAt: new Date().toISOString(), requests: Math.random() * 1000 })) },
+  { name: "The Verge", url: "https://www.theverge.com", status: "online", responseTime: 234, lastCheck: "2 mins ago", uptime: 99.95, region: "EU-West", logs: Array.from({ length: 10 }, () => ({ responseTime: Math.random() * 300, createdAt: new Date().toISOString(), requests: Math.random() * 1000 })) },
+  { name: "Hacker News", url: "https://news.ycombinator.com", status: "offline", responseTime: 0, lastCheck: "5 mins ago", uptime: 98.50, region: "US-West", logs: Array.from({ length: 10 }, () => ({ responseTime: 0, createdAt: new Date().toISOString(), requests: Math.random() * 1000 })) },
+  { name: "GitHub", url: "https://github.com", status: "online", responseTime: 98, lastCheck: "30 secs ago", uptime: 99.99, region: "US-East", logs: Array.from({ length: 10 }, () => ({ responseTime: Math.random() * 150, createdAt: new Date().toISOString(), requests: Math.random() * 1000 })) },
 ];
 
 const demoNotifications: Notification[] = [
@@ -102,20 +101,35 @@ const DemoDashboard = () => {
           </Card>
         </div>
 
-        {/* Real-time Chart */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <TrendingUp className="w-5 h-5 mr-2" />
-              Real-time Response Time (ms)
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="h-[350px]">
-              <RealTimeChart onRefresh={handleRefresh} />
-            </div>
-          </CardContent>
-        </Card>
+        {/* Real-time Charts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <TrendingUp className="w-5 h-5 mr-2" />
+                Real-time Response Time (ms)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-[350px]">
+                <RealTimeChart onRefresh={handleRefresh} />
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <BarChart2 className="w-5 h-5 mr-2" />
+                Real-time Traffic
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-[350px]">
+                <RealTimeTrafficChart />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Service Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

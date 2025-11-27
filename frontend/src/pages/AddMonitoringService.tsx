@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import api from '@/utils/api';
-import Navbar from '@/components/ui/navbar';
 import useNotifications from '@/hooks/use-notifications';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
@@ -16,13 +15,7 @@ const AddMonitoringService = () => {
   const [type, setType] = useState('website');
   const [location, setLocation] = useState('us-east');
   const [interval, setInterval] = useState<number | ''>(5);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { addNotification } = useNotifications();
-
-  useEffect(() => {
-    const authStatus = localStorage.getItem('isAuthenticated') === 'true';
-    setIsAuthenticated(authStatus);
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -65,7 +58,6 @@ const AddMonitoringService = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
-      <Navbar isAuthenticated={isAuthenticated} />
       <main className="flex-grow flex items-center justify-center">
         <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
           <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200">Add Monitoring Service</h1>

@@ -15,8 +15,9 @@ interface User {
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
+  loading: boolean;
   login: (data: any) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   register: (data: any) => Promise<void>;
   updateUser: (data: any) => Promise<void>;
 }
@@ -26,14 +27,32 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedToken = localStorage.getItem("accessToken");
-    if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
-      setIsAuthenticated(true);
-    }
+    const checkAuthState = () => {
+      try {
+        const storedUser = localStorage.getItem("user");
+        const storedToken = localStorage.getItem("accessToken");
+        const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
+
+        if (storedUser && storedToken && storedIsAuthenticated === "true") {
+          setUser(JSON.parse(storedUser));
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error("Failed to parse auth data from localStorage", error);
+        // Clear corrupted data
+        localStorage.removeItem("user");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("isAuthenticated");
+        setIsAuthenticated(false);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkAuthState();
   }, []);
 
   const login = async (data: any) => {
@@ -67,7 +86,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem("isAuthenticated");
       setUser(null);
       setIsAuthenticated(false);
-      window.location.href = "/login";
     }
   };
 
@@ -80,7 +98,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, user, login, logout, register, updateUser }}
+      value={{ isAuthenticated, user, loading, login, logout, register, updateUser }}
     >
       {children}
     </AuthContext.Provider>

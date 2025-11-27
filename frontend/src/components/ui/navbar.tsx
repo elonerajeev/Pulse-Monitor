@@ -50,8 +50,8 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated }) => {
     }
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     addNotification({
       message: "You have been successfully logged out.",
       service: "Authentication",
@@ -60,6 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated }) => {
     toast.success("Logout Successful", {
       description: "You have been successfully logged out.",
     });
+    navigate("/login");
   };
 
 

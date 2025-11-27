@@ -1,7 +1,7 @@
 
-up to date, audited 172 packages in 5s
+up to date, audited 193 packages in 4s
 
-24 packages are looking for funding
+40 packages are looking for funding
   run `npm fund` for details
 
 1 moderate severity vulnerability
@@ -19,151 +19,194 @@ Run `npm audit` for details.
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/server.js`[39m
-[dotenv@17.2.3] injecting env (9) from src/.env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
-[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
-[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+file:///home/user/server/backend/src/controllers/traffic.controller.js:66
+    const parsedData = JSON.parse(jsonString);
+          ^
+
+SyntaxError: Identifier 'parsedData' has already been declared
+    at compileSourceTextModule (node:internal/modules/esm/utils:340:16)
+    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:146:18)
+    at #translate (node:internal/modules/esm/loader:431:12)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:478:27)
+
+Node.js v20.19.1
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+[dotenv@17.2.3] injecting env (10) from src/.env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
 Server is running on http://localhost:5000
 MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
-[0mGET / [32m200[0m 27.236 ms - 842[0m
-[0mGET /style.css [32m200[0m 3.877 ms - 903[0m
-[0mGET /script.js [32m200[0m 7.509 ms - 124[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MjQ5NDMzfQ.zKrTK_BHVznyd4EB17bFQBNJ8dVO7fuAnw5owzaAH90'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MzE5MzA3fQ.K4dHMTebRsvDQV9-ZIV2LXkcdgkEttOGjCoAo8trDu0'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MDk0NjMzfQ.s9-k-neaFCaA20FmhwdqAYIzDGlv9ZuBUrC4ovTBSxE
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764076633, exp: 1764094633 }
-[0mGET /api/v1/monitoring [32m200[0m 331.157 ms - 7369[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MTY0NTA3fQ.DfFl4qYMfc99OHPGRxQN2blJTmp78v0ux9QIuiJFp84
+Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764146507, exp: 1764164507 }
+[0mGET /api/v1/monitoring [32m200[0m 316.717 ms - 4293[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MjQ5NDMzfQ.zKrTK_BHVznyd4EB17bFQBNJ8dVO7fuAnw5owzaAH90'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MzE5MzA3fQ.K4dHMTebRsvDQV9-ZIV2LXkcdgkEttOGjCoAo8trDu0'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MDk0NjMzfQ.s9-k-neaFCaA20FmhwdqAYIzDGlv9ZuBUrC4ovTBSxE
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764076633, exp: 1764094633 }
-[0mGET /api/v1/monitoring [32m200[0m 306.041 ms - 7369[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MTY0NTA3fQ.DfFl4qYMfc99OHPGRxQN2blJTmp78v0ux9QIuiJFp84
+Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764146507, exp: 1764164507 }
+[0mGET /api/v1/monitoring [32m200[0m 292.982 ms - 4293[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MjQ5NDMzfQ.zKrTK_BHVznyd4EB17bFQBNJ8dVO7fuAnw5owzaAH90'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MzE5MzA3fQ.K4dHMTebRsvDQV9-ZIV2LXkcdgkEttOGjCoAo8trDu0'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MDk0NjMzfQ.s9-k-neaFCaA20FmhwdqAYIzDGlv9ZuBUrC4ovTBSxE
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764076633, exp: 1764094633 }
-[0mGET /api/v1/monitoring [32m200[0m 300.714 ms - 7369[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MTY0NTA3fQ.DfFl4qYMfc99OHPGRxQN2blJTmp78v0ux9QIuiJFp84
+Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764146507, exp: 1764164507 }
+[0mGET /api/v1/monitoring [32m200[0m 291.323 ms - 4293[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=g [31m500[0m 802.172 ms - 125[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=goo [31m500[0m 310.066 ms - 125[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=goof [31m500[0m 260.016 ms - 125[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=goo [31m500[0m 277.678 ms - 125[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=goog [31m500[0m 267.093 ms - 125[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=googl [31m500[0m 260.954 ms - 125[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=google [31m500[0m 262.031 ms - 125[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=google. [31m500[0m 258.359 ms - 125[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=google.c [31m500[0m 261.844 ms - 125[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=google.com [31m500[0m 617.544 ms - 125[0m
+Error: Could not find traffic data in any script tag.
+[0mGET /api/v1/traffic?site_id=google.com [31m500[0m 1076.165 ms - 125[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MjQ5NDMzfQ.zKrTK_BHVznyd4EB17bFQBNJ8dVO7fuAnw5owzaAH90'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MzE5MzA3fQ.K4dHMTebRsvDQV9-ZIV2LXkcdgkEttOGjCoAo8trDu0'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MDk0NjMzfQ.s9-k-neaFCaA20FmhwdqAYIzDGlv9ZuBUrC4ovTBSxE
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764076633, exp: 1764094633 }
-[0mGET /api/v1/monitoring [32m200[0m 338.476 ms - 7369[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MTY0NTA3fQ.DfFl4qYMfc99OHPGRxQN2blJTmp78v0ux9QIuiJFp84
+Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764146507, exp: 1764164507 }
+[0mGET /api/v1/monitoring [32m200[0m 293.451 ms - 4296[0m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+[dotenv@17.2.3] injecting env (10) from src/.env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+Server is running on http://localhost:5000
+MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
+Could not find traffic data in any script tag. Returning empty data.
+[0mGET /api/v1/traffic?site_id=google.com [32m200[0m 1172.138 ms - 333[0m
+Could not find traffic data in any script tag. Returning empty data.
+[0mGET /api/v1/traffic?site_id=https://www.google.com/ [32m200[0m 1067.252 ms - 346[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MjQ5NDMzfQ.zKrTK_BHVznyd4EB17bFQBNJ8dVO7fuAnw5owzaAH90'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MzE5MzA3fQ.K4dHMTebRsvDQV9-ZIV2LXkcdgkEttOGjCoAo8trDu0'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MDk0NjMzfQ.s9-k-neaFCaA20FmhwdqAYIzDGlv9ZuBUrC4ovTBSxE
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764076633, exp: 1764094633 }
-[0mPOST /api/v1/auth/logout [32m200[0m 307.221 ms - 84[0m
-Attempting to verify JWT...
-Cookies:  [Object: null prototype] {}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA3NjYzMywiZXhwIjoxNzY0MDk0NjMzfQ.s9-k-neaFCaA20FmhwdqAYIzDGlv9ZuBUrC4ovTBSxE
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764076633, exp: 1764094633 }
-[0mGET /api/v1/monitoring [32m200[0m 305.153 ms - 7459[0m
-[0mPOST /api/v1/auth/login [32m200[0m 656.958 ms - 455[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MTY0NTA3fQ.DfFl4qYMfc99OHPGRxQN2blJTmp78v0ux9QIuiJFp84
+Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764146507, exp: 1764164507 }
+[0mGET /api/v1/monitoring [32m200[0m 316.949 ms - 4295[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MjYyNTU2fQ.EQ2cVZoIa_GPThFvaab6AV6ZUIoM6-inPwbqfI4GNdQ'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MzE5MzA3fQ.K4dHMTebRsvDQV9-ZIV2LXkcdgkEttOGjCoAo8trDu0'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MTA3NzU2fQ.Ox1GypWsa0hnZIhbOTfpBe_UINpOzgLZeKHou1AQ1mE
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764089756, exp: 1764107756 }
-[0mGET /api/v1/monitoring [32m200[0m 303.783 ms - 8550[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MTY0NTA3fQ.DfFl4qYMfc99OHPGRxQN2blJTmp78v0ux9QIuiJFp84
+Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764146507, exp: 1764164507 }
+[0mGET /api/v1/monitoring [32m200[0m 298.647 ms - 4295[0m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node src/server.js`[39m
+[dotenv@17.2.3] injecting env (10) from src/.env -- tip: ⚙️  enable debug logging with { debug: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+Server is running on http://localhost:5000
+MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MjYyNTU2fQ.EQ2cVZoIa_GPThFvaab6AV6ZUIoM6-inPwbqfI4GNdQ'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MzE5MzA3fQ.K4dHMTebRsvDQV9-ZIV2LXkcdgkEttOGjCoAo8trDu0'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MTA3NzU2fQ.Ox1GypWsa0hnZIhbOTfpBe_UINpOzgLZeKHou1AQ1mE
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764089756, exp: 1764107756 }
-[0mGET /api/v1/monitoring [32m200[0m 300.766 ms - 8550[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MTY0NTA3fQ.DfFl4qYMfc99OHPGRxQN2blJTmp78v0ux9QIuiJFp84
+Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764146507, exp: 1764164507 }
+[0mGET /api/v1/monitoring [32m200[0m 314.858 ms - 4295[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MjYyNTU2fQ.EQ2cVZoIa_GPThFvaab6AV6ZUIoM6-inPwbqfI4GNdQ'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MzE5MzA3fQ.K4dHMTebRsvDQV9-ZIV2LXkcdgkEttOGjCoAo8trDu0'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MTA3NzU2fQ.Ox1GypWsa0hnZIhbOTfpBe_UINpOzgLZeKHou1AQ1mE
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764089756, exp: 1764107756 }
-[0mGET /api/v1/monitoring [32m200[0m 349.543 ms - 8550[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MTY0NTA3fQ.DfFl4qYMfc99OHPGRxQN2blJTmp78v0ux9QIuiJFp84
+Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764146507, exp: 1764164507 }
+[0mGET /api/v1/monitoring [32m200[0m 294.632 ms - 4295[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MjYyNTU2fQ.EQ2cVZoIa_GPThFvaab6AV6ZUIoM6-inPwbqfI4GNdQ'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MzE5MzA3fQ.K4dHMTebRsvDQV9-ZIV2LXkcdgkEttOGjCoAo8trDu0'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MTA3NzU2fQ.Ox1GypWsa0hnZIhbOTfpBe_UINpOzgLZeKHou1AQ1mE
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764089756, exp: 1764107756 }
-[0mPATCH /api/v1/users/update-profile [32m200[0m 604.792 ms - 259[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDE0NjUwNywiZXhwIjoxNzY0MTY0NTA3fQ.DfFl4qYMfc99OHPGRxQN2blJTmp78v0ux9QIuiJFp84
+Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764146507, exp: 1764164507 }
+[0mPOST /api/v1/auth/logout [32m200[0m 308.427 ms - 84[0m
+[0mPOST /api/v1/auth/login [32m200[0m 689.137 ms - 455[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MjYyNTU2fQ.EQ2cVZoIa_GPThFvaab6AV6ZUIoM6-inPwbqfI4GNdQ'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MzIzMDc4fQ.hLgoDe2vm9MFZBHl9wVVgWqUTg4YHytCtwp0z0QnfbQ'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MTA3NzU2fQ.Ox1GypWsa0hnZIhbOTfpBe_UINpOzgLZeKHou1AQ1mE
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764089756, exp: 1764107756 }
-[0mPATCH /api/v1/users/update-profile [32m200[0m 595.720 ms - 259[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MTY4Mjc4fQ.ACCpSKLS_dmOAnT_XOzu_zKJHCT6yGWatBoAmvjAykU
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764150278, exp: 1764168278 }
+[0mGET /api/v1/monitoring [32m200[0m 293.309 ms - 8587[0m
+Could not find traffic data in any script tag. Returning empty data.
+[0mGET /api/v1/traffic?site_id=h [32m200[0m 802.821 ms - 205[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MjYyNTU2fQ.EQ2cVZoIa_GPThFvaab6AV6ZUIoM6-inPwbqfI4GNdQ'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MzIzMDc4fQ.hLgoDe2vm9MFZBHl9wVVgWqUTg4YHytCtwp0z0QnfbQ'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MTA3NzU2fQ.Ox1GypWsa0hnZIhbOTfpBe_UINpOzgLZeKHou1AQ1mE
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764089756, exp: 1764107756 }
-[0mPATCH /api/v1/users/update-profile [32m200[0m 591.943 ms - 259[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MTY4Mjc4fQ.ACCpSKLS_dmOAnT_XOzu_zKJHCT6yGWatBoAmvjAykU
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764150278, exp: 1764168278 }
+[0mGET /api/v1/monitoring [32m200[0m 291.711 ms - 8587[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MjYyNTU2fQ.EQ2cVZoIa_GPThFvaab6AV6ZUIoM6-inPwbqfI4GNdQ'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MzIzMDc4fQ.hLgoDe2vm9MFZBHl9wVVgWqUTg4YHytCtwp0z0QnfbQ'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MTA3NzU2fQ.Ox1GypWsa0hnZIhbOTfpBe_UINpOzgLZeKHou1AQ1mE
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764089756, exp: 1764107756 }
-[0mPOST /api/v1/monitoring/prune-logs [32m200[0m 904.038 ms - 107[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MTY4Mjc4fQ.ACCpSKLS_dmOAnT_XOzu_zKJHCT6yGWatBoAmvjAykU
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764150278, exp: 1764168278 }
+[0mGET /api/v1/monitoring [32m200[0m 291.153 ms - 8587[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MjYyNTU2fQ.EQ2cVZoIa_GPThFvaab6AV6ZUIoM6-inPwbqfI4GNdQ'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MzIzMDc4fQ.hLgoDe2vm9MFZBHl9wVVgWqUTg4YHytCtwp0z0QnfbQ'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MTA3NzU2fQ.Ox1GypWsa0hnZIhbOTfpBe_UINpOzgLZeKHou1AQ1mE
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764089756, exp: 1764107756 }
-[0mGET /api/v1/monitoring [32m200[0m 300.661 ms - 8550[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MTY4Mjc4fQ.ACCpSKLS_dmOAnT_XOzu_zKJHCT6yGWatBoAmvjAykU
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764150278, exp: 1764168278 }
+[0mGET /api/v1/monitoring [32m200[0m 298.152 ms - 8587[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MjYyNTU2fQ.EQ2cVZoIa_GPThFvaab6AV6ZUIoM6-inPwbqfI4GNdQ'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MzIzMDc4fQ.hLgoDe2vm9MFZBHl9wVVgWqUTg4YHytCtwp0z0QnfbQ'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDA4OTc1NiwiZXhwIjoxNzY0MTA3NzU2fQ.Ox1GypWsa0hnZIhbOTfpBe_UINpOzgLZeKHou1AQ1mE
-Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764089756, exp: 1764107756 }
-[0mPOST /api/v1/auth/logout [32m200[0m 301.627 ms - 84[0m
-[0mPOST /api/v1/auth/login [32m200[0m 530.057 ms - 466[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MTY4Mjc4fQ.ACCpSKLS_dmOAnT_XOzu_zKJHCT6yGWatBoAmvjAykU
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764150278, exp: 1764168278 }
+[0mGET /api/v1/monitoring [32m200[0m 296.791 ms - 8587[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA4OTkyNywiZXhwIjoxNzY0MjYyNzI3fQ._qiyK6Lzh7x2UXmCjFrbppaG-pQIqNCUoqzHB4oPAvk'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MzIzMDc4fQ.hLgoDe2vm9MFZBHl9wVVgWqUTg4YHytCtwp0z0QnfbQ'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA4OTkyNywiZXhwIjoxNzY0MTA3OTI3fQ.w_RCLzcQrqCuT0-udJx8xCM2VWIZbJ7L0ylmyasAiMI
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764089927, exp: 1764107927 }
-[0mGET /api/v1/monitoring [32m200[0m 304.636 ms - 7459[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MTY4Mjc4fQ.ACCpSKLS_dmOAnT_XOzu_zKJHCT6yGWatBoAmvjAykU
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764150278, exp: 1764168278 }
+[0mGET /api/v1/monitoring [32m200[0m 290.080 ms - 8587[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA4OTkyNywiZXhwIjoxNzY0MjYyNzI3fQ._qiyK6Lzh7x2UXmCjFrbppaG-pQIqNCUoqzHB4oPAvk'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MzIzMDc4fQ.hLgoDe2vm9MFZBHl9wVVgWqUTg4YHytCtwp0z0QnfbQ'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA4OTkyNywiZXhwIjoxNzY0MTA3OTI3fQ.w_RCLzcQrqCuT0-udJx8xCM2VWIZbJ7L0ylmyasAiMI
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764089927, exp: 1764107927 }
-[0mGET /api/v1/monitoring [32m200[0m 298.036 ms - 7459[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MTY4Mjc4fQ.ACCpSKLS_dmOAnT_XOzu_zKJHCT6yGWatBoAmvjAykU
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764150278, exp: 1764168278 }
+[0mGET /api/v1/monitoring [32m200[0m 291.076 ms - 8587[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA4OTkyNywiZXhwIjoxNzY0MjYyNzI3fQ._qiyK6Lzh7x2UXmCjFrbppaG-pQIqNCUoqzHB4oPAvk'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MzIzMDc4fQ.hLgoDe2vm9MFZBHl9wVVgWqUTg4YHytCtwp0z0QnfbQ'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA4OTkyNywiZXhwIjoxNzY0MTA3OTI3fQ.w_RCLzcQrqCuT0-udJx8xCM2VWIZbJ7L0ylmyasAiMI
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764089927, exp: 1764107927 }
-[0mGET /api/v1/monitoring [32m200[0m 301.463 ms - 7459[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MTY4Mjc4fQ.ACCpSKLS_dmOAnT_XOzu_zKJHCT6yGWatBoAmvjAykU
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764150278, exp: 1764168278 }
+[0mGET /api/v1/monitoring [32m200[0m 290.537 ms - 8587[0m
 Attempting to verify JWT...
 Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA4OTkyNywiZXhwIjoxNzY0MjYyNzI3fQ._qiyK6Lzh7x2UXmCjFrbppaG-pQIqNCUoqzHB4oPAvk'
+  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MzIzMDc4fQ.hLgoDe2vm9MFZBHl9wVVgWqUTg4YHytCtwp0z0QnfbQ'
 }
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA4OTkyNywiZXhwIjoxNzY0MTA3OTI3fQ.w_RCLzcQrqCuT0-udJx8xCM2VWIZbJ7L0ylmyasAiMI
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764089927, exp: 1764107927 }
-[0mGET /api/v1/monitoring [32m200[0m 300.252 ms - 7087[0m
-Attempting to verify JWT...
-Cookies:  {
-  refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA4OTkyNywiZXhwIjoxNzY0MjYyNzI3fQ._qiyK6Lzh7x2UXmCjFrbppaG-pQIqNCUoqzHB4oPAvk'
-}
-Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjQwZmRhZDAwNmY3ZTcxODNjNWVjOCIsImlhdCI6MTc2NDA4OTkyNywiZXhwIjoxNzY0MTA3OTI3fQ.w_RCLzcQrqCuT0-udJx8xCM2VWIZbJ7L0ylmyasAiMI
-Decoded token:  { id: '69240fdad006f7e7183c5ec8', iat: 1764089927, exp: 1764107927 }
-[0mGET /api/v1/monitoring [36m304[0m 303.185 ms - -[0m
+Token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGQ2YTk2MTdiZTRlZTc3OGIxNDY4YyIsImlhdCI6MTc2NDE1MDI3OCwiZXhwIjoxNzY0MTY4Mjc4fQ.ACCpSKLS_dmOAnT_XOzu_zKJHCT6yGWatBoAmvjAykU
+Decoded token:  { id: '68dd6a9617be4ee778b1468c', iat: 1764150278, exp: 1764168278 }
+[0mGET /api/v1/monitoring [32m200[0m 292.906 ms - 8587[0m

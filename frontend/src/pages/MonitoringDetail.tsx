@@ -8,6 +8,8 @@ import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, Legend } f
 import { ArrowLeft, CheckCircle, Bell, Pause, Edit, MoreVertical, AlertTriangle, Shield, Server, FileText } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import RCAPanel from '@/components/ui/RCAPanel';
+import MaintenanceWindowDialog from '@/components/ui/MaintenanceWindowDialog'; // CORRECTED IMPORT PATH
+import { Button } from '@/components/ui/button';
 
 interface MonitoringLog {
   _id: string;
@@ -51,12 +53,26 @@ const MonitoringDetail = () => {
   const [service, setService] = useState<MonitoringService | null>(null);
   const [rcaData, setRcaData] = useState(null);
   const [isRcaPanelOpen, setIsRcaPanelOpen] = useState(false);
+  const [isMaintenanceDialogOpen, setIsMaintenanceDialogOpen] = useState(false); // New state for maintenance dialog
 
   useEffect(() => {
     const fetchService = async () => {
       try {
         const response = await api.get(`/monitoring/${id}`);
-        setService(response.data.data);
+        const fetchedService = response.data.data; // Store the fetched service
+        setService(fetchedService);
+
+        // Automatically open RCA panel if the latest log indicates an offline status
+        if (fetchedService.latestLog && fetchedService.latestLog.status !== 'online') {
+          try {
+            const rcaResponse = await api.get(`/monitoring/rca/${fetchedService.latestLog._id}`);
+            setRcaData(rcaResponse.data.data);
+            setIsRcaPanelOpen(true);
+          } catch (rcaError) {
+            toast({ title: 'Error', description: 'Failed to fetch RCA details automatically.', variant: 'destructive' });
+          }
+        }
+
       } catch (error) {
         toast({ title: 'Error', description: 'Failed to fetch monitoring service details.', variant: 'destructive' });
       }
@@ -77,6 +93,35 @@ const MonitoringDetail = () => {
       toast({ title: 'Error', description: 'Failed to fetch RCA details.', variant: 'destructive' });
     }
   };
+
+  const handleScheduleMaintenance = async (data: { startTime: string; endTime: string; reason: string }) => {
+    try {
+      if (!service) return; // Guard clause if service is null
+
+      const response = await api.post('/maintenance-windows', {
+        serviceId: service._id,
+        startTime: data.startTime,
+        endTime: data.endTime,
+        reason: data.reason,
+      });
+
+      if (response.status === 201) {
+        toast({
+          title: 'Success',
+          description: 'Maintenance window scheduled successfully.',
+          variant: 'default',
+        });
+        // Optionally, you might want to refresh the service data or update the UI
+      } else {
+        // The toast for error is already handled by the api utility, but you can add specific logic here if needed
+      }
+    } catch (error) {
+      // Error is already handled and toasted by the api utility
+    } finally {
+      setIsMaintenanceDialogOpen(false);
+    }
+  };
+
 
   const chartData = service?.logs.map(log => ({
     time: new Date(log.createdAt).toLocaleTimeString(),
@@ -111,14 +156,31 @@ const MonitoringDetail = () => {
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <button><Bell className="w-5 h-5" /></button>
-            <button><Pause className="w-5 h-5" /></button>
-            <button><Edit className="w-5 h-5" /></button>
-            <button><MoreVertical className="w-5 h-5" /></button>
+            <Button variant="ghost" size="icon"><Bell className="w-5 h-5" /></Button>
+            <Button variant="ghost" size="icon"><Pause className="w-5 h-5" /></Button>
+            <Button variant="ghost" size="icon"><Edit className="w-5 h-5" /></Button>
+            {/* New button to open Maintenance Window Dialog */}
+            <Button variant="ghost" size="icon" onClick={() => setIsMaintenanceDialogOpen(true)}><Shield className="w-5 h-5" /></Button>
+            <Button variant="ghost" size="icon"><MoreVertical className="w-5 h-5" /></Button>
           </div>
         </div>
 
-        {/* ... Other cards ... */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle>Response Time</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
+              <AreaChart data={chartData}>
+                <XAxis dataKey="time" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Area type="monotone" dataKey="total" stroke="#8884d8" fill="#8884d8" />
+              </AreaChart>
+            </responsiveContainer>
+          </CardContent>
+        </Card>
 
         <Card>
           <CardHeader>
@@ -147,6 +209,14 @@ const MonitoringDetail = () => {
         </Card>
       </div>
       <RCAPanel isOpen={isRcaPanelOpen} onClose={() => setIsRcaPanelOpen(false)} rcaData={rcaData} />
+
+      {/* Render MaintenanceWindowDialog */}
+      <MaintenanceWindowDialog
+        isOpen={isMaintenanceDialogOpen}
+        onClose={() => setIsMaintenanceDialogOpen(false)}
+        serviceName={service.name} // Pass the service name to the dialog
+        onSchedule={handleScheduleMaintenance}
+      />
     </div>
   );
 };

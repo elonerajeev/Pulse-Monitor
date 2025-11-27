@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
   Legend,
   ReferenceLine,
+  Brush, // Import Brush
 } from 'recharts';
 
 interface MonitoringLog {
@@ -90,7 +91,8 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
   }, [services]);
 
   const serviceColors = useMemo(() => {
-    const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#a4de6c", "#d0ed57", "#ff7300", "#00C49F", "#FFBB28", "#FF8042"];
+    // Updated professional and distinct color palette
+    const colors = ["#1a9e9e", "#66b2b2", "#3366cc", "#6699cc", "#99ccff", "#ff9933", "#ffcc66", "#cc6699", "#993366", "#663399"];
     return chartServices.reduce((acc, service, index) => {
       acc[service.name] = colors[index % colors.length];
       return acc;
@@ -149,8 +151,23 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
             backgroundColor: "hsl(var(--background))",
             borderColor: "hsl(var(--border))",
           }}
+          formatter={(value: any, name: string) => {
+            if (typeof value === 'number') {
+              return [`${value.toFixed(2)} ms`, name];
+            }
+            return [value, name];
+          }}
         />
         <Legend wrapperStyle={{ fontSize: '14px' }} />
+        
+        <Brush
+          dataKey="time"
+          height={30}
+          stroke="hsl(var(--primary))"
+          fill="hsl(var(--muted))"
+          travellerWidth={10}
+          gap={5}
+        />
         
         <ReferenceLine
           y={IDEAL_RESPONSE_TIME}
@@ -181,7 +198,7 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
             <Area
               type="monotone"
               dataKey={`${service.name}-excess`}
-              fill="#ef4444" // red-500
+              fill="hsl(var(--destructive))" // Changed from #ef4444 to use theme variable
               fillOpacity={0.3}
               stroke="none"
               baseValue={ACTION_NEEDED_RESPONSE_TIME}
