@@ -45,33 +45,7 @@ const RealTimeTrafficChart: React.FC<RealTimeTrafficChartProps> = ({ services, d
         return [];
     }
 
-    // Generate dummy data for the landing page
-    const dummyServices: MonitoringService[] = [
-      {
-        _id: '1',
-        name: 'API',
-        logs: [],
-      },
-      {
-        _id: '2',
-        name: 'Website',
-        logs: [],
-      },
-    ];
-
-    const now = new Date();
-    for (let i = 29; i >= 0; i--) {
-      const time = new Date(now.getTime() - i * 5 * 60 * 1000);
-      dummyServices[0].logs.push({
-        createdAt: time.toISOString(),
-        requests: Math.floor(Math.random() * (i > 15 && i < 20 ? 500 : 100) + 50),
-      });
-      dummyServices[1].logs.push({
-        createdAt: time.toISOString(),
-        requests: Math.floor(Math.random() * (i > 10 && i < 15 ? 800 : 200) + 100),
-      });
-    }
-    return dummyServices;
+    return [];
   }, [services, trafficData]);
 
   const serviceColors = useMemo(() => {

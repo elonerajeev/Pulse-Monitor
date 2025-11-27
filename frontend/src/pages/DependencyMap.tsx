@@ -1,11 +1,13 @@
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import ReactFlow, { MiniMap, Controls, Background, useNodesState, useEdgesState, Position } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { Card, CardContent } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import api from '@/utils/api';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { RefreshCw } from 'lucide-react';
 
 // --- Types ---
 interface MonitoringLog {
@@ -97,28 +99,52 @@ const DependencyMap = () => {
     const [loading, setLoading] = useState(true);
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+    const [autoRefresh, setAutoRefresh] = useState(true);
+    const [countdown, setCountdown] = useState(30);
+
+    const fetchData = useCallback(async () => {
+        setLoading(true);
+        try {
+            const response = await api.get('/monitoring');
+            setServices(response.data.data);
+        } catch (error) {
+            console.error('Failed to fetch monitoring data', error);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await api.get('/monitoring');
-                setServices(response.data.data);
-            } catch (error) {
-                console.error('Failed to fetch monitoring data', error);
-            } finally {
-                if (loading) setLoading(false);
-            }
-        };
-
         fetchData();
-        const intervalId = setInterval(fetchData, 5000); // Poll every 5 seconds
+    }, [fetchData]);
 
-        return () => clearInterval(intervalId); // Cleanup on unmount
-    }, [loading]);
+    useEffect(() => {
+        let intervalId: NodeJS.Timeout;
+        if (autoRefresh) {
+            intervalId = setInterval(() => {
+                setCountdown(prevCountdown => {
+                    if (prevCountdown <= 1) {
+                        fetchData();
+                        return 30;
+                    }
+                    return prevCountdown - 1;
+                });
+            }, 1000);
+        }
+        return () => clearInterval(intervalId);
+    }, [autoRefresh, fetchData]);
+
+    const toggleAutoRefresh = () => {
+        setAutoRefresh(prev => !prev);
+        setCountdown(30);
+    };
+
+    const handleRefresh = () => {
+        fetchData();
+    };
 
     const processedData = useMemo(() => {
         return services.map(service => {
-            // Ensure logs are sorted chronologically to find the latest one
             const sortedLogs = [...service.logs].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
             const latestLog = sortedLogs[0];
             const status = latestLog?.status || 'unknown';
@@ -151,7 +177,6 @@ const DependencyMap = () => {
 
             setNodes(currentNodes => {
                 if (currentNodes.length === 0) {
-                    // Initialize nodes on first load
                     return processedData.map((service, index) => ({
                         id: service.id,
                         type: 'custom',
@@ -161,7 +186,6 @@ const DependencyMap = () => {
                         targetPosition: Position.Left,
                     }));
                 }
-                // Update existing nodes
                 return currentNodes.map(node => {
                     const update = nodeUpdates.find(n => n.id === node.id);
                     return update ? { ...node, data: { ...node.data, ...update.data } } : node;
@@ -181,13 +205,24 @@ const DependencyMap = () => {
         }
     }, [processedData, setNodes, setEdges]);
 
-    if (loading) {
+    if (loading && nodes.length === 0) {
         return <div className="flex justify-center items-center h-full">Loading dependency map...</div>;
     }
 
     return (
         <div className="space-y-4">
-            <h1 className="text-3xl font-bold">Dependency Map</h1>
+            <div className="flex justify-between items-center">
+                <h1 className="text-3xl font-bold">Dependency Map</h1>
+                <div className="flex items-center space-x-4">
+                    <Button variant="outline" onClick={handleRefresh} disabled={loading}>
+                        <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                        Refresh
+                    </Button>
+                    <Button variant="outline" onClick={toggleAutoRefresh}>
+                        {autoRefresh ? `Auto Refresh: ${countdown}s` : 'Enable Auto Refresh'}
+                    </Button>
+                </div>
+            </div>
             <Card className="h-[600px] w-full">
                 <CardContent className="h-full p-0">
                     <ReactFlow

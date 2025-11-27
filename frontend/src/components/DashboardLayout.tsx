@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 import Navigation from './dashboard/Navigation';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+import { MonitoringProvider } from '@/hooks/useMonitoring';
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -44,7 +45,9 @@ const DashboardLayout = () => {
       <main className="flex-1 flex flex-col overflow-hidden">
         <div className="flex-1 overflow-y-auto container mx-auto p-4 md:p-6">
           <Suspense fallback={<div>Loading page...</div>}>
-            <Outlet />
+            <MonitoringProvider>
+              <Outlet />
+            </MonitoringProvider>
           </Suspense>
         </div>
       </main>

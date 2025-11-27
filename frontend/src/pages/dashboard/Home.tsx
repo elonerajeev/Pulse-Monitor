@@ -60,7 +60,7 @@ const Home = () => {
   const { addNotification } = useNotifications();
   const prevServicesRef = useRef<MonitoringService[]>([]);
   const [autoRefresh, setAutoRefresh] = useState(false);
-  const [countdown, setCountdown] = useState(180);
+  const [countdown, setCountdown] = useState(30);
 
   const globeLocations = services
     .map(service => {
@@ -118,7 +118,7 @@ const Home = () => {
         setCountdown(prevCountdown => {
           if (prevCountdown <= 1) {
             fetchServices();
-            return 180;
+            return 30;
           }
           return prevCountdown - 1;
         });
@@ -133,7 +133,7 @@ const Home = () => {
 
   const toggleAutoRefresh = () => {
     setAutoRefresh(prev => !prev);
-    setCountdown(180);
+    setCountdown(30);
   };
 
   const handleRefresh = (serviceId?: string) => {
@@ -522,7 +522,7 @@ const Home = () => {
         />
       )}
 
-      <AlertDialog open={!!serviceToDelete} onOpenChange={() => setServiceToDelete(null)}>
+      <AlertDialog open={!!serviceToDelete} onOpenChange={() => setServiceToDelete(null)} >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>

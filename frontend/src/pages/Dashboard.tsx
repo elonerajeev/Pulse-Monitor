@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/ui/navbar';
@@ -18,36 +18,9 @@ import UptimeHeatmap from '@/components/dashboard/UptimeHeatmap';
 import IncidentsTable from '@/components/dashboard/IncidentsTable';
 import DashboardLayout from '@/components/DashboardLayout'; // Import DashboardLayout
 import { useAuth } from '@/hooks/useAuth'; // Import useAuth hook
+import { useMonitoring } from '@/hooks/useMonitoring'; // Import useMonitoring hook
 
-interface MonitoringLog {
-  _id: string;
-  status: string;
-  responseTime: number;
-  createdAt: string;
-  ssl?: { daysUntilExpiry: number; };
-  message: string;
-  monitor: {
-    _id: string;
-    name: string;
-  };
-  requests: number;
-}
 
-interface MonitoringService {
-  _id: string;
-  name: string;
-  target: string;
-  serviceType: string;
-  interval: number;
-  location?: string;
-  latestLog?: MonitoringLog;
-  logs: MonitoringLog[];
-}
-
-interface TrafficData {
-    time: string;
-    value: number;
-}
 
 const locationCoordinates: Record<string, { lat: number; lon: number }> = {
     'us-east': { lat: 38.9072, lon: -77.0369 },
@@ -62,15 +35,11 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { isAuthenticated, logout } = useAuth(); // Use isAuthenticated from useAuth
-  const [services, setServices] = useState<MonitoringService[]>([]);
-  const [trafficData, setTrafficData] = useState<TrafficData[]>([]);
-  const [editingService, setEditingService] = useState<MonitoringService | null>(null);
-  const [serviceToDelete, setServiceToDelete] = useState<MonitoringService | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { services, trafficData, loading, fetchServices, fetchTrafficData } = useMonitoring();
+  const [editingService, setEditingService] = useState<any | null>(null);
+  const [serviceToDelete, setServiceToDelete] = useState<any | null>(null);
   const { addNotification } = useNotifications();
-  const prevServicesRef = useRef<MonitoringService[]>([]);
-  const [autoRefresh, setAutoRefresh] = useState(false);
-  const [countdown, setCountdown] = useState(180);
+  const prevServicesRef = useRef<any[]>([]);
 
   const globeLocations = services
     .map(service => {
@@ -86,68 +55,17 @@ const Dashboard = () => {
     })
     .filter(Boolean) as { lat: number; lon: number; city: string; status: 'online' | 'offline' | 'degraded' }[];
 
-  const fetchServices = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await api.get('/monitoring');
 
-      if (response.status === 200) {
-        const newServices = response.data.data;
-
-        newServices.forEach((service: MonitoringService) => {
-          const prevService = prevServicesRef.current.find(p => p._id === service._id);
-          if (prevService && prevService.latestLog?.status === 'online' && service.latestLog?.status === 'offline') {
-            addNotification({
-              message: `Service '${service.name}' is down.`,
-              service: 'Monitoring',
-              severity: 'error',
-            });
-          }
-        });
-
-        setServices(newServices);
-        prevServicesRef.current = newServices;
-      } else {
-        toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
-      }
-    } catch (error) {
-      toast({ title: 'Error', description: 'Failed to fetch monitoring services.', variant: 'destructive' });
-    }
-    setLoading(false);
-  }, [toast, addNotification]);
-
-  const fetchTrafficData = useCallback(async () => {
-    try {
-        const response = await api.get('/traffic?site_id=pulse-monitor-pro.vercel.app');
-        if (response.status === 200) {
-            const { results } = response.data.data;
-            const formattedTraffic = results.map((item: { pageviews: number; date: string }) => ({
-                value: item.pageviews,
-                time: new Date(item.date).toLocaleDateString(),
-            }));
-            setTrafficData(formattedTraffic);
-        } else {
-            toast({ title: 'Error', description: 'Failed to fetch traffic data.', variant: 'destructive' });
-        }
-    } catch (error) {
-        console.error("Traffic fetch error:", error)
-        toast({ title: 'Error', description: 'Failed to fetch traffic data.', variant: 'destructive' });
-    }
-  }, [toast]);
 
   useEffect(() => {
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
-    setIsAuthenticated(authStatus);
 
     if (!authStatus) {
       toast({ title: 'Error', description: 'You must be logged in to view the dashboard.', variant: 'destructive' });
       navigate('/login');
       return;
     }
-
-    fetchServices();
-    fetchTrafficData();
-  }, [navigate, toast, fetchServices, fetchTrafficData]);
+  }, [navigate, toast]);
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;

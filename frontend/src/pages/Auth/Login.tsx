@@ -16,9 +16,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { Github, Loader2, Chrome, Activity, Eye, EyeOff } from 'lucide-react';
 import BackgroundIcons from '@/components/ui/background-icons';
 import useNotifications from '@/hooks/use-notifications';
-
-// const API_BASE_URL = "http://localhost:8000/api/v1";
-const API_BASE_URL = "https://pulse-monitor-backend.onrender.com/api/vi";
+import { API_BASE_URL } from '@/utils/config';
 
 const Login = () => {
   const navigate = useNavigate();

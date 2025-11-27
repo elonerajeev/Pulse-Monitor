@@ -1,7 +1,7 @@
 
-up to date, audited 632 packages in 6s
+up to date, audited 649 packages in 7s
 
-88 packages are looking for funding
+91 packages are looking for funding
   run `npm fund` for details
 
 2 moderate severity vulnerabilities
@@ -15,7 +15,174 @@ Run `npm audit` for details.
 > vite
 
 
-  VITE v5.4.21  ready in 451 ms
+  VITE v5.4.21  ready in 1246 ms
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
+1:13:23 PM [vite] page reload src/pages/Dashboard.tsx
+1:14:00 PM [vite] page reload src/pages/Dashboard.tsx
+1:21:17 PM [vite] page reload src/pages/Dashboard.tsx
+1:26:26 PM [vite] hmr update /src/components/ui/real-time-chart.tsx, /src/index.css
+1:26:53 PM [vite] hmr update /src/components/ui/RealTimeTrafficChart.tsx, /src/index.css
+1:27:37 PM [vite] page reload src/pages/Dashboard.tsx
+1:28:27 PM [vite] page reload src/pages/Dashboard.tsx
+1:43:44 PM [vite] hmr update /src/pages/Monitoring.tsx, /src/index.css
+1:45:24 PM [vite] hmr update /src/pages/Monitoring.tsx, /src/index.css
+1:45:24 PM [vite] Internal server error: /home/user/server/frontend/src/pages/Monitoring.tsx: Identifier 'api' has already been declared. (196:7)
+
+  194 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+  195 | import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, LineChart, Line } from 'recharts';
+> 196 | import api from '@/utils/api';
+      |        ^
+  197 | import { Activity, AlertTriangle, BadgePercent, Zap, RefreshCw } from 'lucide-react';
+  198 | import { Button } from '@/components/ui/button';
+  199 |
+  Plugin: vite:react-babel
+  File: /home/user/server/frontend/src/pages/Monitoring.tsx:196:7
+  194|  import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+  195|  import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, LineChart, Line } from 'recharts';
+  196|  import api from '@/utils/api';
+     |         ^
+  197|  import { Activity, AlertTriangle, BadgePercent, Zap, RefreshCw } from 'lucide-react';
+  198|  import { Button } from '@/components/ui/button';
+      at constructor (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+      at TypeScriptParserMixin.raise (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:6624:19)
+      at TypeScriptScopeHandler.checkRedeclarationInScope (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:1646:19)
+      at TypeScriptScopeHandler.declareName (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:1612:12)
+      at TypeScriptScopeHandler.declareName (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4909:11)
+      at TypeScriptParserMixin.declareNameFromIdentifier (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:7594:16)
+      at TypeScriptParserMixin.checkIdentifier (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:7590:12)
+      at TypeScriptParserMixin.checkLVal (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:7527:12)
+      at TypeScriptParserMixin.finishImportSpecifier (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14342:10)
+      at TypeScriptParserMixin.parseImportSpecifierLocal (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14339:31)
+      at TypeScriptParserMixin.maybeParseDefaultImportSpecifier (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14446:12)
+      at TypeScriptParserMixin.parseImportSpecifiersAndAfter (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14315:29)
+      at TypeScriptParserMixin.parseImport (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14311:17)
+      at TypeScriptParserMixin.parseImport (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9412:26)
+      at TypeScriptParserMixin.parseStatementContent (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12952:27)
+      at TypeScriptParserMixin.parseStatementContent (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9569:18)
+      at TypeScriptParserMixin.parseStatementLike (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12843:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12820:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13392:36)
+      at TypeScriptParserMixin.parseBlockBody (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13385:10)
+      at TypeScriptParserMixin.parseProgram (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12698:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12688:25)
+      at TypeScriptParserMixin.parse (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14568:25)
+      at TypeScriptParserMixin.parse (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10183:18)
+      at parse (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14602:38)
+      at parser (/home/user/server/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/user/server/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/user/server/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (/home/user/server/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (/home/user/server/frontend/node_modules/gensync/index.js:261:32)
+      at /home/user/server/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/user/server/frontend/node_modules/gensync/index.js:223:11)
+      at /home/user/server/frontend/node_modules/gensync/index.js:189:28
+      at /home/user/server/frontend/node_modules/@babel/core/lib/gensync-utils/async.js:67:7
+      at /home/user/server/frontend/node_modules/gensync/index.js:113:33
+      at step (/home/user/server/frontend/node_modules/gensync/index.js:287:14)
+      at /home/user/server/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/user/server/frontend/node_modules/gensync/index.js:223:11)
+1:48:19 PM [vite] hmr update /src/pages/Monitoring.tsx, /src/index.css
+1:48:26 PM [vite] Internal server error: /home/user/server/frontend/src/pages/Monitoring.tsx: Identifier 'StatCard' has already been declared. (220:6)
+
+  218 |     description?: string;
+  219 | }
+> 220 | const StatCard = ({ title, value, icon, description }: StatCardProps) => (
+      |       ^
+  221 |     <Card>
+  222 |         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+  223 |             <CardTitle className="text-sm font-medium">{title}</CardTitle>
+  Plugin: vite:react-babel
+  File: /home/user/server/frontend/src/pages/Monitoring.tsx:220:6
+  218|      description?: string;
+  219|  }
+  220|  const StatCard = ({ title, value, icon, description }: StatCardProps) => (
+     |        ^
+  221|      <Card>
+  222|          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      at constructor (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+      at TypeScriptParserMixin.raise (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:6624:19)
+      at TypeScriptScopeHandler.checkRedeclarationInScope (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:1646:19)
+      at TypeScriptScopeHandler.declareName (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:1612:12)
+      at TypeScriptScopeHandler.declareName (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:4909:11)
+      at TypeScriptParserMixin.declareNameFromIdentifier (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:7594:16)
+      at TypeScriptParserMixin.checkIdentifier (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:7590:12)
+      at TypeScriptParserMixin.checkLVal (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:7527:12)
+      at TypeScriptParserMixin.parseVarId (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13488:10)
+      at TypeScriptParserMixin.parseVarId (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9805:11)
+      at TypeScriptParserMixin.parseVar (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13459:12)
+      at TypeScriptParserMixin.parseVarStatement (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13306:10)
+      at TypeScriptParserMixin.parseVarStatement (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9469:31)
+      at TypeScriptParserMixin.parseStatementContent (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12927:23)
+      at TypeScriptParserMixin.parseStatementContent (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:9569:18)
+      at TypeScriptParserMixin.parseStatementLike (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12843:17)
+      at TypeScriptParserMixin.parseModuleItem (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12820:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13392:36)
+      at TypeScriptParserMixin.parseBlockBody (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:13385:10)
+      at TypeScriptParserMixin.parseProgram (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12698:10)
+      at TypeScriptParserMixin.parseTopLevel (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:12688:25)
+      at TypeScriptParserMixin.parse (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14568:25)
+      at TypeScriptParserMixin.parse (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:10183:18)
+      at parse (/home/user/server/frontend/node_modules/@babel/parser/lib/index.js:14602:38)
+      at parser (/home/user/server/frontend/node_modules/@babel/core/lib/parser/index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (/home/user/server/frontend/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)
+      at normalizeFile.next (<anonymous>)
+      at run (/home/user/server/frontend/node_modules/@babel/core/lib/transformation/index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (/home/user/server/frontend/node_modules/@babel/core/lib/transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (/home/user/server/frontend/node_modules/gensync/index.js:261:32)
+      at /home/user/server/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/user/server/frontend/node_modules/gensync/index.js:223:11)
+      at /home/user/server/frontend/node_modules/gensync/index.js:189:28
+      at /home/user/server/frontend/node_modules/@babel/core/lib/gensync-utils/async.js:67:7
+      at /home/user/server/frontend/node_modules/gensync/index.js:113:33
+      at step (/home/user/server/frontend/node_modules/gensync/index.js:287:14)
+      at /home/user/server/frontend/node_modules/gensync/index.js:273:13
+      at async.call.result.err.err (/home/user/server/frontend/node_modules/gensync/index.js:223:11)
+1:51:29 PM [vite] hmr update /src/pages/Monitoring.tsx, /src/index.css
+2:03:37 PM [vite] hmr update /src/components/DashboardLayout.tsx, /src/index.css
+2:04:10 PM [vite] hmr update /src/components/DashboardLayout.tsx, /src/index.css
+2:12:30 PM [vite] page reload src/pages/Dashboard.tsx
+2:12:36 PM [vite] page reload src/pages/Dashboard.tsx
+2:13:29 PM [vite] page reload src/pages/Dashboard.tsx
+2:13:40 PM [vite] page reload src/pages/Dashboard.tsx
+2:13:40 PM [vite] page reload src/pages/Dashboard.tsx
+2:13:54 PM [vite] page reload src/pages/Dashboard.tsx
+2:14:36 PM [vite] page reload src/pages/Dashboard.tsx
+2:17:50 PM [vite] hmr update /src/pages/dashboard/Home.tsx, /src/index.css
+2:19:01 PM [vite] hmr update /src/pages/dashboard/Services.tsx, /src/index.css
+2:21:55 PM [vite] hmr update /src/pages/Monitoring.tsx, /src/index.css
+2:24:05 PM [vite] hmr update /src/hooks/useMonitoring.tsx, /src/index.css
+2:24:06 PM [vite] hmr invalidate /src/hooks/useMonitoring.tsx Could not Fast Refresh ("useMonitoring" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+2:24:06 PM [vite] hmr update /src/index.css, /src/components/DashboardLayout.tsx
+2:25:52 PM [vite] hmr update /src/pages/DependencyMap.tsx, /src/index.css
+2:33:33 PM [vite] hmr update /src/pages/DemoDashboard.tsx, /src/index.css
+2:33:34 PM [vite] Internal server error: Failed to resolve import "@/utils/dummy" from "src/pages/DemoDashboard.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /home/user/server/frontend/src/pages/DemoDashboard.tsx:17:55
+  32 |  import UptimeHeatmap from "@/components/dashboard/UptimeHeatmap";
+  33 |  import IncidentsTable from "@/components/dashboard/IncidentsTable";
+  34 |  import { generateDummyData } from "@/utils/dummy";
+     |                                     ^
+  35 |  const DemoDashboard = () => {
+  36 |    _s();
+      at TransformPluginContext._formatError (file:///home/user/server/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///home/user/server/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///home/user/server/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at async file:///home/user/server/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 19)
+      at async TransformPluginContext.transform (file:///home/user/server/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///home/user/server/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///home/user/server/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///home/user/server/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+2:34:56 PM [vite] hmr update /src/App.tsx, /src/index.css
+2:38:17 PM [vite] hmr update /src/pages/DemoDashboard.tsx, /src/index.css
+2:39:59 PM [vite] hmr update /src/pages/DemoDashboard.tsx, /src/index.css

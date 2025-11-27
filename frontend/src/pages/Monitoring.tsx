@@ -1,9 +1,9 @@
-
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, LineChart, Line } from 'recharts';
 import api from '@/utils/api';
-import { Activity, AlertTriangle, BadgePercent, Zap } from 'lucide-react';
+import { Activity, AlertTriangle, BadgePercent, Zap, RefreshCw } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 // --- Types ---
 interface MonitoringLog {
@@ -193,21 +193,36 @@ const IncidentsTable = ({ logs }: IncidentsTableProps) => (
 const Monitoring = () => {
   const [services, setServices] = useState<MonitoringService[]>([]);
   const [loading, setLoading] = useState(true);
+  const [autoRefresh, setAutoRefresh] = useState(true); // Auto-refresh enabled by default
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await api.get('/monitoring');
+      setServices(response.data.data);
+    } catch (error) {
+      console.error('Failed to fetch monitoring data', error);
+    }
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await api.get('/monitoring');
-        setServices(response.data.data);
-      } catch (error) {
-        console.error('Failed to fetch monitoring data', error);
-      }
-      setLoading(false);
-    };
-
     fetchData();
-  }, []);
+  }, [fetchData]);
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+    if (autoRefresh) {
+        intervalId = setInterval(() => {
+            fetchData();
+        }, 30000); // Refresh every 30 seconds
+    }
+    return () => clearInterval(intervalId);
+  }, [autoRefresh, fetchData]);
+
+  const handleRefresh = () => {
+      fetchData();
+  };
 
   const monitoringData = useMemo(() => {
     if (!services) return null;
@@ -238,7 +253,7 @@ const Monitoring = () => {
             const logTime = new Date(log.createdAt).getTime();
             const fullLog = {...log, monitor: { _id: service._id, name: service.name }};
             if (logTime > twentyFourHoursAgo) {
-                if(log.status !== 'online') {
+                if(log.status !== 'online' && log.status !== 'pending') {
                     incidentLogs.push(fullLog);
                     const type = log.message || 'Unknown';
                     incidentsByType[type] = (incidentsByType[type] || 0) + 1;
@@ -288,7 +303,9 @@ const Monitoring = () => {
 
   return (
     <div className="space-y-6">
-        <h1 className="text-3xl font-bold">Monitoring</h1>
+        <div className="flex justify-between items-center">
+            <h1 className="text-3xl font-bold">Monitoring</h1>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <StatCard title="Overall Uptime" value={`${monitoringData.uptimePercentage.toFixed(2)}%`} icon={<BadgePercent className="h-4 w-4 text-muted-foreground" />} description="(Last 24 hours)" />
             <StatCard title="Avg. Response Time" value={`${monitoringData.avgResponseTime}ms`} icon={<Zap className="h-4 w-4 text-muted-foreground" />} description="(Latest from online services)"/>

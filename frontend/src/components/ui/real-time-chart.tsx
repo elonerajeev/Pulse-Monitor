@@ -50,44 +50,7 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ services }) => {
     if (services && services.length > 0) {
       return services;
     }
-
-    // Generate dummy data for the landing page
-    const dummyServices: MonitoringService[] = [
-      {
-        _id: '1',
-        name: 'API',
-        target: 'https://api.example.com',
-        serviceType: 'api',
-        status: 'healthy',
-        logs: [],
-      },
-      {
-        _id: '2',
-        name: 'Website',
-        target: 'https://example.com',
-        serviceType: 'website',
-        status: 'healthy',
-        logs: [],
-      },
-    ];
-
-    const now = new Date();
-    for (let i = 29; i >= 0; i--) {
-      const time = new Date(now.getTime() - i * 5 * 60 * 1000);
-      dummyServices[0].logs.push({
-        _id: `log1-${i}`,
-        status: 'healthy',
-        responseTime: Math.floor(Math.random() * (i > 15 && i < 20 ? 1200 : 200 - 50 + 1) + 50),
-        createdAt: time.toISOString(),
-      });
-      dummyServices[1].logs.push({
-        _id: `log2-${i}`,
-        status: 'healthy',
-        responseTime: Math.floor(Math.random() * (i > 10 && i < 15 ? 1100 : 300 - 100 + 1) + 100),
-        createdAt: time.toISOString(),
-      });
-    }
-    return dummyServices;
+    return [];
   }, [services]);
 
   const serviceColors = useMemo(() => {

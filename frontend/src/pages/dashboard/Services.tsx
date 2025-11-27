@@ -28,6 +28,7 @@ const Services = () => {
   const [services, setServices] = useState<MonitoringService[]>([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [autoRefresh, setAutoRefresh] = useState(true); // Auto-refresh enabled by default
 
   const fetchServices = useCallback(async () => {
     setLoading(true);
@@ -47,6 +48,17 @@ const Services = () => {
   useEffect(() => {
     fetchServices();
   }, [fetchServices]);
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+    if (autoRefresh) {
+      intervalId = setInterval(() => {
+        fetchServices();
+      }, 30000); // Refresh every 30 seconds
+    }
+    return () => clearInterval(intervalId);
+  }, [autoRefresh, fetchServices]);
+
 
   const handleEdit = (serviceId: string) => {
     // For now, we'll just log this. In a real app, you might open a modal or navigate to an edit page.
