@@ -17,8 +17,7 @@ import IncidentsTable from '@/components/dashboard/IncidentsTable';
 import { generateDummyData, getGlobeLocations } from '@/utils/dummy';
 
 
-const DemoDashboard = () => {
-  const navigate = useNavigate();
+const DemoDashboardHome = () => {
   const { toast } = useToast();
   const [services, setServices] = useState(generateDummyData());
   const [editingService, setEditingService] = useState(null);
@@ -73,7 +72,7 @@ const DemoDashboard = () => {
   }, [autoRefresh, fetchServices]);
 
   const handleAddMonitor = () => {
-    navigate('/signup');
+    toast({ title: 'Feature not available in Demo', description: 'Sign up to create your own monitors.' });
   };
 
   const toggleAutoRefresh = () => {
@@ -394,4 +393,4 @@ const DemoDashboard = () => {
   );
 };
 
-export default DemoDashboard;
+export default DemoDashboardHome;

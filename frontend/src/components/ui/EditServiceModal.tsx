@@ -71,7 +71,8 @@ const EditServiceModal: React.FC<EditServiceModalProps> = ({ service, onUpdate, 
                             <SelectItem value="ap-southeast">AP Southeast</SelectItem>
                         </SelectContent>
                     </Select>
-                    <Input id="interval" type="number" value={interval} onChange={(e) => setInterval(Number(e.target.value))} placeholder="Interval (minutes)" />
+                    <Input id="interval" type="number" value={interval} placeholder="Interval (minutes)" disabled />
+                    <p className="text-sm text-red-500 -mt-2">The interval cannot be changed for now.</p>
                 </div>
                 <DialogFooter>
                     <Button variant="outline" onClick={onCancel}>Cancel</Button>

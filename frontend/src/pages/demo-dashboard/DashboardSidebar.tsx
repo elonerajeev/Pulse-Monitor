@@ -7,42 +7,42 @@ import { buttonVariants } from '@/components/ui/button';
 const navItems = [
   {
     name: 'Home',
-    href: '/dashboard',
+    href: '/demo-dashboard',
     icon: Home,
   },
   {
     name: 'Traffic(Working)',
-    href: '/dashboard/traffic',
+    href: '/demo-dashboard/traffic',
     icon: BarChart2,
   },
   {
     name: 'Services',
-    href: '/dashboard/services',
+    href: '/demo-dashboard/services',
     icon: Server,
   },
   {
       name: 'Monitoring',
-      href: '/dashboard/monitoring',
+      href: '/demo-dashboard/monitoring',
       icon: AreaChart,
   },
   {
       name: 'Dependency Map',
-      href: '/dashboard/dependency-map',
+      href: '/demo-dashboard/dependency-map',
       icon: Network,
   },
   {
       name: 'Settings',
-      href: '/dashboard/settings',
+      href: '/demo-dashboard/settings',
       icon: Settings,
   },
   {
       name: 'Profile',
-      href: '/dashboard/profile',
+      href: '/demo-dashboard/profile',
       icon: User,
   },
   {
       name: 'API & Report',
-      href: '/dashboard/api-and-report',
+      href: '/demo-dashboard/api-and-report',
       icon: Book,
   },
 ];

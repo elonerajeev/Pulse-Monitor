@@ -10,8 +10,8 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
       req.header("Authorization")?.replace("Bearer ", "");
 
     console.log("Attempting to verify JWT...");
-    console.log("Cookies: ", req.cookies);
-    console.log("Token: ", token);
+    // console.log("Cookies: ", req.cookies);
+    // console.log("Token: ", token);
 
     if (!token) {
       throw new ApiError(401, "Unauthorized request: No token provided");
@@ -22,7 +22,7 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
     }
 
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    console.log("Decoded token: ", decodedToken);
+    // console.log("Decoded token: ", decodedToken);
 
     const user = await User.findById(decodedToken?.id).select("-password");
 

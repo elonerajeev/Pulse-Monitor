@@ -1,15 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
-import { MessageSquare, Mail, Send, Bell } from 'lucide-react'; // Placeholder icons
 
 const integrations = [
-  { name: "Slack", icon: MessageSquare },
-  { name: "Email", icon: Mail },
-  { name: "Telegram", icon: Send },
-  { name: "PagerDuty", icon: Bell },
-  { name: "Opsgenie", icon: Bell },
-  { name: "Webhooks", icon: Send },
+  { name: "Slack", iconUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" },
+  { name: "Email", iconUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_(2020).svg" },
+  { name: "Telegram", iconUrl: "https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" },
+  { name: "PagerDuty", iconUrl: "https://www.vectorlogo.zone/logos/pagerduty/pagerduty-icon.svg" },
+  { name: "Opsgenie", iconUrl: "https://cdn.worldvectorlogo.com/logos/opsgenie-1.svg" },
+  { name: "Webhooks", iconUrl: "https://www.vectorlogo.zone/logos/zapier/zapier-icon.svg" },
 ];
 
 const Integrations = () => {
@@ -58,7 +57,7 @@ const Integrations = () => {
                 variants={itemVariants}
                 className="bg-card p-6 rounded-lg border flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-shadow duration-300"
               >
-                <integration.icon className="w-12 h-12 mb-4 text-primary" />
+                <img src={integration.iconUrl} alt={`${integration.name} logo`} className="w-12 h-12 mb-4" />
                 <p className="font-semibold text-lg">{integration.name}</p>
               </motion.div>
             ))}

@@ -66,7 +66,7 @@ const getMonitoringServices = asyncHandler(async (req, res) => {
         as: "logs",
         pipeline: [
           { $sort: { createdAt: -1 } },
-          { $limit: 5 }, // Fetch only the 10 most recent logs
+          { $limit: 200 }, // Fetch only the 200 most recent logs
         ],
       },
     },
@@ -94,7 +94,7 @@ const getMonitoringServices = asyncHandler(async (req, res) => {
 });
 
 const getRecentMonitoringLogs = asyncHandler(async (req, res) => {
-    const limit = parseInt(req.query.limit, 10) || 5;
+    const limit = parseInt(req.query.limit, 10) || 20;
     const logs = await MonitoringLog.find()
         .sort({ createdAt: -1 })
         .limit(limit)

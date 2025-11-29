@@ -25,10 +25,11 @@ import trafficRouter from "./routes/traffic.routes.js";
 const app = express();
 
 const allowedOrigins = [
-    'https://pulse-monitor-frontend.onrender.com',
+    'https://pulsemonitorlog.netlify.app',
     'http://localhost:5173',
     'https://5173-firebase-server-1759253299248.cluster-fdkw7vjj7bgguspe3fbbc25tra.cloudworkstations.dev',
-    'https://5000-firebase-server-1759253299248.cluster-fdkw7vjj7bgguspe3fbbc25tra.cloudworkstations.dev'
+    'https://5000-firebase-server-1759253299248.cluster-fdkw7vjj7bgguspe3fbbc25tra.cloudworkstations.dev',
+    'https://5174-firebase-server-1759253299248.cluster-fdkw7vjj7bgguspe3fbbc25tra.cloudworkstations.dev'
 ];
 
 const corsOptions = {
@@ -37,6 +38,7 @@ const corsOptions = {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
+            console.log("Refresh a page once")
         }
     },
     credentials: true,

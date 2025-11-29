@@ -1,95 +1,98 @@
-import { useState } from 'react';
-import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
-import { BarChart2 } from 'lucide-react';
-import useApi from '../../hooks/useApi';
 import TrafficCard from '../../components/ui/TrafficCard';
 
+const dummyTrafficData1 = {
+  rank: {
+    global_rank: 224762,
+    country: 'Canada',
+    country_rank: 47388,
+  },
+  engagement: {
+    visits: '8.0k',
+    time_on_site: '05:02',
+    bounce_rate: 66.71,
+    monthly_visitors_count: 103864,
+  },
+  traffic_sources: {
+    Search: 50,
+    Direct: 25,
+    Social: 16,
+    Referrals: 9,
+  },
+  historical_traffic: Array.from({ length: 30 }, (_, i) => ({
+    date: new Date(Date.now() - (30 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    visits: Math.floor(Math.random() * 3000) + 1000,
+  })),
+  traffic_by_country: [
+    { country: 'USA', visits: 500000 },
+    { country: 'India', visits: 200000 },
+    { country: 'UK', visits: 100000 },
+    { country: 'Germany', visits: 50000 },
+    { country: 'Canada', visits: 25000 },
+  ],
+  device_breakdown: {
+    desktop: 64.59,
+    mobile: 35.41,
+  },
+  seo_details: {
+    seo_score: 93.1,
+    keywords_ranked: 2781,
+    top_keyword: 'marketing tool',
+    backlinks: 13558,
+    domain_authority: 41,
+  },
+};
+
+const dummyTrafficData2 = {
+  rank: {
+    global_rank: 494182,
+    country: 'UK',
+    country_rank: 16529,
+  },
+  engagement: {
+    visits: '4.7k',
+    time_on_site: '10:25',
+    bounce_rate: 65.13,
+    monthly_visitors_count: 86498,
+  },
+  traffic_sources: {
+    Search: 54,
+    Direct: 28,
+    Social: 11,
+    Referrals: 7,
+  },
+  historical_traffic: Array.from({ length: 30 }, (_, i) => ({
+    date: new Date(Date.now() - (30 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    visits: Math.floor(Math.random() * 3000) + 1000,
+  })),
+  traffic_by_country: [
+    { country: 'USA', visits: 500000 },
+    { country: 'India', visits: 200000 },
+    { country: 'UK', visits: 100000 },
+    { country: 'Germany', visits: 50000 },
+    { country: 'Canada', visits: 25000 },
+  ],
+  device_breakdown: {
+    desktop: 69.34,
+    mobile: 30.66,
+  },
+  seo_details: {
+    seo_score: 65.5,
+    keywords_ranked: 2734,
+    top_keyword: 'analytics',
+    backlinks: 17257,
+    domain_authority: 39,
+  },
+};
+
 const Traffic = () => {
-  const [url, setUrl] = useState("");
-  const [submittedUrl, setSubmittedUrl] = useState("");
-  const [favicon, setFavicon] = useState("");
-  const [error, setError] = useState("");
-
-  const ANALYTICS_URL = submittedUrl
-    ? `/api/v1/traffic?site_id=${submittedUrl}`
-    : null;
-
-  const { data: trafficData, loading, error: apiError } = useApi(ANALYTICS_URL || "");
-
-  const handleAnalyze = () => {
-    setError("");
-    setFavicon("");
-
-    if (!url) {
-      setError("Please enter a URL.");
-      return;
-    }
-
-    try {
-      const urlObj = new URL(url.startsWith("http") ? url : `http://${url}`);
-      setFavicon(`https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=128`);
-      setSubmittedUrl(url);
-    } catch {
-      setError("Please enter a valid URL.");
-    }
-  };
-
   return (
     <div className="space-y-4">
       <h1 className="text-3xl font-bold">Traffic</h1>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Website Analyzer</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center space-x-2">
-            <Input
-              type="text"
-              placeholder="example.com"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleAnalyze()}
-            />
-            <Button onClick={handleAnalyze} disabled={loading}>
-              {loading ? 'Analyzing...' : <><BarChart2 className="mr-2 h-4 w-4" /> Analyze</>}
-            </Button>
-          </div>
-          {error && <p className="text-red-500 mt-2">{error}</p>}
-        </CardContent>
-      </Card>
-
-      {favicon && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Website Favicon</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <img
-              src={favicon}
-              className="w-16 h-16 rounded-lg"
-              alt="favicon"
-            />
-          </CardContent>
-        </Card>
-      )}
-
-      {loading && <p>Loading traffic analysis...</p>}
-      {apiError && <p className="text-red-500">An error occurred while fetching traffic data.</p>}
-
-      {trafficData && trafficData.data && (
-        <TrafficCard serviceName={submittedUrl} trafficData={trafficData.data} />
-      )}
-      
-      {trafficData && !trafficData.data && (
-        <Card>
-          <CardHeader><CardTitle>No Data</CardTitle></CardHeader>
-          <CardContent><p>No traffic data could be retrieved for the given URL.</p></CardContent>
-        </Card>
-      )}
-
+      <div className="grid gap-4">
+        <TrafficCard serviceName="Elonerajeev1233" trafficData={dummyTrafficData1} />
+        <TrafficCard serviceName="Google" trafficData={dummyTrafficData2} />
+      </div>
     </div>
   );
 };

@@ -244,7 +244,7 @@ const Home = () => {
   const historicalData = useMemo(() => {
     const now = Date.now();
     const twentyFourHours = 24 * 60 * 60 * 1000;
-    const hourlyData: { [key: string]: { times: number[], uptimes: number[] } } = {};
+    const hourlyData: { [key: string]: { times: number[], uptimes: number[], requests: number[] } } = {};
 
     for (const service of services) {
         for (const log of service.logs) {
@@ -253,10 +253,11 @@ const Home = () => {
 
             const hour = logDate.toISOString().slice(0, 13);
             if (!hourlyData[hour]) {
-                hourlyData[hour] = { times: [], uptimes: [] };
+                hourlyData[hour] = { times: [], uptimes: [], requests: [] };
             }
             hourlyData[hour].times.push(log.responseTime);
             hourlyData[hour].uptimes.push(log.status === 'online' ? 1 : 0);
+            hourlyData[hour].requests.push(log.requests || 0);
         }
     }
 
@@ -270,7 +271,13 @@ const Home = () => {
         value: (data.uptimes.reduce((a, b) => a + b, 0) / data.uptimes.length) * 100,
     })).sort((a, b) => a.time.localeCompare(b.time));
 
-    return { responseTime: formattedResponseData, uptime: formattedUptimeData };
+    const formattedTrafficData = Object.entries(hourlyData).map(([hour, data]) => ({
+        time: new Date(hour).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        value: data.requests.reduce((a, b) => a + b, 0),
+    })).sort((a, b) => a.time.localeCompare(b.time));
+
+
+    return { responseTime: formattedResponseData, uptime: formattedUptimeData, traffic: formattedTrafficData };
   }, [services]);
 
   const uptimeHeatmapData = useMemo(() => {
@@ -445,19 +452,12 @@ const Home = () => {
             </CardHeader>
             <CardContent>
               <div className="h-[350px]">
-                <RealTimeTrafficChart services={onlineServices} />
+                <RealTimeTrafficChart data={historicalData.traffic} />
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Daily Uptime (Last 90 Days)</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <UptimeHeatmap data={uptimeHeatmapData} />
-            </CardContent>
-          </Card>
+          <UptimeHeatmap data={uptimeHeatmapData} />
 
           <Card>
               <CardHeader>

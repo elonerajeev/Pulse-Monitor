@@ -13,18 +13,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
-import { Github, Loader2, Chrome, Activity, Eye, EyeOff } from 'lucide-react';
+import { Loader2, Activity, Eye, EyeOff } from 'lucide-react';
 import BackgroundIcons from '@/components/ui/background-icons';
 import useNotifications from '@/hooks/use-notifications';
-import { API_BASE_URL } from '@/utils/config';
 
 const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
-  const [isGitHubLoading, setIsGitHubLoading] = useState(false);
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { addNotification } = useNotifications();
 
@@ -53,16 +50,6 @@ const Login = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleGitHubLogin = () => {
-    setIsGitHubLoading(true);
-    window.location.href = `${API_BASE_URL}/users/auth/github`;
-  };
-
-  const handleGoogleLogin = () => {
-    setIsGoogleLoading(true);
-    window.location.href = `${API_BASE_URL}/users/auth/google`;
   };
 
   return (
@@ -151,24 +138,11 @@ const Login = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 w-full">
-                  <Button variant="outline" onClick={handleGitHubLogin} disabled={isGitHubLoading}>
-                    {isGitHubLoading ? (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    ) : (
-                      <Github className="mr-2 h-4 w-4" />
-                    )}
-                    GitHub
+                <Link to="/demo-dashboard" className="w-full">
+                  <Button variant="outline" className="w-full">
+                    Continue with Demo User
                   </Button>
-                  <Button variant="outline" onClick={handleGoogleLogin} disabled={isGoogleLoading}>
-                    {isGoogleLoading ? (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    ) : (
-                      <Chrome className="mr-2 h-4 w-4" />
-                    )}
-                    Google
-                  </Button>
-                </div>
+                </Link>
 
                 <p className="text-center text-sm text-muted-foreground">
                   Don't have an account?{' '}
