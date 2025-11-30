@@ -29,7 +29,8 @@ const allowedOrigins = [
     'http://localhost:5173',
     'https://5173-firebase-server-1759253299248.cluster-fdkw7vjj7bgguspe3fbbc25tra.cloudworkstations.dev',
     'https://5000-firebase-server-1759253299248.cluster-fdkw7vjj7bgguspe3fbbc25tra.cloudworkstations.dev',
-    'https://5174-firebase-server-1759253299248.cluster-fdkw7vjj7bgguspe3fbbc25tra.cloudworkstations.dev'
+    'https://5174-firebase-server-1759253299248.cluster-fdkw7vjj7bgguspe3fbbc25tra.cloudworkstations.dev',
+    'https://server-81845678-b0224.web.app/'
 ];
 
 const corsOptions = {
