@@ -123,10 +123,6 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated }) => {
                           <Edit className="mr-2 h-4 w-4" />
                           Edit Profile
                         </Button>
-                        <Button variant="ghost" className="w-full justify-start" onClick={() => navigate("/settings")}>
-                          <Settings className="mr-2 h-4 w-4" />
-                          Settings
-                        </Button>
                         <Button variant="destructive" className="w-full justify-start mt-2" onClick={handleLogout}>
                           <LogOut className="mr-2 h-4 w-4" />
                           Logout
