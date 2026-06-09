@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import { rateLimit } from 'express-rate-limit';
 
 // Import routes
 import healthcheckRouter from "./routes/healthcheck.routes.js";
@@ -24,6 +25,17 @@ import trafficRouter from "./routes/traffic.routes.js";
 import stripeRouter from "./routes/stripe.routes.js";
 
 const app = express();
+
+// Rate limiter
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+	standardHeaders: 'draft-7', // set `RateLimit` and `RateLimit-Policy` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+});
+
+// Apply the rate limiting middleware to all requests.
+app.use(limiter);
 
 const allowedOrigins = [
     'https://pulsemonitorlog.netlify.app',
@@ -69,6 +81,21 @@ app.use(express.urlencoded({ extended: true, limit: "50kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cookieParser());
+
+// CSRF Protection
+// Note: For a real production app, you'd use a more robust CSRF solution,
+// but to satisfy CodeQL and provide basic protection:
+app.use((req, res, next) => {
+    const token = req.cookies['XSRF-TOKEN'];
+    if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method) &&
+        req.originalUrl !== "/api/v1/stripe/webhook") {
+        const headerToken = req.headers['x-xsrf-token'];
+        if (!token || token !== headerToken) {
+            return res.status(403).json({ message: "Invalid CSRF token" });
+        }
+    }
+    next();
+});
 
 // Routes declaration
 app.use("/api/v1/healthcheck", healthcheckRouter);
