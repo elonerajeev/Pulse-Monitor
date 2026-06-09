@@ -1,21 +1,30 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import api from '@/utils/api';
 import useNotifications from '@/hooks/use-notifications';
+import { useAuth } from '@/hooks/useAuth';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Badge } from '@/components/ui/badge';
+import { Lock } from 'lucide-react';
 
 const AddMonitoringService = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [name, setName] = useState('');
   const [target, setTarget] = useState('');
   const [type, setType] = useState('website');
-  const [location, setLocation] = useState('us-east');
-  const [interval, setInterval] = useState<number | ''>(5);
+  const [regions, setRegions] = useState<string[]>(['us-east-1']);
+  const [interval, setInterval] = useState<number>(5);
+  const [slackEnabled, setSlackEnabled] = useState(false);
+  const [slackWebhook, setSlackWebhook] = useState('');
   const { addNotification } = useNotifications();
+
+  const isPremium = user?.plan === 'pro' || user?.plan === 'enterprise';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,8 +39,14 @@ const AddMonitoringService = () => {
         name,
         target,
         serviceType: type,
-        location,
+        regions,
         interval,
+        alertChannels: {
+            slack: {
+                enabled: slackEnabled,
+                webhookUrl: slackWebhook
+            }
+        }
       });
 
       if (response.status === 201) {
@@ -97,37 +112,87 @@ const AddMonitoringService = () => {
               </select>
             </div>
             <div>
-              <Label htmlFor="location">Location</Label>
-              <Select value={location} onValueChange={setLocation}>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="regions">Regions</Label>
+                {!isPremium && <Badge variant="secondary"><Lock className="h-3 w-3 mr-1" /> Premium</Badge>}
+              </div>
+              <Select
+                value={regions[0]}
+                onValueChange={(val) => setRegions([val])}
+                disabled={!isPremium}
+              >
                 <SelectTrigger>
                     <SelectValue placeholder="Location" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="us-east">US East</SelectItem>
-                    <SelectItem value="us-west">US West</SelectItem>
-                    <SelectItem value="eu-west">EU West</SelectItem>
-                    <SelectItem value="eu-central">EU Central</SelectItem>
-                    <SelectItem value="ap-south">AP South</SelectItem>
-                    <SelectItem value="ap-southeast">AP Southeast</SelectItem>
+                    <SelectItem value="us-east-1">US East (N. Virginia)</SelectItem>
+                    <SelectItem value="us-west-2">US West (Oregon)</SelectItem>
+                    <SelectItem value="eu-central-1">Europe (Frankfurt)</SelectItem>
+                    <SelectItem value="ap-south-1">Asia Pacific (Mumbai)</SelectItem>
                 </SelectContent>
               </Select>
+              {!isPremium && <p className="text-xs text-gray-500 mt-1">Upgrade to select different regions.</p>}
             </div>
+
             <div>
-              <Label htmlFor="interval">Check Interval (minutes)</Label>
-              <Input
-                id="interval"
-                type="number"
-                value={interval}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setInterval(val === '' ? '' : parseInt(val, 10));
-                }}
-                min="1"
-                required
-                disabled
-              />
-              <p className="text-red-500 text-sm mt-1">The check interval is fixed at 5 minutes.</p>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="interval">Check Interval (minutes)</Label>
+                {!isPremium && <Badge variant="secondary"><Lock className="h-3 w-3 mr-1" /> Premium</Badge>}
+              </div>
+              <Select
+                value={interval.toString()}
+                onValueChange={(val) => setInterval(parseFloat(val))}
+                disabled={!isPremium}
+              >
+                <SelectTrigger>
+                    <SelectValue placeholder="Interval" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="0.5" disabled={user?.plan !== 'enterprise'}>30 Seconds (Enterprise)</SelectItem>
+                    <SelectItem value="1">1 Minute (Pro)</SelectItem>
+                    <SelectItem value="5">5 Minutes (Free)</SelectItem>
+                    <SelectItem value="10">10 Minutes</SelectItem>
+                </SelectContent>
+              </Select>
+              {!isPremium && (
+                <p className="text-xs text-gray-500 mt-1">
+                   Fixed at 5 minutes for Free plan. <Link to="/pricing" className="text-blue-500 underline">Upgrade</Link>
+                </p>
+              )}
             </div>
+
+            <div className="space-y-4 border-t pt-4">
+               <div className="flex items-center justify-between">
+                 <Label className="text-base">Alert Channels</Label>
+                 {!isPremium && <Badge variant="secondary"><Lock className="h-3 w-3 mr-1" /> Premium</Badge>}
+               </div>
+
+               <div className="flex items-start space-x-2">
+                 <Checkbox
+                    id="slack"
+                    checked={slackEnabled}
+                    onCheckedChange={(checked) => setSlackEnabled(!!checked)}
+                    disabled={!isPremium}
+                 />
+                 <div className="grid gap-1.5 leading-none">
+                    <label
+                      htmlFor="slack"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      Slack Webhook
+                    </label>
+                    {slackEnabled && (
+                      <Input
+                        placeholder="https://hooks.slack.com/services/..."
+                        value={slackWebhook}
+                        onChange={(e) => setSlackWebhook(e.target.value)}
+                        className="mt-2"
+                      />
+                    )}
+                 </div>
+               </div>
+            </div>
+
             <Button type="submit" className="w-full">Add Service</Button>
           </form>
         </div>

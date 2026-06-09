@@ -1,38 +1,48 @@
+import axios from "axios";
+import { sendEmail } from "./emailService.js";
 
-import nodemailer from 'nodemailer';
-import logger from '../utils/logger.js';
-import { alertTemplate } from '../templates/alertTemplate.js';
+export const sendAlert = async (monitoring, status, result, user) => {
+    const { name, target, alertChannels } = monitoring;
+    const timestamp = new Date().toUTCString();
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+    const alertData = {
+        userName: user.name,
+        serviceName: name,
+        serviceTarget: target,
+        status: status,
+        timestamp: timestamp,
+        responseTime: result.responseTime || '-',
+        error: result.error || 'N/A',
+        region: result.region || 'N/A'
+    };
 
-const populateTemplate = (template, data) => {
-  return template.replace(/{{(.*?)}}/g, (match, key) => {
-    return data[key.trim()] || '';
-  });
-};
+    // 1. Email Alert (Base)
+    try {
+        const subject = `PulseMonitor Alert: ${name} is ${status}`;
+        await sendEmail(user.email, subject, 'alert', alertData);
+    } catch (error) {
+        console.error("Failed to send email alert:", error.message);
+    }
 
-export const sendEmail = async (to, alertData) => {
-  try {
-    const subject = `Website Alert: ${alertData.serviceName} is ${alertData.status}`;
-    const htmlBody = populateTemplate(alertTemplate, alertData);
+    // 2. Slack Alert (Premium)
+    if (alertChannels?.slack?.enabled && alertChannels?.slack?.webhookUrl) {
+        try {
+            await axios.post(alertChannels.slack.webhookUrl, {
+                text: `🚨 *PulseMonitor Alert* 🚨\n*Service:* ${name}\n*Target:* ${target}\n*Status:* ${status}\n*Region:* ${result.region}\n*Time:* ${timestamp}`,
+            });
+        } catch (error) {
+            console.error("Failed to send Slack alert:", error.message);
+        }
+    }
 
-    const info = await transporter.sendMail({
-      from: `"PulseMonitor" <${process.env.FROM_EMAIL}>`,
-      to,
-      subject,
-      html: htmlBody,
-    });
-    logger.info(`Email sent to ${to}: ${info.messageId}`);
-  } catch (error) {
-    logger.error(`Error sending email to ${to}:`, error);
-    throw error; // Re-throw to be handled by the caller
-  }
+    // 3. Discord Alert (Premium)
+    if (alertChannels?.discord?.enabled && alertChannels?.discord?.webhookUrl) {
+        try {
+            await axios.post(alertChannels.discord.webhookUrl, {
+                content: `🚨 **PulseMonitor Alert** 🚨\n**Service:** ${name}\n**Target:** ${target}\n**Status:** ${status}\n**Region:** ${result.region}\n**Time:** ${timestamp}`,
+            });
+        } catch (error) {
+            console.error("Failed to send Discord alert:", error.message);
+        }
+    }
 };

@@ -31,6 +31,35 @@ const userSchema = new mongoose.Schema(
     refreshToken: {
       type: String,
     },
+
+    plan: {
+      type: String,
+      enum: ["free", "pro", "enterprise"],
+      default: "free",
+    },
+
+    stripeCustomerId: {
+      type: String,
+    },
+
+    stripeSubscriptionId: {
+      type: String,
+    },
+
+    subscriptionStatus: {
+      type: String,
+      enum: [
+        "active",
+        "canceled",
+        "incomplete",
+        "incomplete_expired",
+        "past_due",
+        "trialing",
+        "unpaid",
+        "none",
+      ],
+      default: "none",
+    },
   },
   { timestamps: true }
 );

@@ -21,6 +21,7 @@ import monitoringRouter from "./routes/monitoring.routes.js";
 import userRouter from "./routes/user.routes.js";
 import maintenanceWindowRouter from "./routes/maintenanceWindow.routes.js";
 import trafficRouter from "./routes/traffic.routes.js";
+import stripeRouter from "./routes/stripe.routes.js";
 
 const app = express();
 
@@ -55,7 +56,13 @@ app.set("view engine", "html");
 app.set("views", path.join(__dirname, "views"));
 
 // Middleware
-app.use(express.json({ limit: "50kb" }));
+app.use((req, res, next) => {
+    if (req.originalUrl === "/api/v1/stripe/webhook") {
+        next();
+    } else {
+        express.json({ limit: "50kb" })(req, res, next);
+    }
+});
 app.use(express.urlencoded({ extended: true, limit: "50kb" }));
 
 // Static files
@@ -70,6 +77,7 @@ app.use("/api/v1/monitoring", monitoringRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/maintenance-windows", maintenanceWindowRouter);
 app.use("/api/v1/traffic", trafficRouter);
+app.use("/api/v1/stripe", stripeRouter);
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
