@@ -2,7 +2,7 @@ import { Monitoring } from "../models/monitoring.model.js";
 import { MonitoringLog } from "../models/monitoring_log.model.js";
 import Notification from "../models/notification.model.js";
 import User from "../models/user.model.js";
-import { sendEmail } from "./emailService.js";
+import { sendAlert } from "./alertService.js";
 
 export const getAllMonitoringServices = async () => {
   const services = await Monitoring.find({});
@@ -25,7 +25,7 @@ export const saveMonitoringResult = async (monitoringId, result) => {
     return newLog;
 };
 
-export const updateMonitoringStatus = async (monitoringId, newStatus) => {
+export const updateMonitoringStatus = async (monitoringId, newStatus, result = {}) => {
   const monitoring = await Monitoring.findById(monitoringId).populate('owner');
 
   if (monitoring && monitoring.status !== newStatus) {
@@ -40,18 +40,10 @@ export const updateMonitoringStatus = async (monitoringId, newStatus) => {
       });
       await notification.save();
 
-      // Send email notification
-      const emailData = {
-        userName: user.name,
-        serviceName: monitoring.name,
-        serviceTarget: monitoring.target,
-        status: newStatus,
-        timestamp: new Date().toUTCString(),
-        responseTime: '-', // This could be improved to include actual response time
-        error: 'N/A', // This could be improved to include actual error
-      };
-      const subject = `PulseMonitor: ${monitoring.name} is now ${newStatus}`;
-      await sendEmail(user.email, subject, 'alert', emailData);
+      // Send multi-channel alerts if not "pending"
+      if (newStatus !== "pending") {
+          await sendAlert(monitoring, newStatus, result, user);
+      }
     }
     await Monitoring.findByIdAndUpdate(monitoringId, { status: newStatus });
 

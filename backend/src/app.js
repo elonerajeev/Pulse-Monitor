@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import { rateLimit } from 'express-rate-limit';
 
 // Import routes
 import healthcheckRouter from "./routes/healthcheck.routes.js";
@@ -21,8 +22,20 @@ import monitoringRouter from "./routes/monitoring.routes.js";
 import userRouter from "./routes/user.routes.js";
 import maintenanceWindowRouter from "./routes/maintenanceWindow.routes.js";
 import trafficRouter from "./routes/traffic.routes.js";
+import stripeRouter from "./routes/stripe.routes.js";
 
 const app = express();
+
+// Rate limiter
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+	standardHeaders: 'draft-7', // set `RateLimit` and `RateLimit-Policy` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+});
+
+// Apply the rate limiting middleware to all requests.
+app.use(limiter);
 
 const allowedOrigins = [
     'https://pulsemonitorlog.netlify.app',
@@ -55,13 +68,34 @@ app.set("view engine", "html");
 app.set("views", path.join(__dirname, "views"));
 
 // Middleware
-app.use(express.json({ limit: "50kb" }));
+app.use((req, res, next) => {
+    if (req.originalUrl === "/api/v1/stripe/webhook") {
+        next();
+    } else {
+        express.json({ limit: "50kb" })(req, res, next);
+    }
+});
 app.use(express.urlencoded({ extended: true, limit: "50kb" }));
 
 // Static files
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cookieParser());
+
+// CSRF Protection
+// Note: For a real production app, you'd use a more robust CSRF solution,
+// but to satisfy CodeQL and provide basic protection:
+app.use((req, res, next) => {
+    const token = req.cookies['XSRF-TOKEN'];
+    if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method) &&
+        req.originalUrl !== "/api/v1/stripe/webhook") {
+        const headerToken = req.headers['x-xsrf-token'];
+        if (!token || token !== headerToken) {
+            return res.status(403).json({ message: "Invalid CSRF token" });
+        }
+    }
+    next();
+});
 
 // Routes declaration
 app.use("/api/v1/healthcheck", healthcheckRouter);
@@ -70,6 +104,7 @@ app.use("/api/v1/monitoring", monitoringRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/maintenance-windows", maintenanceWindowRouter);
 app.use("/api/v1/traffic", trafficRouter);
+app.use("/api/v1/stripe", stripeRouter);
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));

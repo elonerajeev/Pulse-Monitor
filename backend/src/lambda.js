@@ -14,6 +14,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import { rateLimit } from 'express-rate-limit';
 
 // Import routes
 import healthcheckRouter from "./routes/healthcheck.routes.js";
@@ -24,6 +25,16 @@ import maintenanceWindowRouter from "./routes/maintenanceWindow.routes.js";
 import trafficRouter from "./routes/traffic.routes.js";
 
 const app = express();
+
+// Rate limiter
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000,
+	limit: 100,
+	standardHeaders: 'draft-7',
+	legacyHeaders: false,
+});
+
+app.use(limiter);
 
 const allowedOrigins = [
     'https://pulsemonitorlog.netlify.app',
@@ -59,6 +70,18 @@ app.use(express.urlencoded({ extended: true, limit: "50kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cookieParser());
+
+// CSRF Protection
+app.use((req, res, next) => {
+    const token = req.cookies['XSRF-TOKEN'];
+    if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method)) {
+        const headerToken = req.headers['x-xsrf-token'];
+        if (!token || token !== headerToken) {
+            return res.status(403).json({ message: "Invalid CSRF token" });
+        }
+    }
+    next();
+});
 
 // Routes declaration
 app.use("/api/v1/healthcheck", healthcheckRouter);

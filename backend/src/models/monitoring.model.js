@@ -22,11 +22,11 @@ const monitoringSchema = new Schema(
       type: Number,
       required: [true, "Check interval is required"],
       default: 5, // Default to 5 minutes
-      min: [5, "Interval must be at least 5 minutes"],
+      min: [0.5, "Interval must be at least 0.5 minutes (30 seconds)"],
     },
-    location: {
-        type: String,
-        trim: true,
+    regions: {
+      type: [String],
+      default: ["us-east-1"],
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -39,6 +39,21 @@ const monitoringSchema = new Schema(
         ref: "Monitoring",
       },
     ],
+    alertChannels: {
+      slack: {
+        enabled: { type: Boolean, default: false },
+        webhookUrl: { type: String, trim: true },
+      },
+      discord: {
+        enabled: { type: Boolean, default: false },
+        webhookUrl: { type: String, trim: true },
+      },
+    },
+    status: {
+      type: String,
+      enum: ["online", "offline", "degraded", "pending"],
+      default: "pending",
+    },
   },
   { timestamps: true }
 );

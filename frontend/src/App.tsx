@@ -21,6 +21,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import ComingSoon from "./pages/ComingSoon";
+import Pricing from "./pages/Pricing";
 import ServiceDetailsPage from "./pages/dashboard/ServiceDetailsPage";
 import DashboardLayout from "./components/DashboardLayout";
 import Home from "./pages/dashboard/Home";
@@ -75,6 +76,7 @@ const App = () => (
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/privacy" element={<Privacy />} />
+                <Route path="/pricing" element={<Pricing />} />
                 <Route path="/coming-soon" element={<ComingSoon />} />
               </Route>
               <Route path="/demo-dashboard" element={<DemoDashboardLayout />}>

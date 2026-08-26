@@ -27,6 +27,39 @@ const userSchema = new mongoose.Schema(
       minlength: [6, "Password must be at least 6 characters long"],
       maxlength: [100, "Password must be at most 100 characters long"],
     },
+
+    refreshToken: {
+      type: String,
+    },
+
+    plan: {
+      type: String,
+      enum: ["free", "pro", "enterprise"],
+      default: "free",
+    },
+
+    stripeCustomerId: {
+      type: String,
+    },
+
+    stripeSubscriptionId: {
+      type: String,
+    },
+
+    subscriptionStatus: {
+      type: String,
+      enum: [
+        "active",
+        "canceled",
+        "incomplete",
+        "incomplete_expired",
+        "past_due",
+        "trialing",
+        "unpaid",
+        "none",
+      ],
+      default: "none",
+    },
   },
   { timestamps: true }
 );
