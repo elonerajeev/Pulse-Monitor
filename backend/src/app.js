@@ -68,11 +68,14 @@ app.use(limiter);
 
 const allowedOrigins = [
     'https://pulsemonitorlog.netlify.app',
+    'https://automatic-fortnight-x55wgj9vxrq29v5j-5173.app.github.dev',
     'https://5173-firebase-server-1759253299248.cluster-fdkw7vjj7bgguspe3fbbc25tra.cloudworkstations.dev',
     'https://server-81845678-b0224.web.app',
     'https://www.pulsemonitorlog.com',
-    'https://pulsemonitorlog.com'
-
+    'https://pulsemonitorlog.com',
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'http://127.0.0.1:5173'
 ];
 
 const corsOptions = {

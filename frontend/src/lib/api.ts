@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://automatic-fortnight-x55wgj9vxrq29v5j-5000.app.github.dev/api/v1';
 
 export interface ApiResponse<T> {
   status: string;
