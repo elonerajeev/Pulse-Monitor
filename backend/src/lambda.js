@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 import express from "express";
 import cookieParser from "cookie-parser";
@@ -23,6 +23,12 @@ import monitoringRouter from "./routes/monitoring.routes.js";
 import userRouter from "./routes/user.routes.js";
 import maintenanceWindowRouter from "./routes/maintenanceWindow.routes.js";
 import trafficRouter from "./routes/traffic.routes.js";
+import aiRouter from "./routes/ai.routes.js";
+import publicRouter from "./routes/public.routes.js";
+import heartbeatRouter from "./routes/heartbeat.routes.js";
+import reportRouter from "./routes/report.routes.js";
+import { issueCsrfToken, verifyCsrfToken, getCsrfToken } from "./middlewares/csrf.middleware.js";
+import { errorHandler, notFoundHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
 
@@ -55,7 +61,7 @@ const corsOptions = {
     },
     credentials: true,
     methods: 'GET,POST,PUT,DELETE,PATCH,OPTIONS',
-    allowedHeaders: 'Content-Type, Authorization, Origin, Accept',
+    allowedHeaders: 'Content-Type, Authorization, Origin, Accept, X-XSRF-TOKEN',
 };
 
 app.use(cors(corsOptions));
@@ -71,29 +77,29 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cookieParser());
 
-// CSRF Protection
-app.use((req, res, next) => {
-    const token = req.cookies['XSRF-TOKEN'];
-    if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method)) {
-        const headerToken = req.headers['x-xsrf-token'];
-        if (!token || token !== headerToken) {
-            return res.status(403).json({ message: "Invalid CSRF token" });
-        }
-    }
-    next();
-});
+// CSRF Protection (double-submit cookie)
+app.use(issueCsrfToken);
+app.use(verifyCsrfToken);
 
 // Routes declaration
+app.get("/api/v1/csrf-token", getCsrfToken);
 app.use("/api/v1/healthcheck", healthcheckRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/monitoring", monitoringRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/maintenance-windows", maintenanceWindowRouter);
 app.use("/api/v1/traffic", trafficRouter);
+app.use("/api/v1/ai", aiRouter);
+app.use("/api/v1/public", publicRouter);
+app.use("/api/v1/heartbeats", heartbeatRouter);
+app.use("/api/v1/reports", reportRouter);
 
 app.get("/", (req, res) => {
     res.status(200).json({ message: 'Backend is running on AWS Lambda!' });
 });
+
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 // Export the handler for AWS Lambda
 export const handler = serverless(app);

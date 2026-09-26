@@ -39,4 +39,37 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updatedUser, "Profile updated successfully"));
 });
 
-export { updateUserProfile };
+/**
+ * Updates which emails this account receives.
+ *
+ * Each preference is applied only when the request actually names it, so a
+ * client that knows about one toggle cannot reset the others by omitting them.
+ * Webhooks are deliberately not covered here: muting email must not silently
+ * mute an on-call channel.
+ */
+const updateNotificationPrefs = asyncHandler(async (req, res) => {
+  const { incidentEmails, sslExpiry, weeklyReport } = req.body ?? {};
+
+  const update = {};
+  if (typeof incidentEmails === "boolean") update["notificationPrefs.incidentEmails"] = incidentEmails;
+  if (typeof sslExpiry === "boolean") update["notificationPrefs.sslExpiry"] = sslExpiry;
+  if (typeof weeklyReport === "boolean") update["notificationPrefs.weeklyReport"] = weeklyReport;
+
+  if (Object.keys(update).length === 0) {
+    throw new ApiError(400, "Provide at least one preference to update");
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    { $set: update },
+    { new: true }
+  ).select("-password -refreshToken");
+
+  if (!user) throw new ApiError(404, "User not found");
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user.notificationPrefs, "Notification preferences updated"));
+});
+
+export { updateUserProfile, updateNotificationPrefs };

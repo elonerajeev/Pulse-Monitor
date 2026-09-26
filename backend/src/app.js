@@ -6,7 +6,7 @@ import { initWebSocket } from './websocket.js'; // Import WebSocket initializer
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 import express from "express";
 import cookieParser from "cookie-parser";
@@ -31,12 +31,21 @@ import userRouter from "./routes/user.routes.js";
 import maintenanceWindowRouter from "./routes/maintenanceWindow.routes.js";
 import trafficRouter from "./routes/traffic.routes.js";
 import stripeRouter from "./routes/stripe.routes.js";
+<<<<<<< HEAD
 import multiRegionMonitoringRouter from "./routes/multiRegionMonitoring.routes.js";
 import slaConfigurationRouter from "./routes/slaConfiguration.routes.js";
 import incidentRouter from "./routes/incident.routes.js";
 import alertRuleRouter from "./routes/alertRule.routes.js";
 import teamRouter from "./routes/team.routes.js";
 import apiKeyRouter from "./routes/apiKey.routes.js";
+=======
+import aiRouter from "./routes/ai.routes.js";
+import publicRouter from "./routes/public.routes.js";
+import heartbeatRouter from "./routes/heartbeat.routes.js";
+import reportRouter from "./routes/report.routes.js";
+import { issueCsrfToken, verifyCsrfToken, getCsrfToken } from "./middlewares/csrf.middleware.js";
+import { errorHandler, notFoundHandler } from "./middlewares/error.middleware.js";
+>>>>>>> e02f133 (updated)
 
 const app = express();
 
@@ -73,9 +82,21 @@ const allowedOrigins = [
     'https://server-81845678-b0224.web.app',
     'https://www.pulsemonitorlog.com',
     'https://pulsemonitorlog.com',
+<<<<<<< HEAD
     'http://localhost:5173',
     'http://localhost:3000',
     'http://127.0.0.1:5173'
+=======
+    // Local development
+    'http://localhost:5173',
+    'http://localhost:4173',
+    'http://127.0.0.1:5173',
+    // Anything extra supplied by the environment (comma separated)
+    ...(process.env.CORS_ORIGIN || '*')
+        .split(',')
+        .map((o) => o.trim())
+        .filter(Boolean),
+>>>>>>> e02f133 (updated)
 ];
 
 const corsOptions = {
@@ -89,7 +110,7 @@ const corsOptions = {
     },
     credentials: true,
     methods: 'GET,POST,PUT,DELETE,PATCH,OPTIONS',
-    allowedHeaders: 'Content-Type, Authorization, Origin, Accept',
+    allowedHeaders: 'Content-Type, Authorization, Origin, Accept, X-XSRF-TOKEN',
 };
 
 app.use(cors(corsOptions));
@@ -114,22 +135,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cookieParser());
 
-// CSRF Protection
-// Note: For a real production app, you'd use a more robust CSRF solution,
-// but to satisfy CodeQL and provide basic protection:
-app.use((req, res, next) => {
-    const token = req.cookies['XSRF-TOKEN'];
-    if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method) &&
-        req.originalUrl !== "/api/v1/stripe/webhook") {
-        const headerToken = req.headers['x-xsrf-token'];
-        if (!token || token !== headerToken) {
-            return res.status(403).json({ message: "Invalid CSRF token" });
-        }
-    }
-    next();
-});
+// CSRF Protection (double-submit cookie)
+app.use(issueCsrfToken);
+app.use(verifyCsrfToken);
 
 // Routes declaration
+app.get("/api/v1/csrf-token", getCsrfToken);
 app.use("/api/v1/healthcheck", healthcheckRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/monitoring", monitoringRouter);
@@ -139,19 +150,30 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/maintenance-windows", maintenanceWindowRouter);
 app.use("/api/v1/traffic", trafficRouter);
 app.use("/api/v1/stripe", stripeRouter);
+<<<<<<< HEAD
 app.use("/api/v1/incidents", incidentRouter);
 app.use("/api/v1/alerts", alertRuleRouter);
 app.use("/api/v1/teams", teamRouter);
 app.use("/api/v1/api-keys", apiKeyRouter);
+=======
+app.use("/api/v1/ai", aiRouter);
+app.use("/api/v1/public", publicRouter);
+app.use("/api/v1/heartbeats", heartbeatRouter);
+app.use("/api/v1/reports", reportRouter);
+>>>>>>> e02f133 (updated)
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
+<<<<<<< HEAD
 // 404 Not Found Handler (MUST be before error handler)
 app.use(notFoundHandler);
 
 // Global Error Handler (MUST be last)
+=======
+app.use(notFoundHandler);
+>>>>>>> e02f133 (updated)
 app.use(errorHandler);
 
 // Initialize WebSocket and create the server

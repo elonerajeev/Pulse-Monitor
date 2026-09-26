@@ -1,10 +1,10 @@
 
-up to date, audited 151 packages in 3s
+up to date, audited 152 packages in 17s
 
 24 packages are looking for funding
   run `npm fund` for details
 
-2 moderate severity vulnerabilities
+10 vulnerabilities (2 moderate, 8 high)
 
 To address issues that do not require attention, run:
   npm audit fix
@@ -13,6 +13,11 @@ To address all issues (including breaking changes), run:
   npm audit fix --force
 
 Run `npm audit` for details.
+npm notice
+npm notice New major version of npm available! 10.9.7 -> 12.0.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+npm notice To update run: npm install -g npm@12.0.2
+npm notice
 
 > service@1.0.0 dev
 > nodemon src/index.js
@@ -23,20 +28,49 @@ Run `npm audit` for details.
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/index.js`[39m
 [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
-[dotenv@17.2.3] injecting env (0) from ../.env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from ../.env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
 Server is running on port 3000
 MongoDB connected: ac-5pdugs8-shard-00-00.pqzslj3.mongodb.net
-✅ Email sent successfully!
-Message ID: <9ddd0c62-536e-3d45-70c9-5bc77e7a6156@gmail.com>
-✅ Email sent successfully!
-Message ID: <730b83e3-ea5d-87a9-cc89-305d7a70d7dd@gmail.com>
-✅ Email sent successfully!
-Message ID: <5b7564a6-17bf-9287-b436-f251fdef163f@gmail.com>
-✅ Email sent successfully!
-Message ID: <f5e8a9fd-c39a-ed3d-f94c-c836d6c0f79d@gmail.com>
-✅ Email sent successfully!
-Message ID: <58b333eb-1242-0e37-c42a-d3c4f6d8e574@gmail.com>
-✅ Email sent successfully!
-Message ID: <ac13d16e-6bce-8cf6-3f3f-6b8b2daccb3d@gmail.com>
-✅ Email sent successfully!
-Message ID: <596cb5ba-a13e-8485-dd5f-dc22556db9c3@gmail.com>
+Started monitoring job for service: GitHub (68e6aba38d6010cb9eb4f580) every 5 min in region us-east-1
+Started monitoring job for service: Zintellix (690f5470550359ee9360b7fa) every 5 min in region us-east-1
+Started monitoring job for service: Zinsiehe (690f54f5550359ee9360b801) every 5 min in region us-east-1
+Started monitoring job for service: fake-website (692b222e69c99a4480bf5505) every 5 min in region us-east-1
+Started monitoring job for service: PulseMonitor-Backend (692c43f1ff25d86cf2f8ed5d) every 5 min in region us-east-1
+Started monitoring job for service: PulseMonitor-Frontend-Firebase (692c44f0ff25d86cf2f8ed8d) every 5 min in region us-east-1
+Started monitoring job for service: PulseMonitor-Frontend-Netlify (692c4523ff25d86cf2f8ed96) every 5 min in region us-east-1
+Started monitoring job for service: Portfolio (692c5560ff25d86cf2f8eeae) every 5 min in region us-east-1
+Started monitoring job for service: EC2-Server (692d22498f4b82a9684b3c8c) every 5 min in region us-east-1
+Started monitoring job for service: youtube (692d54d6b2f71a992bcff7a5) every 5 min in region us-east-1
+Started monitoring job for service: Weather monitor (692d57e6b2f71a992bcff85c) every 5 min in region us-east-1
+Started monitoring job for service: Zintellix (6932da14546e4727ebb3a909) every 5 min in region us-east-1
+Started monitoring job for service: Blinkadz (694020f12d65a9f5c75f8391) every 5 min in region us-east-1
+Started monitoring job for service: artansart (6957b5266a486f872ba7d102) every 5 min in region us-east-1
+❌ Failed to send email:
+Error: Invalid login: 451 Authentication failed: Maximum credits exceeded
+    at SMTPConnection._formatError (/home/elonerajeev/Desktop/Pulse-Monitor/service/node_modules/nodemailer/lib/smtp-connection/index.js:809:19)
+    at SMTPConnection._actionAUTHComplete (/home/elonerajeev/Desktop/Pulse-Monitor/service/node_modules/nodemailer/lib/smtp-connection/index.js:1588:34)
+    at SMTPConnection.<anonymous> (/home/elonerajeev/Desktop/Pulse-Monitor/service/node_modules/nodemailer/lib/smtp-connection/index.js:556:26)
+    at SMTPConnection._processResponse (/home/elonerajeev/Desktop/Pulse-Monitor/service/node_modules/nodemailer/lib/smtp-connection/index.js:993:20)
+    at SMTPConnection._onData (/home/elonerajeev/Desktop/Pulse-Monitor/service/node_modules/nodemailer/lib/smtp-connection/index.js:774:14)
+    at SMTPConnection._onSocketData (/home/elonerajeev/Desktop/Pulse-Monitor/service/node_modules/nodemailer/lib/smtp-connection/index.js:195:44)
+    at TLSSocket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EAUTH',
+  response: '451 Authentication failed: Maximum credits exceeded',
+  responseCode: 451,
+  command: 'AUTH PLAIN'
+}
+[2026-09-02T15:35:02.272Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:03.526Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:04.140Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:05.043Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:05.770Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:06.161Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:06.815Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:06.920Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:06.991Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:07.069Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:07.136Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
+[2026-09-02T15:35:07.211Z] [PID: 1788] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Wed Sep 02 2026 21:05:00 GMT+0530 (India Standard Time)! Possible blocking IO or high CPU user at the same process used by node-cron.

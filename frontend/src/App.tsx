@@ -14,6 +14,7 @@ import Documentation from "./pages/Documentation";
 import NotFound from "./pages/NotFound";
 import Terms from "./pages/Terms";
 import Profile from "./pages/dashboard/Profile";
+import Heartbeats from "@/pages/dashboard/Heartbeats";
 import EditProfile from "./pages/EditProfile";
 import ApiReference from "./pages/ApiReference";
 import About from "./pages/About";
@@ -40,6 +41,7 @@ import DemoDependencyMap from "./pages/demo-dashboard/DependencyMap";
 import DemoProfile from "./pages/demo-dashboard/Profile";
 import DemoApiAndReport from "./pages/demo-dashboard/ApiAndReport";
 import Overview from "./pages/dashboard/Overview";
+<<<<<<< HEAD
 // Core Feature Pages
 import PerformanceMetrics from "./pages/dashboard/PerformanceMetrics";
 import MultiRegion from "./pages/dashboard/MultiRegion";
@@ -55,6 +57,10 @@ import DashboardsPage from "./pages/dashboard/DashboardsPage";
 import StatusPagesPage from "./pages/dashboard/StatusPagesPage";
 import WebhooksPage from "./pages/dashboard/WebhooksPage";
 import IntegrationsPage from "./pages/dashboard/IntegrationsPage";
+=======
+import StatusPage from "./pages/dashboard/StatusPage";
+import PublicStatus from "./pages/PublicStatus";
+>>>>>>> e02f133 (updated)
 
 
 const queryClient = new QueryClient();
@@ -79,6 +85,8 @@ const App = () => (
                   <Route path="monitoring" element={<Monitoring />} />
                   <Route path="dependency-map" element={<DependencyMap />} />
                   <Route path="api-and-report" element={<ApiAndReport />} />
+                  <Route path="heartbeats" element={<Heartbeats />} />
+                  <Route path="status-page" element={<StatusPage />} />
                   <Route path="profile" element={<Profile />} />
                   
                   {/* Core Features */}
@@ -120,6 +128,7 @@ const App = () => (
                 <Route path="profile" element={<DemoProfile />} />
                 <Route path="api-and-report" element={<DemoApiAndReport />} />
               </Route>
+              <Route path="/status/:slug" element={<PublicStatus />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

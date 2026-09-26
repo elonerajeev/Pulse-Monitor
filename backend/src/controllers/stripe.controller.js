@@ -4,7 +4,19 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+// Lazily construct the Stripe client so the server can boot without billing
+// configured. Stripe's constructor throws on a missing key, and doing that at
+// import time takes the whole API down.
+let stripeClient = null;
+const getStripe = () => {
+    if (!process.env.STRIPE_SECRET_KEY) {
+        throw new ApiError(503, "Billing is not configured on this server");
+    }
+    if (!stripeClient) {
+        stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY);
+    }
+    return stripeClient;
+};
 
 const createCheckoutSession = asyncHandler(async (req, res) => {
     const { priceId } = req.body;
@@ -17,7 +29,7 @@ const createCheckoutSession = asyncHandler(async (req, res) => {
     // Create or retrieve Stripe customer
     let stripeCustomerId = user.stripeCustomerId;
     if (!stripeCustomerId) {
-        const customer = await stripe.customers.create({
+        const customer = await getStripe().customers.create({
             email: user.email,
             name: user.name,
             metadata: {
@@ -29,7 +41,7 @@ const createCheckoutSession = asyncHandler(async (req, res) => {
         await user.save();
     }
 
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
         customer: stripeCustomerId,
         payment_method_types: ["card"],
         line_items: [
@@ -63,7 +75,7 @@ const stripeWebhook = asyncHandler(async (req, res) => {
     const rawBody = Buffer.concat(buffers);
 
     try {
-        event = stripe.webhooks.constructEvent(
+        event = getStripe().webhooks.constructEvent(
             rawBody,
             sig,
             process.env.STRIPE_WEBHOOK_SECRET
@@ -96,7 +108,7 @@ async function handleCheckoutSessionCompleted(session) {
     const subscriptionId = session.subscription;
     const customerId = session.customer;
 
-    const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+    const subscription = await getStripe().subscriptions.retrieve(subscriptionId);
     const planId = subscription.items.data[0].plan.id;
 
     let planName = "free";

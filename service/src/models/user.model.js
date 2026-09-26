@@ -46,6 +46,21 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
 
+    // Per-channel email opt-outs. Defaults are on: someone who added a monitor
+    // is asking to be told when it breaks. Each can be turned off independently
+    // so muting weekly digests never mutes incident alerts.
+    notificationPrefs: {
+      incidentEmails: { type: Boolean, default: true },
+      sslExpiry: { type: Boolean, default: true },
+      weeklyReport: { type: Boolean, default: true },
+    },
+
+    // When the last weekly report was delivered. The report job reads this so a
+    // worker restart or a retry cannot send the same digest twice.
+    lastWeeklyReportAt: {
+      type: Date,
+    },
+
     subscriptionStatus: {
       type: String,
       enum: [

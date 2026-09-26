@@ -6,6 +6,7 @@ import Navigation from './dashboard/Navigation';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { MonitoringProvider } from '@/hooks/useMonitoring';
+import AiAssistant from './dashboard/AiAssistant';
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -51,6 +52,9 @@ const DashboardLayout = () => {
           </Suspense>
         </div>
       </main>
+
+      {/* Available on every dashboard page */}
+      <AiAssistant />
     </div>
   );
 };

@@ -8,7 +8,9 @@ import {
   pruneMonitoringLogs,
   getRCADetails,
   getLogsForService,
-  getMonitoringService
+  getMonitoringService,
+  testMonitoringAlert,
+  setMonitoringPaused,
 } from "../controllers/monitoring.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -24,5 +26,7 @@ router.route("/:id/logs").get(verifyJWT, getLogsForService);
 router.route("/:id").get(verifyJWT, getMonitoringService);
 router.route("/:id").patch(verifyJWT, updateMonitoring);
 router.route("/:id").delete(verifyJWT, deleteMonitoring);
+router.route("/:id/test-alert").post(verifyJWT, testMonitoringAlert);
+router.route("/:id/pause").patch(verifyJWT, setMonitoringPaused);
 
 export default router;

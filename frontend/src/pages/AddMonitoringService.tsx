@@ -22,6 +22,11 @@ const AddMonitoringService = () => {
   const [interval, setInterval] = useState<number>(5);
   const [slackEnabled, setSlackEnabled] = useState(false);
   const [slackWebhook, setSlackWebhook] = useState('');
+  const [expectedStatusCode, setExpectedStatusCode] = useState('');
+  const [mustContain, setMustContain] = useState('');
+  const [mustNotContain, setMustNotContain] = useState('');
+  const [confirmations, setConfirmations] = useState(2);
+  const [cooldownMinutes, setCooldownMinutes] = useState(30);
   const { addNotification } = useNotifications();
 
   const isPremium = user?.plan === 'pro' || user?.plan === 'enterprise';
@@ -32,6 +37,14 @@ const AddMonitoringService = () => {
     if (interval === '' || interval <= 0) {
       toast.error('Please enter a valid interval.');
       return;
+    }
+
+    if (expectedStatusCode) {
+      const code = Number(expectedStatusCode);
+      if (!Number.isInteger(code) || code < 100 || code > 599) {
+        toast.error('Expected status code must be between 100 and 599.');
+        return;
+      }
     }
 
     try {
@@ -46,7 +59,16 @@ const AddMonitoringService = () => {
                 enabled: slackEnabled,
                 webhookUrl: slackWebhook
             }
-        }
+        },
+        assertions: {
+          expectedStatusCode: expectedStatusCode ? Number(expectedStatusCode) : null,
+          mustContain,
+          mustNotContain,
+        },
+        alerting: {
+          confirmations,
+          cooldownMinutes,
+        },
       });
 
       if (response.status === 201) {
@@ -159,6 +181,102 @@ const AddMonitoringService = () => {
                    Fixed at 5 minutes for Free plan. <Link to="/pricing" className="text-blue-500 underline">Upgrade</Link>
                 </p>
               )}
+            </div>
+
+            <div className="space-y-4 border-t pt-4">
+              <div>
+                <Label className="text-base">Health checks</Label>
+                <p className="text-xs text-gray-500">
+                  A response that arrives is not necessarily a healthy one. Leave these blank
+                  to treat any status below 400 as up.
+                </p>
+              </div>
+
+              <div>
+                <Label htmlFor="expectedStatusCode">Expected status code</Label>
+                <Input
+                  id="expectedStatusCode"
+                  type="number"
+                  placeholder="Any 2xx/3xx (default)"
+                  value={expectedStatusCode}
+                  onChange={(e) => setExpectedStatusCode(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="mustContain">Response must contain</Label>
+                <Input
+                  id="mustContain"
+                  placeholder='e.g. "status":"ok"'
+                  value={mustContain}
+                  onChange={(e) => setMustContain(e.target.value)}
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Catches the case where the page loads but the app behind it is broken.
+                </p>
+              </div>
+
+              <div>
+                <Label htmlFor="mustNotContain">Response must not contain</Label>
+                <Input
+                  id="mustNotContain"
+                  placeholder="e.g. Internal Server Error"
+                  value={mustNotContain}
+                  onChange={(e) => setMustNotContain(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-4 border-t pt-4">
+              <div>
+                <Label className="text-base">Alerting</Label>
+                <p className="text-xs text-gray-500">
+                  How sure we should be before waking you, and how often we may repeat.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="confirmations">Confirm after</Label>
+                  <Select
+                    value={confirmations.toString()}
+                    onValueChange={(val) => setConfirmations(Number(val))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">1 failed check</SelectItem>
+                      <SelectItem value="2">2 failed checks</SelectItem>
+                      <SelectItem value="3">3 failed checks</SelectItem>
+                      <SelectItem value="5">5 failed checks</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-xs text-gray-500 mt-1">Higher values ignore brief blips.</p>
+                </div>
+
+                <div>
+                  <Label htmlFor="cooldown">Repeat alerts at most every</Label>
+                  <Select
+                    value={cooldownMinutes.toString()}
+                    onValueChange={(val) => setCooldownMinutes(Number(val))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="0">No cooldown</SelectItem>
+                      <SelectItem value="15">15 minutes</SelectItem>
+                      <SelectItem value="30">30 minutes</SelectItem>
+                      <SelectItem value="60">1 hour</SelectItem>
+                      <SelectItem value="240">4 hours</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-xs text-gray-500 mt-1">
+                    A recovery is always sent, cooldown or not.
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div className="space-y-4 border-t pt-4">

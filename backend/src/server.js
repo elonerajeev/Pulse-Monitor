@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import connectDB from "./db/connectdb.js";
 import app from "./app.js"; // Import configured app
 import { setupGracefulShutdown, registerShutdownService } from "./services/gracefulShutdownService.js";

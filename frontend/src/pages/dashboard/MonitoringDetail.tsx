@@ -27,8 +27,8 @@ interface MonitoringLog {
   ssl?: {
     subject: any;
     issuer: any;
-    valid_from: string;
-    valid_to: string;
+    validFrom: string;
+    validTo: string;
     daysUntilExpiry: number;
   };
   responseBody?: string;
@@ -178,7 +178,7 @@ const MonitoringDetail = () => {
                 <Legend />
                 <Area type="monotone" dataKey="total" stroke="#8884d8" fill="#8884d8" />
               </AreaChart>
-            </responsiveContainer>
+            </ResponsiveContainer>
           </CardContent>
         </Card>
 

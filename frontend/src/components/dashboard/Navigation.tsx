@@ -1,6 +1,6 @@
 
 import { NavLink } from 'react-router-dom';
-import { Home, BarChart2, Server, AreaChart, Network, User, Book } from 'lucide-react';
+import { Home, BarChart2, Server, AreaChart, Network, User, Book, Globe, HeartPulse } from 'lucide-react';
 
 interface NavigationProps {
   isSidebarOpen: boolean;
@@ -13,7 +13,9 @@ const navLinks = [
     { to: '/dashboard/traffic', icon: BarChart2, text: 'Traffic' },
     { to: '/dashboard/services', icon: Server, text: 'Services' },
     { to: '/dashboard/dependency-map', icon: Network, text: 'Dependency Map' },
+    { to: '/dashboard/heartbeats', icon: HeartPulse, text: 'Heartbeats' },
     // { to: '/dashboard/settings', icon: Settings, text: 'Settings' },
+    { to: '/dashboard/status-page', icon: Globe, text: 'Status Page' },
     { to: '/dashboard/api-and-report', icon: Book, text: 'API & Report' },
     { to: '/dashboard/profile', icon: User, text: 'Profile' },
 ];
