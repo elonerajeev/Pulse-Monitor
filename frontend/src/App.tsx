@@ -15,7 +15,6 @@ import NotFound from "./pages/NotFound";
 import Terms from "./pages/Terms";
 import Profile from "./pages/dashboard/Profile";
 import EditProfile from "./pages/EditProfile";
-// import Settings from "./pages/dashboard/Setting";
 import ApiReference from "./pages/ApiReference";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -41,6 +40,21 @@ import DemoDependencyMap from "./pages/demo-dashboard/DependencyMap";
 import DemoProfile from "./pages/demo-dashboard/Profile";
 import DemoApiAndReport from "./pages/demo-dashboard/ApiAndReport";
 import Overview from "./pages/dashboard/Overview";
+// Core Feature Pages
+import PerformanceMetrics from "./pages/dashboard/PerformanceMetrics";
+import MultiRegion from "./pages/dashboard/MultiRegion";
+import SLAManagement from "./pages/dashboard/SLAManagement";
+import IncidentsManagement from "./pages/dashboard/IncidentsManagement";
+import AlertRulesManagement from "./pages/dashboard/AlertRulesManagement";
+import TeamManagement from "./pages/dashboard/TeamManagement";
+import ApiKeysManagement from "./pages/dashboard/ApiKeysManagement";
+// Premium Feature Pages
+import SyntheticMonitoring from "./pages/dashboard/SyntheticMonitoring";
+import AnomalyDetection from "./pages/dashboard/AnomalyDetection";
+import DashboardsPage from "./pages/dashboard/DashboardsPage";
+import StatusPagesPage from "./pages/dashboard/StatusPagesPage";
+import WebhooksPage from "./pages/dashboard/WebhooksPage";
+import IntegrationsPage from "./pages/dashboard/IntegrationsPage";
 
 
 const queryClient = new QueryClient();
@@ -66,6 +80,23 @@ const App = () => (
                   <Route path="dependency-map" element={<DependencyMap />} />
                   <Route path="api-and-report" element={<ApiAndReport />} />
                   <Route path="profile" element={<Profile />} />
+                  
+                  {/* Core Features */}
+                  <Route path="performance-metrics" element={<PerformanceMetrics />} />
+                  <Route path="multi-region" element={<MultiRegion />} />
+                  <Route path="sla" element={<SLAManagement />} />
+                  <Route path="incidents" element={<IncidentsManagement />} />
+                  <Route path="alerts" element={<AlertRulesManagement />} />
+                  <Route path="teams" element={<TeamManagement />} />
+                  <Route path="api-keys" element={<ApiKeysManagement />} />
+                  
+                  {/* Premium Features */}
+                  <Route path="synthetic" element={<SyntheticMonitoring />} />
+                  <Route path="anomalies" element={<AnomalyDetection />} />
+                  <Route path="dashboards" element={<DashboardsPage />} />
+                  <Route path="status-pages" element={<StatusPagesPage />} />
+                  <Route path="webhooks" element={<WebhooksPage />} />
+                  <Route path="integrations" element={<IntegrationsPage />} />
                 </Route>
                 <Route path="/monitoring/add" element={<ProtectedRoute><AddMonitoringService /></ProtectedRoute>} />
                 <Route path="/monitoring/:id" element={<ProtectedRoute><ServiceDetailsPage /></ProtectedRoute>} />
