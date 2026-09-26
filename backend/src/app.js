@@ -15,6 +15,14 @@ import helmet from "helmet";
 import morgan from "morgan";
 import { rateLimit } from 'express-rate-limit';
 
+// Import error handling
+import {
+  errorHandler,
+  notFoundHandler,
+} from "./middlewares/errorHandler.middleware.js";
+import correlationIdMiddleware from "./middlewares/correlationId.middleware.js";
+import requestLoggerMiddleware from "./middlewares/requestLogger.middleware.js";
+
 // Import routes
 import healthcheckRouter from "./routes/healthcheck.routes.js";
 import authRouter from "./routes/auth.routes.js";
@@ -23,8 +31,20 @@ import userRouter from "./routes/user.routes.js";
 import maintenanceWindowRouter from "./routes/maintenanceWindow.routes.js";
 import trafficRouter from "./routes/traffic.routes.js";
 import stripeRouter from "./routes/stripe.routes.js";
+import multiRegionMonitoringRouter from "./routes/multiRegionMonitoring.routes.js";
+import slaConfigurationRouter from "./routes/slaConfiguration.routes.js";
+import incidentRouter from "./routes/incident.routes.js";
+import alertRuleRouter from "./routes/alertRule.routes.js";
+import teamRouter from "./routes/team.routes.js";
+import apiKeyRouter from "./routes/apiKey.routes.js";
 
 const app = express();
+
+// Add correlation ID to all requests (must be first)
+app.use(correlationIdMiddleware);
+
+// Add request logging (before rate limiter to capture all requests)
+app.use(requestLoggerMiddleware);
 
 // Rate limiter
 const limiter = rateLimit({
@@ -32,6 +52,15 @@ const limiter = rateLimit({
 	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
 	standardHeaders: 'draft-7', // set `RateLimit` and `RateLimit-Policy` headers
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+	skip: (req) => req.path === '/api/v1/healthcheck', // Skip health checks
+	handler: (req, res) => {
+		res.status(429).json({
+			success: false,
+			errorCode: 'RATE_001',
+			message: 'Too many requests from this IP, please try again later.',
+			retryAfter: req.rateLimit.resetTime,
+		});
+	},
 });
 
 // Apply the rate limiting middleware to all requests.
@@ -101,14 +130,26 @@ app.use((req, res, next) => {
 app.use("/api/v1/healthcheck", healthcheckRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/monitoring", monitoringRouter);
+app.use("/api/v1/monitoring", multiRegionMonitoringRouter);
+app.use("/api/v1/monitoring", slaConfigurationRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/maintenance-windows", maintenanceWindowRouter);
 app.use("/api/v1/traffic", trafficRouter);
 app.use("/api/v1/stripe", stripeRouter);
+app.use("/api/v1/incidents", incidentRouter);
+app.use("/api/v1/alerts", alertRuleRouter);
+app.use("/api/v1/teams", teamRouter);
+app.use("/api/v1/api-keys", apiKeyRouter);
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
+
+// 404 Not Found Handler (MUST be before error handler)
+app.use(notFoundHandler);
+
+// Global Error Handler (MUST be last)
+app.use(errorHandler);
 
 // Initialize WebSocket and create the server
 const server = initWebSocket(app);

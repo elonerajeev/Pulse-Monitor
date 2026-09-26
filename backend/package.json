@@ -35,7 +35,14 @@
     "path": "^0.12.7",
     "serverless-http": "^4.0.0",
     "socket.io": "^4.8.1",
-    "stripe": "^22.2.0"
+    "stripe": "^22.2.0",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0",
+    "redis": "^4.6.12",
+    "joi": "^17.11.0",
+    "speakeasy": "^2.0.0",
+    "qrcode": "^1.5.3",
+    "bull": "^4.11.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
